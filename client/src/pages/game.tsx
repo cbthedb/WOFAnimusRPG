@@ -6,6 +6,7 @@ import CharacterPanel from "@/components/character-panel";
 import GameplayArea from "@/components/gameplay-area";
 import MagicModal from "@/components/magic-modal";
 import TribalPowersModal from "@/components/tribal-powers-modal";
+import { MockAIService } from "@/lib/mock-ai-service";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Save, Home } from "lucide-react";
@@ -174,12 +175,35 @@ export default function Game() {
     }
   };
 
-  const handleUsePower = (power: string) => {
+  const handleUsePower = (power: string, scenario?: string) => {
+    if (!gameState || !gameId) return;
+
+    // Generate AI description for the power usage
+    const aiResponse = MockAIService.generateRandomEvent(
+      gameState.characterData, 
+      { turn: gameState.gameData.turn, power, scenario }
+    );
+
     toast({
       title: "Power Used", 
-      description: `You use your ${power} ability!`,
+      description: scenario ? `${scenario} - ${aiResponse.content.slice(0, 100)}...` : `You use your ${power} ability!`,
     });
     setShowTribalPowersModal(false);
+  };
+
+  const handleUseInventoryItem = (item: InventoryItem) => {
+    if (!gameState || !gameId) return;
+
+    // Generate AI description for the item usage
+    const itemDescription = MockAIService.generateObjectDescription(item.name, { 
+      turn: gameState.gameData.turn,
+      enchantments: item.enchantments 
+    });
+
+    toast({
+      title: "Item Used",
+      description: `${item.name}: ${itemDescription.content}`,
+    });
   };
 
   const handleSaveGame = () => {
@@ -276,7 +300,8 @@ export default function Game() {
           <CharacterPanel 
             character={character} 
             inventory={gameData?.inventory || []}
-            onShowTribalPowers={() => setShowTribalPowersModal(true)} 
+            onShowTribalPowers={() => setShowTribalPowersModal(true)}
+            onUseInventoryItem={handleUseInventoryItem}
           />
           <GameplayArea
             character={character}

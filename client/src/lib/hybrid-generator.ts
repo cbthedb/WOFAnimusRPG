@@ -19,8 +19,8 @@ const TRIBAL_POWERS = {
 };
 
 export function generateHybridDragon(): Partial<Character> {
-  // 15% chance to be hybrid
-  if (Math.random() > 0.15) {
+  // 25% chance to be hybrid (increased for more variety)
+  if (Math.random() > 0.25) {
     return {};
   }
 
@@ -28,8 +28,8 @@ export function generateHybridDragon(): Partial<Character> {
   const primaryTribe = TRIBES[Math.floor(Math.random() * TRIBES.length)];
   hybridTribes.push(primaryTribe);
 
-  // Add 1-2 more tribes
-  const numAdditionalTribes = Math.random() < 0.7 ? 1 : 2;
+  // Add 1-2 more tribes (80% chance for 2 tribes, 20% chance for 3 tribes)
+  const numAdditionalTribes = Math.random() < 0.8 ? 1 : 2;
   for (let i = 0; i < numAdditionalTribes; i++) {
     let secondaryTribe;
     do {
@@ -38,18 +38,21 @@ export function generateHybridDragon(): Partial<Character> {
     hybridTribes.push(secondaryTribe);
   }
 
-  // Combine powers from all tribes
+  // Combine powers from all tribes - more generous for hybrids
   const combinedPowers: string[] = [];
-  hybridTribes.forEach(tribe => {
+  hybridTribes.forEach((tribe, index) => {
     const tribePowers = TRIBAL_POWERS[tribe as keyof typeof TRIBAL_POWERS];
-    // Each hybrid gets 1-2 powers from each tribe
-    const numPowers = Math.floor(Math.random() * 2) + 1;
-    for (let i = 0; i < numPowers; i++) {
-      if (tribePowers.length > 0) {
-        const power = tribePowers[Math.floor(Math.random() * tribePowers.length)];
-        if (!combinedPowers.includes(power)) {
-          combinedPowers.push(power);
-        }
+    // Primary tribe gets 2-3 powers, secondary tribes get 1-2 powers
+    const numPowers = index === 0 ? 
+      Math.floor(Math.random() * 2) + 2 : 
+      Math.floor(Math.random() * 2) + 1;
+    
+    // Shuffle and select powers to avoid always getting the same ones
+    const shuffledPowers = [...tribePowers].sort(() => Math.random() - 0.5);
+    for (let i = 0; i < Math.min(numPowers, shuffledPowers.length); i++) {
+      const power = shuffledPowers[i];
+      if (!combinedPowers.includes(power)) {
+        combinedPowers.push(power);
       }
     }
   });

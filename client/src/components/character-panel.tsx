@@ -13,9 +13,10 @@ interface CharacterPanelProps {
   character: Character;
   inventory?: InventoryItem[];
   onShowTribalPowers?: () => void;
+  onUseInventoryItem?: (item: InventoryItem) => void;
 }
 
-export default function CharacterPanel({ character, inventory = [], onShowTribalPowers }: CharacterPanelProps) {
+export default function CharacterPanel({ character, inventory = [], onShowTribalPowers, onUseInventoryItem }: CharacterPanelProps) {
   const [activeTab, setActiveTab] = useState<"info" | "family" | "social" | "inventory">("info");
   const corruptionLevel = GameEngine.getCorruptionLevel(character.soulPercentage);
   
@@ -355,12 +356,24 @@ export default function CharacterPanel({ character, inventory = [], onShowTribal
               ) : (
                 <div className="space-y-2">
                   {inventory.slice(0, 6).map((item, index) => (
-                    <div key={index} className="bg-black/30 rounded-lg p-3">
+                    <div key={index} className="bg-black/30 rounded-lg p-3 hover:bg-black/40 transition-colors">
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-semibold text-purple-300">{item.name}</span>
-                        <Badge variant={item.type === 'enchanted_object' ? 'default' : item.type === 'magical_artifact' ? 'destructive' : 'secondary'} className="text-xs">
-                          {item.type.replace('_', ' ')}
-                        </Badge>
+                        <div className="flex items-center gap-2">
+                          <Badge variant={item.type === 'enchanted_object' ? 'default' : item.type === 'magical_artifact' ? 'destructive' : 'secondary'} className="text-xs">
+                            {item.type.replace('_', ' ')}
+                          </Badge>
+                          {onUseInventoryItem && (
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => onUseInventoryItem(item)}
+                              className="h-6 px-2 text-xs hover:bg-purple-600/30"
+                            >
+                              Use
+                            </Button>
+                          )}
+                        </div>
                       </div>
                       <p className="text-xs text-slate-300 mb-2">{item.description}</p>
                       {item.enchantments.length > 0 && (

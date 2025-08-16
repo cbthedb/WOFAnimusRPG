@@ -6,13 +6,19 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { Dice6, Sparkles, Zap } from "lucide-react";
+import { Dice6, Sparkles, Zap, Shuffle } from "lucide-react";
 import { generateCharacter } from "@/lib/character-generator";
 import { Character } from "@shared/schema";
 
 const TRIBES = [
   "MudWing", "SandWing", "SkyWing", "SeaWing", "IceWing", 
-  "RainWing", "NightWing", "SilkWing", "HiveWing", "LeafWing"
+  "RainWing", "NightWing", "SilkWing", "HiveWing", "LeafWing", "Hybrid"
+];
+
+const AVAILABLE_TRAITS = [
+  "Brave", "Cunning", "Wise", "Curious", "Fierce", "Gentle", "Loyal", "Mysterious",
+  "Ambitious", "Calm", "Reckless", "Patient", "Proud", "Humble", "Vengeful", "Forgiving",
+  "Studious", "Impulsive", "Cautious", "Bold", "Sarcastic", "Optimistic", "Pessimistic", "Protective"
 ];
 
 const TRIBAL_POWERS = {
@@ -38,6 +44,8 @@ export default function CharacterCreator({ onCreateCharacter, onCancel }: Charac
   const [selectedTribe, setSelectedTribe] = useState<string>("");
   const [isAnimus, setIsAnimus] = useState(false);
   const [selectedPowers, setSelectedPowers] = useState<string[]>([]);
+  const [selectedTraits, setSelectedTraits] = useState<string[]>([]);
+  const [selectedHybridTribes, setSelectedHybridTribes] = useState<string[]>([]);
   const [attributes, setAttributes] = useState({
     strength: 50,
     intelligence: 50,
@@ -48,9 +56,11 @@ export default function CharacterCreator({ onCreateCharacter, onCancel }: Charac
   const handleRandomize = () => {
     const randomChar = generateCharacter();
     setCustomName(randomChar.name);
-    setSelectedTribe(randomChar.tribe);
+    setSelectedTribe(randomChar.hybridTribes ? "Hybrid" : randomChar.tribe);
     setIsAnimus(randomChar.isAnimus);
     setSelectedPowers(randomChar.tribalPowers);
+    setSelectedTraits(randomChar.traits);
+    setSelectedHybridTribes(randomChar.hybridTribes || []);
     setAttributes({
       strength: randomChar.strength,
       intelligence: randomChar.intelligence,
@@ -67,14 +77,37 @@ export default function CharacterCreator({ onCreateCharacter, onCancel }: Charac
     );
   };
 
+  const handleTraitToggle = (trait: string) => {
+    setSelectedTraits(prev => 
+      prev.includes(trait) 
+        ? prev.filter(t => t !== trait)
+        : [...prev, trait]
+    );
+  };
+
+  const handleHybridTribeToggle = (tribe: string) => {
+    setSelectedHybridTribes(prev => 
+      prev.includes(tribe) 
+        ? prev.filter(t => t !== tribe)
+        : prev.length < 3 ? [...prev, tribe] : prev
+    );
+  };
+
+  const randomizeTraits = () => {
+    const shuffled = [...AVAILABLE_TRAITS].sort(() => Math.random() - 0.5);
+    setSelectedTraits(shuffled.slice(0, 2 + Math.floor(Math.random() * 3)));
+  };
+
   const handleCreateCustom = () => {
     const baseChar = generateCharacter();
     const customCharacter: Character = {
       ...baseChar,
       name: customName || baseChar.name,
-      tribe: selectedTribe || baseChar.tribe,
+      tribe: selectedTribe === "Hybrid" ? (selectedHybridTribes[0] || "MudWing") : selectedTribe || baseChar.tribe,
+      hybridTribes: selectedTribe === "Hybrid" ? selectedHybridTribes : undefined,
       isAnimus,
       tribalPowers: selectedPowers,
+      traits: selectedTraits,
       strength: attributes.strength,
       intelligence: attributes.intelligence,
       charisma: attributes.charisma,
@@ -85,7 +118,18 @@ export default function CharacterCreator({ onCreateCharacter, onCancel }: Charac
     onCreateCharacter(customCharacter);
   };
 
-  const availablePowers = selectedTribe ? TRIBAL_POWERS[selectedTribe as keyof typeof TRIBAL_POWERS] : [];
+  const availablePowers = (() => {
+    if (selectedTribe === "Hybrid" && selectedHybridTribes.length > 0) {
+      // Combine powers from all selected hybrid tribes
+      const combinedPowers: string[] = [];
+      selectedHybridTribes.forEach(tribe => {
+        const tribePowers = TRIBAL_POWERS[tribe as keyof typeof TRIBAL_POWERS] || [];
+        combinedPowers.push(...tribePowers);
+      });
+      return Array.from(new Set(combinedPowers)); // Remove duplicates
+    }
+    return selectedTribe ? TRIBAL_POWERS[selectedTribe as keyof typeof TRIBAL_POWERS] || [] : [];
+  })();
 
   return (
     <div className="min-h-screen bg-dragon-gradient text-slate-100 p-4">
@@ -157,6 +201,31 @@ export default function CharacterCreator({ onCreateCharacter, onCancel }: Charac
                     Animus Dragon (Soul magic abilities)
                   </Label>
                 </div>
+
+                {/* Hybrid Tribe Selection */}
+                {selectedTribe === "Hybrid" && (
+                  <div className="space-y-3">
+                    <Label>Choose Hybrid Tribes (2-3 tribes)</Label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {TRIBES.filter(t => t !== "Hybrid").map(tribe => (
+                        <div 
+                          key={tribe}
+                          className={`p-2 rounded-lg border text-sm cursor-pointer transition-colors ${
+                            selectedHybridTribes.includes(tribe)
+                              ? 'bg-purple-600/50 border-purple-400'
+                              : 'bg-black/30 border-purple-500/30 hover:bg-purple-500/20'
+                          }`}
+                          onClick={() => handleHybridTribeToggle(tribe)}
+                        >
+                          {tribe}
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-slate-400">
+                      Select 2-3 tribes for your hybrid heritage. Order matters - first tribe is primary.
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Attributes */}
@@ -183,10 +252,10 @@ export default function CharacterCreator({ onCreateCharacter, onCancel }: Charac
             </div>
 
             {/* Tribal Powers */}
-            {selectedTribe && (
+            {selectedTribe && availablePowers.length > 0 && (
               <div className="space-y-4">
                 <h3 className="font-fantasy text-xl text-purple-300">
-                  {selectedTribe} Tribal Powers
+                  {selectedTribe === "Hybrid" ? "Hybrid" : selectedTribe} Tribal Powers
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {availablePowers.map(power => (
@@ -213,6 +282,40 @@ export default function CharacterCreator({ onCreateCharacter, onCancel }: Charac
                 </p>
               </div>
             )}
+
+            {/* Character Traits */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="font-fantasy text-xl text-purple-300">Character Traits</h3>
+                <Button 
+                  onClick={randomizeTraits}
+                  size="sm"
+                  variant="outline"
+                  className="text-xs"
+                >
+                  <Dice6 className="w-3 h-3 mr-1" />
+                  Randomize
+                </Button>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                {AVAILABLE_TRAITS.map(trait => (
+                  <div 
+                    key={trait}
+                    className={`p-2 rounded-lg border text-sm cursor-pointer transition-colors ${
+                      selectedTraits.includes(trait)
+                        ? 'bg-purple-600/50 border-purple-400'
+                        : 'bg-black/30 border-purple-500/30 hover:bg-purple-500/20'
+                    }`}
+                    onClick={() => handleTraitToggle(trait)}
+                  >
+                    {trait}
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-slate-400">
+                Select 2-5 traits that define your dragon's personality and behavior.
+              </p>
+            </div>
 
             {/* Action Buttons */}
             <div className="flex gap-4 justify-center pt-6">

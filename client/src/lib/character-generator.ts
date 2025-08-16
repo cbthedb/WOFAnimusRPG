@@ -1,6 +1,7 @@
 import { Character } from "@shared/schema";
 import { generateHybridDragon } from "./hybrid-generator";
 import { SoulCorruptionManager } from "./enhanced-magic-system";
+import { MockAIService } from "./mock-ai-service";
 
 const TRIBES = [
   'NightWing', 'SkyWing', 'SeaWing', 'RainWing', 'SandWing', 'IceWing', 'MudWing',
@@ -23,7 +24,8 @@ const DRAGON_NAMES = {
 const PERSONALITY_TRAITS = [
   'Curious', 'Ambitious', 'Secretive', 'Brave', 'Cautious', 'Loyal', 'Independent',
   'Compassionate', 'Analytical', 'Impulsive', 'Wise', 'Rebellious', 'Patient', 'Fierce',
-  'Gentle', 'Protective', 'Scholarly', 'Adventurous', 'Mysterious', 'Determined'
+  'Gentle', 'Protective', 'Scholarly', 'Adventurous', 'Mysterious', 'Determined',
+  'Cunning', 'Forgiving', 'Vengeful', 'Optimistic', 'Pessimistic', 'Humble', 'Proud'
 ];
 
 function randomChoice<T>(array: T[]): T {
@@ -123,10 +125,20 @@ export function generateCharacter(): Character {
   const tribalPowers = determineTribalPowers(tribe);
   const specialPowers = determineSpecialPowers(tribe, intelligence);
   
-  // Check for hybrid heritage first
+  // Check for hybrid heritage first (increased chance to 25%)
   const hybridData = generateHybridDragon();
   const finalTribe = hybridData.hybridTribes ? hybridData.hybridTribes[0] : tribe;
   const finalTribalPowers = hybridData.tribalPowers || tribalPowers;
+  
+  // Generate AI-enhanced traits for hybrids
+  let finalTraits = traits;
+  if (hybridData.hybridTribes && hybridData.hybridTribes.length > 1) {
+    const hybridTraits = MockAIService.generateHybridTraits(
+      hybridData.hybridTribes[0],
+      hybridData.hybridTribes[1]
+    );
+    finalTraits = [...traits, ...hybridTraits.slice(0, 2)];
+  }
 
   const character: Character = {
     name,
@@ -147,7 +159,7 @@ export function generateCharacter(): Character {
     siblings,
     mate: undefined,
     dragonets: [],
-    traits,
+    traits: finalTraits,
     avatar: `https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400`,
     isAnimus,
     tribalPowers: finalTribalPowers,
