@@ -1,4 +1,6 @@
 import { Character } from "@shared/schema";
+import { generateHybridDragon } from "./hybrid-generator";
+import { SoulCorruptionManager } from "./enhanced-magic-system";
 
 const TRIBES = [
   'NightWing', 'SkyWing', 'SeaWing', 'RainWing', 'SandWing', 'IceWing', 'MudWing',
@@ -121,24 +123,38 @@ export function generateCharacter(): Character {
   const tribalPowers = determineTribalPowers(tribe);
   const specialPowers = determineSpecialPowers(tribe, intelligence);
   
+  // Check for hybrid heritage first
+  const hybridData = generateHybridDragon();
+  const finalTribe = hybridData.hybridTribes ? hybridData.hybridTribes[0] : tribe;
+  const finalTribalPowers = hybridData.tribalPowers || tribalPowers;
+
   const character: Character = {
     name,
-    tribe,
+    tribe: finalTribe,
+    hybridTribes: hybridData.hybridTribes,
     age: randomRange(3, 8), // Young dragonet
+    yearsSurvived: 0,
+    currentSeason: "Spring",
     soulPercentage: 100, // Start with pure soul
     sanityPercentage: 100, // Start with full sanity
-    strength: randomRange(10, 16),
-    intelligence,
-    charisma: randomRange(10, 16),
-    wisdom: randomRange(12, 18),
+    soulCorruptionStage: "Normal",
+    strength: hybridData.strength || randomRange(10, 16),
+    intelligence: hybridData.intelligence || intelligence,
+    charisma: hybridData.charisma || randomRange(10, 16),
+    wisdom: hybridData.wisdom || randomRange(12, 18),
     mother,
     father,
     siblings,
+    mate: undefined,
+    dragonets: [],
     traits,
     avatar: `https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400`,
     isAnimus,
-    tribalPowers,
-    specialPowers
+    tribalPowers: finalTribalPowers,
+    specialPowers,
+    relationships: {},
+    achievements: [],
+    isAIControlled: false
   };
   
   return character;

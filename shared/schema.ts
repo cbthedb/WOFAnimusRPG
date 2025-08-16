@@ -40,9 +40,13 @@ export type InsertGameState = z.infer<typeof insertGameStateSchema>;
 export interface Character {
   name: string;
   tribe: string;
+  hybridTribes?: string[]; // For hybrid dragons
   age: number;
+  yearsSurvived: number;
+  currentSeason: "Spring" | "Summer" | "Fall" | "Winter";
   soulPercentage: number;
   sanityPercentage: number;
+  soulCorruptionStage: "Normal" | "Frayed" | "Twisted" | "Broken";
   strength: number;
   intelligence: number;
   charisma: number;
@@ -50,11 +54,16 @@ export interface Character {
   mother: string;
   father: string;
   siblings: string[];
+  mate?: string;
+  dragonets: string[];
   traits: string[];
   avatar: string;
   isAnimus: boolean;
   tribalPowers: string[];
   specialPowers: string[];
+  relationships: Record<string, { name: string; type: "friend" | "rival" | "enemy" | "neutral" | "romantic"; strength: number }>;
+  achievements: string[];
+  isAIControlled: boolean;
 }
 
 export interface GameData {
@@ -66,6 +75,9 @@ export interface GameData {
   relationships: Record<string, number>;
   inventory: string[];
   reputation: number;
+  politicalEvents: PoliticalEvent[];
+  warStatus: WarStatus;
+  explorationLog: ExplorationEvent[];
 }
 
 export interface Scenario {
@@ -102,8 +114,31 @@ export interface GameEvent {
 
 export interface MagicSpell {
   name: string;
-  category: 'minor' | 'moderate' | 'dangerous';
+  category: 'minor' | 'moderate' | 'major' | 'catastrophic';
   soulCost: [number, number]; // min, max
   description: string;
   examples: string[];
+  type: "enchantment" | "combat" | "healing" | "weather" | "curse" | "summoning";
+}
+
+export interface PoliticalEvent {
+  type: "succession" | "civil_war" | "queen_demand" | "alliance" | "betrayal";
+  tribes: string[];
+  description: string;
+  playerChoice?: string;
+  consequences: string;
+}
+
+export interface WarStatus {
+  isAtWar: boolean;
+  warringTribes: string[];
+  warCause: string;
+  playerInvolvement: "forced_fighter" | "enchanter" | "neutral" | "deserter";
+}
+
+export interface ExplorationEvent {
+  location: string;
+  discovery: "ruins" | "scroll" | "treasure" | "enemy" | "ally" | "mystery";
+  description: string;
+  consequences: string[];
 }
