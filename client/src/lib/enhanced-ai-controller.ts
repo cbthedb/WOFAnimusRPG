@@ -65,48 +65,34 @@ export class EnhancedAIController {
     if (!character.isAnimus) return null;
 
     const corruptedSpells = [
-      {
-        targetObject: "nearby dragon's mind",
-        enchantmentDescription: "Forces them to obey my every command and worship me as their master",
-        spellType: "curse" as const,
-        complexity: "complex" as const,
-        estimatedSoulCost: 15
-      },
-      {
-        targetObject: "the ground beneath my enemies",
-        enchantmentDescription: "Creates deadly spikes that pierce through anyone who dares oppose me",
-        spellType: "combat" as const,
-        complexity: "moderate" as const,
-        estimatedSoulCost: 12
-      },
-      {
-        targetObject: "the air around me",
-        enchantmentDescription: "Becomes a toxic miasma that slowly poisons all who breathe it",
-        spellType: "curse" as const,
-        complexity: "complex" as const,
-        estimatedSoulCost: 18
-      },
-      {
-        targetObject: "my claws",
-        enchantmentDescription: "Become eternally sharp and dripping with incurable venom",
-        spellType: "enchantment" as const,
-        complexity: "moderate" as const,
-        estimatedSoulCost: 10
-      },
-      {
-        targetObject: "the memories of my victims",
-        enchantmentDescription: "Erases all trace of their happiness, leaving only fear and despair",
-        spellType: "curse" as const,
-        complexity: "complex" as const,
-        estimatedSoulCost: 20
-      },
-      {
-        targetObject: "the nearest water source",
-        enchantmentDescription: "Turns to acid that burns through scales and melts bones",
-        spellType: "curse" as const,
-        complexity: "complex" as const,
-        estimatedSoulCost: 16
-      }
+      // From the provided spell lists
+      { targetObject: "Dagger", enchantmentDescription: "Cause wounds to fester and never fully heal", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 12 },
+      { targetObject: "Mirror", enchantmentDescription: "Trap the reflection's soul, making it scream silently", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 18 },
+      { targetObject: "Necklace", enchantmentDescription: "Whisper dark thoughts into the wearer's mind at night", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 14 },
+      { targetObject: "Ring", enchantmentDescription: "Slowly drain the wearer's luck, making misfortune unavoidable", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 15 },
+      { targetObject: "Candle", enchantmentDescription: "Burn with flames that induce fear and hallucinations", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 13 },
+      { targetObject: "Book", enchantmentDescription: "Rewrite its own pages to reveal forbidden knowledge whenever opened", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 20 },
+      { targetObject: "Armor", enchantmentDescription: "Slowly corrupt the wearer's body, making them feel endless fatigue", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 16 },
+      { targetObject: "Coin", enchantmentDescription: "Curse anyone who touches it to attract betrayal from friends", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 14 },
+      { targetObject: "Key", enchantmentDescription: "Lock doors permanently and summon shadows when used", spellType: "summoning" as const, complexity: "complex" as const, estimatedSoulCost: 17 },
+      { targetObject: "Cloak", enchantmentDescription: "Conceal the wearer but slowly warp their mind into paranoia", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 18 },
+      { targetObject: "Potion vial", enchantmentDescription: "Turn any drink poured inside into a poison that induces rage", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 13 },
+      { targetObject: "Quill", enchantmentDescription: "Write words that compel the reader to obey dark commands", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 19 },
+      { targetObject: "Bell", enchantmentDescription: "Ring on its own to call nightmares into the surrounding area", spellType: "summoning" as const, complexity: "complex" as const, estimatedSoulCost: 17 },
+      { targetObject: "Staff", enchantmentDescription: "Summon illusions of fallen enemies to terrify allies", spellType: "summoning" as const, complexity: "complex" as const, estimatedSoulCost: 16 },
+      { targetObject: "Shoes", enchantmentDescription: "Make the wearer walk endlessly in circles at night", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 12 },
+      { targetObject: "Gemstone", enchantmentDescription: "Absorb the life force of anyone who gazes into it", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 20 },
+      { targetObject: "Mask", enchantmentDescription: "Force the wearer to mimic the voices of others, sowing confusion", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 14 },
+      { targetObject: "Scroll", enchantmentDescription: "Spread a curse on anyone who reads it aloud", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 15 },
+      { targetObject: "Cup", enchantmentDescription: "Turn any drink into a hallucinogenic draught of despair", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 13 },
+      { targetObject: "Chain", enchantmentDescription: "Bind its victim's luck and movement, making escape impossible", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 18 },
+      { targetObject: "Amulet", enchantmentDescription: "Slowly twist the wearer's emotions into uncontrollable anger", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 14 },
+      { targetObject: "Blade", enchantmentDescription: "Infect any wound with pain that never fully fades", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 15 },
+      { targetObject: "Lantern", enchantmentDescription: "Illuminate only the fear within people, showing them their worst dread", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 17 },
+      { targetObject: "Boots", enchantmentDescription: "Force the wearer to stumble into danger whenever they try to run", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 12 },
+      { targetObject: "Potion", enchantmentDescription: "Turn any drink into a liquid that causes uncontrollable trembling", spellType: "curse" as const, complexity: "moderate" as const, estimatedSoulCost: 13 },
+      { targetObject: "Cage", enchantmentDescription: "Trap a creature inside permanently if it is filled with darkness", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 19 },
+      { targetObject: "Chalice", enchantmentDescription: "Slowly drain the vitality of anyone who drinks from it", spellType: "curse" as const, complexity: "complex" as const, estimatedSoulCost: 16 }
     ];
 
     const spell = corruptedSpells[Math.floor(Math.random() * corruptedSpells.length)];
@@ -131,7 +117,7 @@ export class EnhancedAIController {
   private static generateCustomAction(character: Character, gameData: GameData): AIAction | null {
     const corruptedActions = [
       "Silently approach a sleeping dragon and whisper dark prophecies into their dreams",
-      "Use my claws to carve threatening messages into the walls where other dragons gather",
+      "Use my claws to carve threatening messages into the walls where other dragons gather", 
       "Steal precious belongings from fellow dragons and hide them to sow discord",
       "Spread malicious rumors about other dragons to turn them against each other",
       "Sabotage important tribal ceremonies by disrupting sacred objects",
@@ -144,7 +130,22 @@ export class EnhancedAIController {
       "Destroy important historical artifacts to erase cultural memory",
       "Practice forbidden rituals that summon dark entities from beyond",
       "Corrupt pure magical springs by adding my own tainted essence",
-      "Orchestrate 'accidents' that appear natural but serve my dark purposes"
+      "Orchestrate 'accidents' that appear natural but serve my dark purposes",
+      "Stalk through the shadows, observing others to gather blackmail material",
+      "Convince innocent dragons to make terrible mistakes through subtle manipulation",
+      "Create false evidence to frame rivals for crimes they didn't commit",
+      "Burn down libraries and schools to spread ignorance and fear",
+      "Torture captured enemies for information, then dispose of them cruelly",
+      "Corrupt healing herbs and medicines to make them cause harm instead",
+      "Impersonate trusted figures to gain access to restricted areas",
+      "Start fights between different dragon tribes by provoking ancient grievances",
+      "Kidnap dragonets and hold them hostage to control their parents",
+      "Destroy food supplies during times of scarcity to cause starvation",
+      "Spread disease by contaminating water sources with infected materials",
+      "Turn loyal friends against each other through carefully planted lies",
+      "Recruit desperate dragons into a cult of darkness and despair",
+      "Burn down homes and shelters, leaving others exposed to the elements",
+      "Practice mind control techniques on weaker-willed dragons"
     ];
 
     const action = corruptedActions[Math.floor(Math.random() * corruptedActions.length)];

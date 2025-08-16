@@ -1,0 +1,59 @@
+Enchanting what: Dagger
+Enchanting to do what: Cause wounds to fester and never fully heal
+
+Enchanting what: Mirror
+Enchanting to do what: Trap the reflection’s soul, making it scream silently
+
+Enchanting what: Necklace
+Enchanting to do what: Whisper dark thoughts into the wearer’s mind at night
+
+Enchanting what: Ring
+Enchanting to do what: Slowly drain the wearer’s luck, making misfortune unavoidable
+
+Enchanting what: Candle
+Enchanting to do what: Burn with flames that induce fear and hallucinations
+
+Enchanting what: Book
+Enchanting to do what: Rewrite its own pages to reveal forbidden knowledge whenever opened
+
+Enchanting what: Armor
+Enchanting to do what: Slowly corrupt the wearer’s body, making them feel endless fatigue
+
+Enchanting what: Coin
+Enchanting to do what: Curse anyone who touches it to attract betrayal from friends
+
+Enchanting what: Key
+Enchanting to do what: Lock doors permanently and summon shadows when used
+
+Enchanting what: Cloak
+Enchanting to do what: Conceal the wearer but slowly warp their mind into paranoia
+
+Enchanting what: Potion vial
+Enchanting to do what: Turn any drink poured inside into a poison that induces rage
+
+Enchanting what: Quill
+Enchanting to do what: Write words that compel the reader to obey dark commands
+
+Enchanting what: Bell
+Enchanting to do what: Ring on its own to call nightmares into the surrounding area
+
+Enchanting what: Staff
+Enchanting to do what: Summon illusions of fallen enemies to terrify allies
+
+Enchanting what: Shoes
+Enchanting to do what: Make the wearer walk endlessly in circles at night
+
+Enchanting what: Gemstone
+Enchanting to do what: Absorb the life force of anyone who gazes into it
+
+Enchanting what: Mask
+Enchanting to do what: Force the wearer to mimic the voices of others, sowing confusion
+
+Enchanting what: Scroll
+Enchanting to do what: Spread a curse on anyone who reads it aloud
+
+Enchanting what: Cup
+Enchanting to do what: Turn any drink into a hallucinogenic draught of despair
+
+Enchanting what: Chain
+Enchanting to do what: Bind its victim’s luck and movement, making escape impossible

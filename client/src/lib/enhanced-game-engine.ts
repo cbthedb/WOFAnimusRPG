@@ -273,8 +273,8 @@ export class EnhancedGameEngine {
   }
 
   static shouldShowCorruptionPopup(character: Character): boolean {
-    // Show corruption popups when soul is below 15%
-    return character.soulPercentage < 15;
+    // Show corruption popups when soul is below 15% but NOT when AI is in control
+    return character.soulPercentage < 15 && character.soulPercentage > 0 && !character.isAIControlled;
   }
 
   static generateCorruptionWhisper(character: Character): string {

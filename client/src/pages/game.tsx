@@ -623,40 +623,71 @@ export default function Game() {
         console.log("AI performing action:", aiAction.type, aiAction.description);
         
         toast({
-          title: "Corrupted Action",
-          description: narrative,
+          title: "🔥 YOUR CORRUPTED DRAGON TAKES CONTROL",
+          description: `${narrative} - The darkness spreads...`,
+          duration: 5000,
           variant: "destructive"
         });
 
-        // Show corruption whisper
+        // Show corruption whisper with more dramatic effect
         setTimeout(() => {
           toast({
-            title: "Dark Whisper",
-            description: whisper,
+            title: "💀 SOUL CORRUPTION CONSUMES ALL",
+            description: `${whisper} - Your dragon revels in darkness...`,
+            duration: 4000,
             variant: "destructive"
           });
-        }, 1500);
+        }, 2000);
 
-        // Execute the AI action based on type
+        // Execute the AI action based on type with UI interaction
         switch (aiAction.type) {
           case 'magic':
             if (currentGameState.characterData.isAnimus) {
-              handleCastSpell(aiAction.data);
+              // Simulate opening magic modal and casting spell
+              setTimeout(() => {
+                setShowMagicModal(true);
+                setTimeout(() => {
+                  handleCastSpell(aiAction.data);
+                  setShowMagicModal(false);
+                }, 1000);
+              }, 500);
             }
             break;
           case 'custom_action':
-            handleCustomAction(aiAction.data, "The corrupted dragon performs this evil deed with malicious glee.");
+            // Simulate opening custom action modal
+            setTimeout(() => {
+              setShowCustomActionModal(true);
+              setTimeout(() => {
+                handleCustomAction(aiAction.data, "The corrupted dragon performs this evil deed with malicious glee.");
+                setShowCustomActionModal(false);
+              }, 1000);
+            }, 500);
             break;
           case 'tribal_power':
-            // Handle tribal power usage
-            handleTribalPower(aiAction.data.power, aiAction.data.use);
+            // Simulate opening tribal powers modal
+            setTimeout(() => {
+              setShowTribalPowersModal(true);
+              setTimeout(() => {
+                handleTribalPower(aiAction.data.power, aiAction.data.use);
+                setShowTribalPowersModal(false);
+              }, 1000);
+            }, 500);
             break;
           case 'special_power':
-            // Handle special power usage  
-            handleAISpecialPower(aiAction.data.power, aiAction.data.use);
+            // Simulate opening special power modal
+            setTimeout(() => {
+              setSpecialPowerType(aiAction.data.power.toLowerCase().includes('prophecy') ? 'prophecy' : 
+                                 aiAction.data.power.toLowerCase().includes('mind') ? 'mindreading' : 'future');
+              setShowSpecialPowerModal(true);
+              setTimeout(() => {
+                handleAISpecialPower(aiAction.data.power, aiAction.data.use);
+                setShowSpecialPowerModal(false);
+              }, 1000);
+            }, 500);
             break;
           case 'choice':
           default:
+            // Direct choice handling for scenario choices
             handleChoice(aiAction.data);
             break;
         }
