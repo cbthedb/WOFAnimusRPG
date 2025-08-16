@@ -27,6 +27,7 @@ export default function Game() {
   const [specialPowerType, setSpecialPowerType] = useState<'prophecy' | 'mindreading' | 'future' | null>(null);
   const [conversationData, setConversationData] = useState<{topic: string, otherDragon: string} | null>(null);
   const [aiControlMessage, setAiControlMessage] = useState<string | null>(null);
+  const [aiInterval, setAiInterval] = useState<NodeJS.Timeout | null>(null);
   const [gameOverState, setGameOverState] = useState<{ isGameOver: boolean; reason?: string; allowContinue?: boolean } | null>(null);
   const [gameState, setGameState] = useState<{ characterData: Character; gameData: GameData } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -46,6 +47,15 @@ export default function Game() {
     }
   }, [gameId]);
 
+  // Cleanup interval on unmount
+  useEffect(() => {
+    return () => {
+      if (aiInterval) {
+        clearInterval(aiInterval);
+      }
+    };
+  }, [aiInterval]);
+
   useEffect(() => {
     if (gameState?.characterData) {
       const character = gameState.characterData;
@@ -55,6 +65,11 @@ export default function Game() {
         setAiControlMessage(EnhancedGameEngine.getCorruptionMessage(stage));
       } else {
         setAiControlMessage(null);
+        // Stop AI control if character is no longer corrupted
+        if (aiInterval) {
+          clearInterval(aiInterval);
+          setAiInterval(null);
+        }
       }
 
       // Check for game over conditions - but allow continuation for corrupted souls
@@ -66,7 +81,7 @@ export default function Game() {
         setGameOverState(null);
       }
     }
-  }, [gameState]);
+  }, [gameState, aiInterval]);
 
   const handleCastSpell = (spell: CustomSpell) => {
     if (!gameState || !gameId || gameOverState?.isGameOver) return;
@@ -445,57 +460,57 @@ export default function Game() {
         variant: "destructive"
       });
 
-      // Start AI control sequence
-      startAIControlSequence();
+      // Start AI control sequence after a brief delay
+      setTimeout(() => {
+        startAIControlSequence();
+      }, 1000);
     } catch (error) {
       console.error("Failed to continue as corrupted:", error);
     }
   };
 
   const startAIControlSequence = () => {
-    if (!gameState) return;
+    if (!gameId) return;
 
     // Show AI taking control message
     setAiControlMessage("The AI has taken control of your corrupted dragon. Evil choices are being made automatically...");
 
+    // Clear any existing interval
+    if (aiInterval) {
+      clearInterval(aiInterval);
+    }
+
     // Set up interval for AI to make choices automatically
-    const aiInterval = setInterval(() => {
-      if (!gameState?.characterData?.isAIControlled) {
-        clearInterval(aiInterval);
+    const newInterval = setInterval(() => {
+      // Get fresh game state each time
+      const currentGameState = LocalGameStorage.getGameState(gameId);
+      if (!currentGameState?.characterData?.isAIControlled) {
+        clearInterval(newInterval);
+        setAiInterval(null);
         return;
       }
 
-      const currentScenario = gameState.gameData.currentScenario;
-      if (!currentScenario || !currentScenario.choices) return;
+      const currentScenario = currentGameState.gameData.currentScenario;
+      if (!currentScenario || !currentScenario.choices || currentScenario.choices.length === 0) return;
 
       // Use the enhanced game engine's AI choice logic
-      const aiChoice = EnhancedGameEngine.getAIChoice(gameState.characterData, currentScenario);
+      const aiChoice = EnhancedGameEngine.getAIChoice(currentGameState.characterData, currentScenario);
       const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
 
-      setTimeout(() => {
-        toast({
-          title: "AI Choice Made",
-          description: `Your corrupted dragon chose: ${choiceToMake.text}`,
-          variant: "destructive"
-        });
-        handleChoice(choiceToMake);
-      }, 2000);
-
-    }, 5000); // AI makes a choice every 5 seconds
-
-    // Stop AI control after 10 choices or 1 minute
-    setTimeout(() => {
-      clearInterval(aiInterval);
-      setAiControlMessage("The corruption overwhelms your dragon completely. The story ends in darkness...");
+      console.log("AI making choice:", choiceToMake.text);
       
-      setTimeout(() => {
-        setGameOverState({
-          isGameOver: true,
-          reason: "Your dragon has been completely consumed by corruption and lost to the darkness forever.",
-          allowContinue: false
-        });
-      }, 3000);
-    }, 60000); // 1 minute of AI control
+      toast({
+        title: "AI Choice Made",
+        description: `Your corrupted dragon chose: ${choiceToMake.text}`,
+        variant: "destructive"
+      });
+      
+      // Make the choice immediately
+      handleChoice(choiceToMake);
+
+    }, 4000); // AI makes a choice every 4 seconds
+
+    setAiInterval(newInterval);
   };
 
   const handleUseInventoryItem = (item: InventoryItem) => {
