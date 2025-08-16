@@ -61,6 +61,26 @@ export default function Home() {
     createGameWithCharacter(character);
   };
 
+  if (showCharacterCreator) {
+    return (
+      <CharacterCreator 
+        onCreateCharacter={handleCustomCharacter}
+        onCancel={() => setShowCharacterCreator(false)}
+      />
+    );
+  }
+
+  if (isCreating) {
+    return (
+      <div className="min-h-screen bg-dragon-gradient flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin text-6xl mb-4">🐉</div>
+          <p className="text-slate-300 font-narrative text-lg">Creating your dragon adventure...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-dragon-gradient flex items-center justify-center p-4">
       <Card className="w-full max-w-2xl bg-black/20 border-purple-500/30 backdrop-blur-sm">

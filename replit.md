@@ -8,7 +8,10 @@ The application is built as a full-stack web game with a React frontend and Expr
 
 Preferred communication style: Simple, everyday language.
 
-## Future Changes Requested
+## Recent Changes
+- **Character Customization System** (January 2025): Added comprehensive character creator allowing players to choose tribe, powers, attributes, and animus status, plus randomization options.
+
+## Future Changes Requested  
 - **Database Migration** (planned for ~1 month): Convert from PostgreSQL database saves to local browser storage to remove Replit Core dependency. This will eliminate the save system and make the game run without database requirements.
 
 # System Architecture
