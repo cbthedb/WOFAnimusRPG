@@ -118,7 +118,7 @@ export class AIDungeonMaster {
       {
         title: `Crisis at ${location}`,
         setup: `During a ${weather} day at ${location}, you encounter a ${victim} suffering from ${threat}. They desperately plead for your help, but the situation is complex and morally challenging.`,
-        choice1: character.isAnimus ? magicSolution + " (10-25% soul cost)" : magicSolution,
+        choice1: magicSolution,
         choice2: nonMagicSolution,
         choice3: moralChoice
       }
@@ -134,12 +134,12 @@ export class AIDungeonMaster {
       choices: [
         {
           id: "dilemma_1",
-          text: dilemma.choice1,
+          text: character.isAnimus ? dilemma.choice1 + " (10-25% soul cost)" : dilemma.choice1,
           description: character.isAnimus ? "The path of power, but at what cost?" : "Use your natural abilities to help",
-          soulCost: character.isAnimus && dilemma.choice1.includes("soul cost") ? Math.floor(Math.random() * 15) + 10 : 0,
+          soulCost: character.isAnimus ? Math.floor(Math.random() * 15) + 10 : 0,
           sanityCost: character.isAnimus ? 0 : Math.floor(Math.random() * 5),
           consequences: ["Your choice will have lasting consequences..."],
-          corruption: dilemma.choice1.includes("corruption")
+          corruption: false
         },
         {
           id: "dilemma_2", 
