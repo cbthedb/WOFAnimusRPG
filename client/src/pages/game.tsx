@@ -615,18 +615,19 @@ export default function Game() {
           const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
           
           // Process the choice directly with the game engine
-          const newGameData = EnhancedGameEngine.processChoice(
+          const processResult = EnhancedGameEngine.processChoice(
             currentGameState.characterData,
             currentGameState.gameData,
-            choiceToMake
+            choiceToMake,
+            currentGameState.gameData.currentScenario
           );
 
           try {
             const updatedGame = updateGame(gameId, {
-              characterData: newGameData.character,
-              gameData: newGameData.gameData,
-              turn: newGameData.gameData.turn,
-              location: newGameData.gameData.location,
+              characterData: processResult.newCharacter,
+              gameData: processResult.newGameData,
+              turn: processResult.newGameData.turn,
+              location: processResult.newGameData.location,
             });
             
             setGameState({
@@ -698,6 +699,7 @@ export default function Game() {
                 type: "enchanted_object",
                 enchantments: [spell.enchantmentDescription],
                 soulCostToCreate: spell.estimatedSoulCost,
+                isActive: true,
               };
 
               updatedGameData.inventory = [...(updatedGameData.inventory || []), newItem];
