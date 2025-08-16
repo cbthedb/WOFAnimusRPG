@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { OpenAIService } from "@/lib/openai-service";
+import { MockAIService } from "@/lib/mock-ai-service";
 import { Sparkles, Send, Package, Zap } from "lucide-react";
 import { useState } from "react";
 
@@ -30,36 +30,38 @@ export default function CustomActionModal({
   const [actionResult, setActionResult] = useState<string>("");
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const generateActionResult = async () => {
+  const generateActionResult = () => {
     if (!customAction.trim()) return;
     
     setIsGenerating(true);
     
     // Simulate AI processing
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Generate AI response based on action and context
-    const context = {
-      turn: gameData.turn,
-      location: gameData.location,
-      action: customAction,
-      tribe: character.tribe,
-      item: selectedItem?.name,
-      itemEnchantments: selectedItem?.enchantments || []
-    };
-    
-    let result = "";
-    
-    if (selectedItem) {
-      // Action with item usage
-      result = await OpenAIService.generateCustomAction(character, `${customAction} using ${selectedItem.name}`, gameData.currentScenario.description);
-    } else {
-      // Pure custom action
-      result = await OpenAIService.generateCustomAction(character, customAction, gameData.currentScenario.description);
-    }
-    
-    setActionResult(result);
-    setIsGenerating(false);
+    setTimeout(() => {
+      // Generate AI response based on action and context
+      const context = {
+        turn: gameData.turn,
+        location: gameData.location,
+        action: customAction,
+        tribe: character.tribe,
+        item: selectedItem?.name,
+        itemEnchantments: selectedItem?.enchantments || []
+      };
+      
+      let result = "";
+      
+      if (selectedItem) {
+        // Action with item usage
+        const response = MockAIService.generateRandomEvent(character, gameData);
+        result = `You use ${selectedItem.name} to ${customAction.toLowerCase()}. ${response.content}`;
+      } else {
+        // Pure custom action
+        const response = MockAIService.generateRandomEvent(character, gameData);
+        result = `You attempt to ${customAction.toLowerCase()}. ${response.content}`;
+      }
+      
+      setActionResult(result);
+      setIsGenerating(false);
+    }, 1500);
   };
 
   const executeAction = () => {

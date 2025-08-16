@@ -2,7 +2,7 @@ import { Character } from "@shared/schema";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { OpenAIService } from "@/lib/openai-service";
+import { MockAIService } from "@/lib/mock-ai-service";
 import { Eye, Brain, Sparkles, Zap, RefreshCw } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -81,34 +81,37 @@ export default function SpecialPowerModal({
     }
   }, [powerType, isOpen, config]);
 
-  const generateVision = async (actionType: string) => {
+  const generateVision = (actionType: string) => {
     if (!config || !powerType) return;
     
     setIsGenerating(true);
     
     // Simulate AI generation delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    let vision = "";
-    
-    switch (powerType) {
-      case 'prophecy':
-        vision = await OpenAIService.generateProphecy(character, actionType);
-        break;
-        
-      case 'mindreading':
-        vision = await OpenAIService.generateMindReading(character, actionType);
-        break;
-        
-      case 'future':
-        vision = await OpenAIService.generateFutureVision(character, actionType);
-        break;
-    }
-    
-    setCurrentVision(vision);
-    setUsageCount(prev => prev + 1);
-    setSoulCost(prev => prev + (config.baseCost * usageCount));
-    setIsGenerating(false);
+    setTimeout(() => {
+      let vision = "";
+      
+      switch (powerType) {
+        case 'prophecy':
+          const prophecy = MockAIService.generateProphecy(character, { action: actionType });
+          vision = prophecy.content;
+          break;
+          
+        case 'mindreading':
+          const mindRead = MockAIService.generateVision(character, { action: actionType });
+          vision = mindRead.content;
+          break;
+          
+        case 'future':
+          const futureVision = MockAIService.generateProphecy(character, { action: actionType, type: 'future' });
+          vision = futureVision.content;
+          break;
+      }
+      
+      setCurrentVision(vision);
+      setUsageCount(prev => prev + 1);
+      setSoulCost(prev => prev + (config.baseCost * usageCount));
+      setIsGenerating(false);
+    }, 1000);
   };
 
   const usePower = () => {

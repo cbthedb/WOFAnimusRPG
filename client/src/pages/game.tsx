@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "wouter";
 import { Character, GameData, Choice, CustomSpell, InventoryItem } from "@shared/schema";
 import { EnhancedGameEngine } from "@/lib/enhanced-game-engine";
-import { OpenAIService } from "@/lib/openai-service";
 import CharacterPanel from "@/components/character-panel";
 import GameplayArea from "@/components/gameplay-area";
 import MagicModal from "@/components/magic-modal";
@@ -37,9 +36,9 @@ export default function Game() {
 
   const { updateGame } = useLocalGameState();
 
-  const generateCorruptionWhisper = async (character: Character) => {
+  const generateCorruptionWhisper = (character: Character) => {
     try {
-      const whisper = await EnhancedGameEngine.generateCorruptionWhisper(character);
+      const whisper = EnhancedGameEngine.generateCorruptionWhisper(character);
       setCorruptionWhisper(whisper);
       setShowCorruptionPopup(true);
       
@@ -178,7 +177,7 @@ export default function Game() {
     }
   };
 
-  const handleChoice = async (choice: Choice) => {
+  const handleChoice = (choice: Choice) => {
     if (!gameState || !gameId || gameOverState?.isGameOver) return;
 
     const character = gameState.characterData;
@@ -196,7 +195,7 @@ export default function Game() {
       });
     }
 
-    const { newCharacter, newGameData } = await EnhancedGameEngine.processChoice(
+    const { newCharacter, newGameData } = EnhancedGameEngine.processChoice(
       character,
       gameData,
       actualChoice,
@@ -229,7 +228,7 @@ export default function Game() {
     }
   };
 
-  const handleUsePower = async (power: string, scenario?: string) => {
+  const handleUsePower = (power: string, scenario?: string) => {
     if (!gameState || !gameId) return;
 
     const { characterData: character, gameData } = gameState;
@@ -251,7 +250,7 @@ export default function Game() {
     const result = scenario ? `${scenario} - ${aiResponse.content}` : aiResponse.content;
 
     // Process the power use as a choice to advance the storyline
-    const { newCharacter: updatedCharacter, newGameData } = await EnhancedGameEngine.processChoice(
+    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
       newCharacter,
       gameData,
       {
@@ -298,7 +297,7 @@ export default function Game() {
     setShowSpecialPowerModal(true);
   };
 
-  const handleSpecialPowerUse = async (power: string, result: string) => {
+  const handleSpecialPowerUse = (power: string, result: string) => {
     if (!gameState || !gameId) return;
 
     // Special powers cost sanity for non-animus, soul energy for animus
@@ -315,7 +314,7 @@ export default function Game() {
     }
 
     // Generate a new scenario based on the power use result
-    const { newCharacter: updatedCharacter, newGameData } = await EnhancedGameEngine.processChoice(
+    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
       newCharacter,
       gameData,
       {
@@ -357,7 +356,7 @@ export default function Game() {
     setShowSpecialPowerModal(false);
   };
 
-  const handleCustomAction = async (action: string, result: string, itemUsed?: InventoryItem) => {
+  const handleCustomAction = (action: string, result: string, itemUsed?: InventoryItem) => {
     if (!gameState || !gameId) return;
 
     const { characterData: character, gameData } = gameState;
@@ -384,7 +383,7 @@ export default function Game() {
     }
 
     // Process the action as a choice to advance the storyline
-    const { newCharacter: updatedCharacter, newGameData } = await EnhancedGameEngine.processChoice(
+    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
       newCharacter,
       gameData,
       {

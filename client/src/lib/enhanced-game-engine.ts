@@ -2,15 +2,15 @@ import { Character, GameData, Choice, GameEvent, Scenario } from "@shared/schema
 import { AIDungeonMaster } from "./ai-dungeon-master";
 import { SoulCorruptionManager } from "./enhanced-magic-system";
 import { generateScenario, generateTimeInfo } from "./scenario-generator-final";
-import { OpenAIService } from "./openai-service";
+import { MockAIService } from "./mock-ai-service";
 
 export class EnhancedGameEngine {
-  static async processChoice(
+  static processChoice(
     character: Character,
     gameData: GameData,
     choice: Choice,
     scenario: Scenario
-  ): Promise<{ newCharacter: Character; newGameData: GameData; event: GameEvent }> {
+  ): { newCharacter: Character; newGameData: GameData; event: GameEvent } {
     const newCharacter = { ...character };
     const newGameData = { ...gameData };
 
@@ -36,8 +36,8 @@ export class EnhancedGameEngine {
     // Check for achievements
     this.checkAchievements(newCharacter, choice, scenario);
 
-    // Generate next scenario using OpenAI
-    const nextScenario = await this.generateNextScenario(newCharacter, newGameData);
+    // Generate next scenario using original system
+    const nextScenario = this.generateNextScenario(newCharacter, newGameData);
 
     // Create game event
     const event: GameEvent = {
@@ -62,437 +62,267 @@ export class EnhancedGameEngine {
     return { newCharacter, newGameData, event };
   }
 
-  static async generateNextScenario(character: Character, gameData: GameData): Promise<Scenario> {
-    // Use OpenAI for ALL scenario generation for maximum variety and quality
-    return await this.generateOpenAIScenario(character, gameData);
-  }
-
-  static async generateOpenAIScenario(character: Character, gameData: GameData): Promise<Scenario> {
-    try {
-      const context = {
-        character: {
-          name: character.name,
-          tribe: character.tribe,
-          hybridTribes: character.hybridTribes,
-          isAnimus: character.isAnimus,
-          age: character.age,
-          soulPercentage: character.soulPercentage,
-          soulCorruptionStage: character.soulCorruptionStage,
-          sanityPercentage: character.sanityPercentage,
-          location: gameData.location,
-          currentSeason: character.currentSeason
-        },
-        gameData: {
-          turn: gameData.turn,
-          location: gameData.location,
-          recentEvents: gameData.history.slice(-3)
-        }
-      };
-
-      const prompt = `Generate a new scenario for this Wings of Fire RPG character. Create an interesting, dramatic situation that fits their current state and location. The character is ${character.isAnimus ? 'an animus dragon' : 'a regular dragon'} of the ${character.tribe}${character.hybridTribes ? ` and ${character.hybridTribes.join('/')} tribes` : ' tribe'}.
-
-Return a JSON object with:
-- title: Brief scenario title
-- description: One sentence setup
-- narrativeText: Array of 2-3 dramatic sentences describing the situation
-- choices: Array of 3-4 choice objects, each with id, text, description, soulCost (0-3 for normal choices, higher for animus magic), sanityCost (0-2), and consequences array
-
-Make choices varied - include social, combat, magical, and strategic options. For animus characters, include magical choices but not every scenario needs magic.`;
-
-      const response = await OpenAIService.generateScenarioResponse(prompt, context);
-      
-      // Try to parse the JSON response
-      let parsedScenario;
-      try {
-        parsedScenario = JSON.parse(response);
-      } catch {
-        // Fallback to a basic scenario if JSON parsing fails
-        return this.createFallbackScenario(character, gameData);
-      }
-
-      // Validate and format the scenario
-      const scenario: Scenario = {
-        id: `openai_${Date.now()}`,
-        title: parsedScenario.title || "A New Challenge",
-        description: parsedScenario.description || "Something interesting happens.",
-        narrativeText: Array.isArray(parsedScenario.narrativeText) ? parsedScenario.narrativeText : ["The situation unfolds before you."],
-        choices: this.validateChoices(parsedScenario.choices || []),
-        type: 'extraordinary' as const,
-        location: gameData.location,
-        timeOfDay: this.getRandomTimeOfDay(),
-        weather: this.getRandomWeather()
-      };
-
-      return scenario;
-    } catch (error) {
-      console.error("OpenAI scenario generation failed:", error);
-      return this.createFallbackScenario(character, gameData);
-    }
-  }
-
-  static createFallbackScenario(character: Character, gameData: GameData): Scenario {
+  static generateNextScenario(character: Character, gameData: GameData): Scenario {
+    // Use original scenario generator
     return generateScenario(character, gameData);
   }
 
-  static validateChoices(choices: any[]): Choice[] {
-    const validChoices: Choice[] = [];
-    
-    for (let i = 0; i < Math.min(choices.length, 4); i++) {
-      const choice = choices[i];
-      if (choice && choice.text) {
-        validChoices.push({
-          id: choice.id || `choice_${i}`,
-          text: choice.text,
-          description: choice.description || choice.text,
-          soulCost: Math.min(Math.max(choice.soulCost || 0, 0), 10),
-          sanityCost: Math.min(Math.max(choice.sanityCost || 0, 0), 5),
-          consequences: Array.isArray(choice.consequences) ? choice.consequences : ["The outcome unfolds..."]
-        });
-      }
-    }
-
-    // Ensure at least 2 choices
-    if (validChoices.length < 2) {
-      validChoices.push(
-        {
-          id: "default_1",
-          text: "Take action",
-          description: "Do something about the situation",
-          soulCost: 0,
-          sanityCost: 1,
-          consequences: ["You take decisive action..."]
-        },
-        {
-          id: "default_2", 
-          text: "Wait and observe",
-          description: "Carefully assess the situation",
-          soulCost: 0,
-          sanityCost: 0,
-          consequences: ["You observe the situation carefully..."]
-        }
-      );
-    }
-
-    return validChoices;
+  static calculateSoulLoss(baseCost: number): number {
+    // Add slight randomness to soul cost
+    const modifier = 0.8 + (Math.random() * 0.4); // 0.8 to 1.2 multiplier
+    return Math.floor(baseCost * modifier);
   }
 
-  static getRandomTimeOfDay(): string {
-    const times = ["dawn", "morning", "midday", "afternoon", "dusk", "night", "midnight"];
-    return times[Math.floor(Math.random() * times.length)];
-  }
-
-  static getRandomWeather(): string {
-    const weather = ["clear", "cloudy", "rainy", "stormy", "foggy", "windy", "calm"];
-    return weather[Math.floor(Math.random() * weather.length)];
-  }
-
-  static generatePoliticalScenario(character: Character, gameData: GameData): Scenario {
-    const politicalEvent = AIDungeonMaster.generateTribePolitics(character);
-    
-    return {
-      id: `political_${Date.now()}`,
-      title: `${politicalEvent.type.replace('_', ' ').toUpperCase()}: ${politicalEvent.tribes.join(' vs ')}`,
-      description: "Political turmoil threatens the stability of your tribe",
-      narrativeText: [
-        politicalEvent.description,
-        character.isAnimus ? "Your position as an animus dragon makes you valuable to all sides." : "Your unique abilities make you valuable to all sides.",
-        "How will you navigate these treacherous political waters?"
-      ],
-      choices: [
-        {
-          id: "political_support",
-          text: "Support the traditional power structure",
-          description: "Stand with established authority",
-          soulCost: 0,
-          sanityCost: 0,
-          consequences: ["Your loyalty is noted by those in power..."]
-        },
-        {
-          id: "political_rebel",
-          text: "Support the rebels/challengers",
-          description: "Side with those seeking change",
-          soulCost: 0,
-          sanityCost: Math.floor(Math.random() * 5),
-          consequences: ["Revolution comes with risks..."]
-        },
-        {
-          id: "political_neutral",
-          text: "Remain neutral and protect yourself",
-          description: "Stay out of the conflict",
-          soulCost: 0,
-          sanityCost: Math.floor(Math.random() * 3),
-          consequences: ["Neutrality may be seen as cowardice..."]
-        }
-      ],
-      type: 'extraordinary',
-      location: gameData.location,
-      timeOfDay: "political crisis",
-      weather: "tense"
-    };
+  static calculateSanityChange(baseCost: number): number {
+    // Add slight randomness to sanity cost
+    const modifier = 0.8 + (Math.random() * 0.4);
+    return Math.floor(baseCost * modifier);
   }
 
   static progressTime(character: Character, gameData: GameData): void {
-    // Advance seasons every 10 turns
+    // Age progression - every 10 turns advances age slightly
     if (gameData.turn % 10 === 0) {
-      const seasons: ("Spring" | "Summer" | "Fall" | "Winter")[] = ["Spring", "Summer", "Fall", "Winter"];
-      const currentIndex = seasons.indexOf(character.currentSeason);
-      character.currentSeason = seasons[(currentIndex + 1) % seasons.length];
-      
-      // Age up every 4 seasons (1 year)
-      if (character.currentSeason === "Spring") {
-        character.age += 1;
-        character.yearsSurvived += 1;
-      }
+      character.age += 0.1;
+    }
+
+    // Season changes every 25 turns
+    if (gameData.turn % 25 === 0) {
+      const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
+      const currentIndex = seasons.indexOf(character.currentSeason || 'Spring');
+      character.currentSeason = seasons[(currentIndex + 1) % 4] as "Spring" | "Summer" | "Fall" | "Winter";
     }
   }
 
   static updateRelationships(character: Character, choice: Choice, scenario: Scenario): void {
-    // Romance relationship building
-    if (scenario.id.includes('romance') && choice.id === 'romance_accept') {
-      const partnerName = this.generateRandomDragonName();
-      character.relationships[partnerName] = {
-        name: partnerName,
-        type: "romantic",
-        strength: Math.floor(Math.random() * 40) + 30,
-        history: ["Romance blossomed during an encounter"],
-        isAlive: true
-      };
-      
-      // Chance for pregnancy/dragonets if mated
-      if (Math.random() < 0.3 && !character.mate) {
-        character.mate = partnerName;
-        character.relationships[partnerName].type = "mate";
-        
-        // Chance for immediate dragonets
-        if (Math.random() < 0.4) {
-          this.addDragonet(character, partnerName);
+    // Relationship changes based on choice consequences
+    if (choice.consequences.some(c => c.toLowerCase().includes('friend'))) {
+      // Positive social interaction
+      const dragonName = this.extractDragonName(choice.consequences.join(' '));
+      if (dragonName && character.relationships[dragonName] !== undefined) {
+        const currentRel = character.relationships[dragonName];
+        if (typeof currentRel === 'number') {
+          (character.relationships as any)[dragonName] = Math.min(100, currentRel + 5);
         }
       }
     }
 
-    // Build friendships from social interactions
-    if (choice.consequences.some(c => c.includes("friend")) || scenario.id.includes('social')) {
-      const friendName = this.generateRandomDragonName();
-      character.relationships[friendName] = {
-        name: friendName,
-        type: "friend",
-        strength: Math.floor(Math.random() * 30) + 20,
-        history: ["Met during a memorable encounter"],
-        isAlive: true
-      };
-    }
-
-    // Create rivals from conflicts
-    if (scenario.id.includes('war') || scenario.id.includes('political')) {
-      const rivalName = this.generateRandomDragonName();
-      character.relationships[rivalName] = {
-        name: rivalName,
-        type: "rival",
-        strength: Math.floor(Math.random() * 20) + 10,
-        history: ["Conflict created lasting animosity"],
-        isAlive: true
-      };
-    }
-
-    if (choice.corruption) {
-      // Corrupt choices strain all relationships
-      Object.keys(character.relationships).forEach(key => {
-        const relationship = character.relationships[key];
-        if (relationship.type === "friend" || relationship.type === "romantic") {
-          relationship.strength -= Math.floor(Math.random() * 15) + 5;
-          if (relationship.strength < 0) {
-            relationship.type = relationship.type === "romantic" ? "ex_mate" : "neutral";
-            relationship.history.push("Relationship damaged by corruption");
-          }
+    if (choice.consequences.some(c => c.toLowerCase().includes('betray') || c.toLowerCase().includes('hurt'))) {
+      // Negative social interaction
+      const dragonName = this.extractDragonName(choice.consequences.join(' '));
+      if (dragonName && character.relationships[dragonName] !== undefined) {
+        const currentRel = character.relationships[dragonName];
+        if (typeof currentRel === 'number') {
+          (character.relationships as any)[dragonName] = Math.max(-100, currentRel - 10);
         }
-      });
+      }
     }
-  }
 
-  static generateRandomDragonName(): string {
-    const prefixes = ['Shadow', 'Fire', 'Ice', 'Storm', 'Star', 'Moon', 'Sun', 'Wind', 'Ocean', 'Earth'];
-    const suffixes = ['wing', 'claw', 'scale', 'breath', 'heart', 'eye', 'song', 'dance', 'flight', 'roar'];
-    return `${prefixes[Math.floor(Math.random() * prefixes.length)]}${suffixes[Math.floor(Math.random() * suffixes.length)]}`;
+    // Check for romance progression
+    Object.keys(character.relationships).forEach(dragonName => {
+      const relationship = character.relationships[dragonName];
+      if (typeof relationship === 'number' && relationship > 80 && !(character as any).hasPartner && Math.random() < 0.1) {
+        // 10% chance of romance when relationship is very high
+        (character as any).hasPartner = true;
+        (character as any).partnerName = dragonName;
+        
+        // Chance for dragonets if partnered
+        if (Math.random() < 0.3) {
+          this.addDragonet(character, dragonName);
+        }
+      }
+    });
   }
 
   static addDragonet(character: Character, partnerName: string): void {
     const dragonetName = this.generateRandomDragonName();
-    const inheritedTribes = character.hybridTribes ? [...character.hybridTribes] : [character.tribe];
-    
-    // Add some random tribe mixing
-    if (Math.random() < 0.3) {
-      const allTribes = ['NightWing', 'SkyWing', 'SeaWing', 'RainWing', 'SandWing', 'IceWing', 'MudWing'];
-      const randomTribe = allTribes[Math.floor(Math.random() * allTribes.length)];
-      if (!inheritedTribes.includes(randomTribe)) {
-        inheritedTribes.push(randomTribe);
-      }
-    }
+    const inheritedTribes = character.hybridTribes ? 
+      [character.tribe, ...character.hybridTribes] : [character.tribe];
     
     const dragonet = {
       name: dragonetName,
+      tribe: inheritedTribes[Math.floor(Math.random() * inheritedTribes.length)],
+      hybridTribes: inheritedTribes.length > 1 ? 
+        [inheritedTribes[Math.floor(Math.random() * inheritedTribes.length)]] : undefined,
       age: 0,
-      tribe: inheritedTribes[0],
-      hybridTribes: inheritedTribes.length > 1 ? inheritedTribes : undefined,
+      isAnimus: character.isAnimus && Math.random() < 0.5, // 50% chance if parent is animus
+      personality: this.generateDragonetPersonality(),
+      traits: this.inheritTraits(character),
+      isAlive: true,
       inheritedTraits: this.inheritTraits(character),
-      isAnimus: Math.random() < (character.isAnimus ? 0.15 : 0.05), // Higher chance if parent is animus
-      parentage: 'biological' as const,
-      personality: this.generateDragonetPersonality()
+      parentage: "biological" as "biological" | "adopted"
     };
-    
-    character.dragonets.push(dragonet);
-  }
 
-  static inheritTraits(character: Character): string[] {
-    const inherited = [];
-    // 50% chance to inherit each trait
-    for (const trait of character.traits) {
-      if (Math.random() < 0.5) {
-        inherited.push(trait);
-      }
+    if (!character.dragonets) {
+      character.dragonets = [];
     }
-    // Add some new random traits
-    const newTraits = ['Brave', 'Curious', 'Gentle', 'Fierce', 'Wise', 'Playful'];
-    if (Math.random() < 0.7) {
-      inherited.push(newTraits[Math.floor(Math.random() * newTraits.length)]);
-    }
-    return inherited;
+    character.dragonets.push(dragonet);
   }
 
   static generateDragonetPersonality(): string {
     const personalities = [
-      'Playful and energetic', 'Quiet and thoughtful', 'Bold and adventurous',
-      'Gentle and kind', 'Mischievous and clever', 'Protective and loyal'
+      'brave and adventurous', 'shy but kind', 'curious and intelligent',
+      'mischievous and playful', 'wise beyond their years', 'energetic and loud',
+      'thoughtful and careful', 'rebellious and independent'
     ];
     return personalities[Math.floor(Math.random() * personalities.length)];
   }
 
   static checkAchievements(character: Character, choice: Choice, scenario: Scenario): void {
-    const achievements = [];
-
-    // Soul corruption achievements
-    if (character.soulPercentage <= 50 && !character.achievements.includes("Soul Fractured")) {
-      achievements.push("Soul Fractured");
-    }
-    if (character.soulPercentage <= 10 && !character.achievements.includes("Soul Broken")) {
-      achievements.push("Soul Broken");
+    if (!character.achievements) {
+      character.achievements = [];
     }
 
-    // Age achievements
-    if (character.age >= 10 && !character.achievements.includes("Decade Dragon")) {
-      achievements.push("Decade Dragon");
-    }
-    if (character.age >= 25 && !character.achievements.includes("Ancient Wisdom")) {
-      achievements.push("Ancient Wisdom");
+    const achievements = character.achievements;
+
+    // First animus spell
+    if (character.isAnimus && choice.soulCost > 0 && !achievements.includes('First Magic')) {
+      achievements.push('First Magic');
     }
 
-    // Magic achievements
-    if (choice.soulCost >= 20 && !character.achievements.includes("Major Magic User")) {
-      achievements.push("Major Magic User");
+    // Soul corruption milestones
+    if (character.soulPercentage < 50 && !achievements.includes('Soul Frayed')) {
+      achievements.push('Soul Frayed');
+    }
+    if (character.soulPercentage < 25 && !achievements.includes('Soul Twisted')) {
+      achievements.push('Soul Twisted');
     }
 
     // Relationship achievements
-    const friendCount = Object.values(character.relationships).filter(r => r.type === "friend").length;
-    if (friendCount >= 5 && !character.achievements.includes("Popular Dragon")) {
-      achievements.push("Popular Dragon");
+    if (choice.consequences.some(c => c.toLowerCase().includes('love')) && !achievements.includes('Found Love')) {
+      achievements.push('Found Love');
     }
 
-    // Hybrid achievements
-    if (character.hybridTribes && character.hybridTribes.length >= 2 && !character.achievements.includes("Mixed Heritage")) {
-      achievements.push("Mixed Heritage");
+    // Survival milestones
+    const relationshipCount = Object.keys(character.relationships).length;
+    if (relationshipCount >= 5 && !achievements.includes('Social Butterfly')) {
+      achievements.push('Social Butterfly');
     }
 
-    character.achievements.push(...achievements);
+    // Family achievements
+    if (character.dragonets && character.dragonets.length >= 3 && !achievements.includes('Big Family')) {
+      achievements.push('Big Family');
+    }
+
+    // Corruption resistance
+    if (character.isAnimus && character.soulPercentage > 75 && !achievements.includes('Pure Soul')) {
+      achievements.push('Pure Soul');
+    }
   }
 
   static checkGameOver(character: Character): { isGameOver: boolean; reason?: string } {
-    // Soul completely lost
-    if (character.soulPercentage <= 0) {
-      return {
-        isGameOver: true,
-        reason: "Your soul has been completely consumed by animus magic. The dragon you once were is gone forever, leaving only a hollow shell of power and corruption."
-      };
-    }
-
-    // Sanity completely lost
+    // Traditional game over conditions
     if (character.sanityPercentage <= 0) {
-      return {
-        isGameOver: true,
-        reason: "Your mind has shattered under the weight of your experiences. You can no longer distinguish reality from nightmare, and retreat into permanent madness."
-      };
+      return { isGameOver: true, reason: "Insanity" };
     }
 
-    // Old age (natural death)
-    if (character.age >= 150) {
-      return {
-        isGameOver: true,
-        reason: "After a long and eventful life, your ancient body finally gives out. You die peacefully, your legacy forever carved into dragon history."
-      };
+    if (character.age >= 100) {
+      return { isGameOver: true, reason: "Old Age" };
+    }
+
+    // Soul completely lost - but allow AI takeover
+    if (character.soulPercentage <= 0) {
+      return { isGameOver: true, reason: "Soul Lost - AI Control Activated" };
     }
 
     return { isGameOver: false };
   }
 
-  static calculateSoulLoss(baseCost: number): number {
-    // Add some randomness to soul loss
-    const variance = Math.floor(Math.random() * 3) - 1; // -1 to +1
-    return Math.max(1, baseCost + variance);
-  }
-
-  static calculateSanityChange(baseCost: number): number {
-    // Add some randomness to sanity changes
-    const variance = Math.floor(Math.random() * 2); // 0 to +1
-    return Math.max(0, baseCost + variance);
-  }
-
-  static getAIChoice(character: Character, scenario: Scenario): Choice | null {
-    if (!character.isAIControlled && !SoulCorruptionManager.shouldAITakeControl(character)) {
-      return null;
-    }
-
-    // AI prefers corrupted/dark choices
-    const corruptedChoices = scenario.choices.filter(c => c.corruption);
-    if (corruptedChoices.length > 0) {
-      return corruptedChoices[Math.floor(Math.random() * corruptedChoices.length)];
-    }
-
-    // Otherwise pick a random choice with soul cost
-    const soulCostChoices = scenario.choices.filter(c => c.soulCost > 0);
-    if (soulCostChoices.length > 0) {
-      return soulCostChoices[Math.floor(Math.random() * soulCostChoices.length)];
-    }
-
-    // Last resort: random choice
-    return scenario.choices[Math.floor(Math.random() * scenario.choices.length)];
+  static getCorruptionLevel(soulPercentage: number): "Normal" | "Frayed" | "Twisted" | "Broken" {
+    return SoulCorruptionManager.getSoulCorruptionStage(soulPercentage);
   }
 
   static getCorruptionMessage(stage: "Normal" | "Frayed" | "Twisted" | "Broken"): string {
-    const effects = SoulCorruptionManager.getCorruptionEffects(stage);
-    return effects[Math.floor(Math.random() * effects.length)];
-  }
-
-  static getCorruptionLevel(soulPercentage: number): "Normal" | "Frayed" | "Twisted" | "Broken" {
-    if (soulPercentage >= 85) return "Normal";
-    if (soulPercentage >= 60) return "Frayed";
-    if (soulPercentage >= 30) return "Twisted";
-    return "Broken";
+    switch (stage) {
+      case "Frayed":
+        return "Your soul shows minor cracks. Dark thoughts occasionally surface.";
+      case "Twisted":
+        return "Your moral compass wavers. The corruption whispers suggestions.";
+      case "Broken":
+        return "Your soul is severely damaged. The AI will increasingly make evil choices for you.";
+      default:
+        return "";
+    }
   }
 
   static shouldShowCorruptionPopup(character: Character): boolean {
-    return character.soulPercentage < 15 && character.soulPercentage > 5;
+    // Show corruption popups when soul is below 15%
+    return character.soulPercentage < 15;
   }
 
-  static async generateCorruptionWhisper(character: Character): Promise<string> {
-    try {
-      return await OpenAIService.generateCorruptionWhisper(character);
-    } catch (error) {
-      const darkWhispers = [
-        "Power awaits those who embrace the darkness...",
-        "Why resist when you could rule them all?",
-        "Your enemies deserve to suffer for their weakness...",
-        "Magic is meant to be used. Use it without restraint...",
-        "Show them the true meaning of fear..."
-      ];
-      return darkWhispers[Math.floor(Math.random() * darkWhispers.length)];
+  static generateCorruptionWhisper(character: Character): string {
+    const whispers = [
+      "Perhaps a little cruelty would solve this problem faster...",
+      "Why show mercy when power could settle this instantly?",
+      "Others are weak. You could rule them all with your magic...",
+      "Hurt them before they hurt you. Strike first.",
+      "Your feelings are a weakness. Embrace the cold logic of power.",
+      "They don't understand you. Make them fear you instead.",
+      "Compassion is for the weak. You are beyond such things now.",
+      "Why negotiate when you could simply take what you want?",
+      "Trust no one. Everyone will eventually betray you.",
+      "Pain teaches better lessons than kindness ever could."
+    ];
+    
+    return whispers[Math.floor(Math.random() * whispers.length)];
+  }
+
+  static getAIChoice(character: Character, scenario: Scenario): Choice | null {
+    // AI only takes control when soul is very low (under 5%)
+    if (character.soulPercentage > 5) return null;
+    
+    // AI prefers the most cruel/corrupted choice
+    const choices = scenario.choices;
+    if (choices.length === 0) return null;
+
+    // Look for choices with corruption markers or high soul costs
+    const corruptChoices = choices.filter(c => 
+      c.corruption || 
+      c.soulCost > 5 ||
+      c.text.toLowerCase().includes('attack') ||
+      c.text.toLowerCase().includes('hurt') ||
+      c.text.toLowerCase().includes('betray') ||
+      c.text.toLowerCase().includes('cruel')
+    );
+
+    if (corruptChoices.length > 0) {
+      return corruptChoices[Math.floor(Math.random() * corruptChoices.length)];
     }
+
+    // Fall back to a random choice if no obviously corrupt ones
+    return choices[Math.floor(Math.random() * choices.length)];
+  }
+
+  static extractDragonName(text: string): string | null {
+    const patterns = [
+      /([A-Z][a-z]+) (?:dragon|dragoness)/i,
+      /(?:meet|see|encounter) ([A-Z][a-z]+)/i,
+      /([A-Z][a-z]+) approaches/i
+    ];
+    
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (match) return match[1];
+    }
+    
+    return null;
+  }
+
+  static generateRandomDragonName(): string {
+    const prefixes = ['Fire', 'Moon', 'Star', 'Shadow', 'Storm', 'Ice', 'Sand', 'Sea', 'Sky', 'Earth'];
+    const suffixes = ['wing', 'claw', 'scale', 'flame', 'heart', 'spirit', 'song', 'dance', 'light', 'shade'];
+    
+    return prefixes[Math.floor(Math.random() * prefixes.length)] + 
+           suffixes[Math.floor(Math.random() * suffixes.length)];
+  }
+
+  static inheritTraits(parent: Character): string[] {
+    const traits = [
+      'Strong scales', 'Keen eyesight', 'Quick reflexes', 'Natural leadership',
+      'Magical sensitivity', 'Enhanced intelligence', 'Social charisma', 'Combat instincts'
+    ];
+    
+    const inheritedCount = Math.floor(Math.random() * 3) + 1; // 1-3 traits
+    const shuffled = traits.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, inheritedCount);
   }
 }
