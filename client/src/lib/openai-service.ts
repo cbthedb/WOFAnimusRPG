@@ -1,11 +1,8 @@
 import OpenAI from "openai";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-// For client-side use, we'll make requests to our backend which has the API key
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || process.env.OPENAI_API_KEY;
-
 const openai = new OpenAI({ 
-  apiKey: OPENAI_API_KEY,
+  apiKey: "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",
   dangerouslyAllowBrowser: true 
 });
 
