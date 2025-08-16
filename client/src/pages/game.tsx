@@ -579,6 +579,54 @@ export default function Game() {
     }
   };
 
+  // Dark enchantments from user's provided list
+  const DARK_ENCHANTMENTS = [
+    { object: "Dagger", effect: "Cause wounds to fester and never fully heal" },
+    { object: "Mirror", effect: "Trap the reflection's soul, making it scream silently" },
+    { object: "Necklace", effect: "Whisper dark thoughts into the wearer's mind at night" },
+    { object: "Ring", effect: "Slowly drain the wearer's luck, making misfortune unavoidable" },
+    { object: "Candle", effect: "Burn with flames that induce fear and hallucinations" },
+    { object: "Book", effect: "Rewrite its own pages to reveal forbidden knowledge whenever opened" },
+    { object: "Armor", effect: "Slowly corrupt the wearer's body, making them feel endless fatigue" },
+    { object: "Coin", effect: "Curse anyone who touches it to attract betrayal from friends" },
+    { object: "Key", effect: "Lock doors permanently and summon shadows when used" },
+    { object: "Cloak", effect: "Conceal the wearer but slowly warp their mind into paranoia" },
+    { object: "Potion vial", effect: "Turn any drink poured inside into a poison that induces rage" },
+    { object: "Quill", effect: "Write words that compel the reader to obey dark commands" },
+    { object: "Bell", effect: "Ring on its own to call nightmares into the surrounding area" },
+    { object: "Staff", effect: "Summon illusions of fallen enemies to terrify allies" },
+    { object: "Shoes", effect: "Make the wearer walk endlessly in circles at night" },
+    { object: "Gemstone", effect: "Absorb the life force of anyone who gazes into it" },
+    { object: "Mask", effect: "Force the wearer to mimic the voices of others, sowing confusion" },
+    { object: "Scroll", effect: "Spread a curse on anyone who reads it aloud" },
+    { object: "Cup", effect: "Turn any drink into a hallucinogenic draught of despair" },
+    { object: "Chain", effect: "Bind its victim's luck and movement, making escape impossible" },
+    { object: "Amulet", effect: "Slowly twist the wearer's emotions into uncontrollable anger" },
+    { object: "Blade", effect: "Infect any wound with pain that never fully fades" },
+    { object: "Lantern", effect: "Illuminate only the fear within people, showing them their worst dread" },
+    { object: "Boots", effect: "Force the wearer to stumble into danger whenever they try to run" },
+    { object: "Cage", effect: "Trap a creature inside permanently if it is filled with darkness" },
+    { object: "Chalice", effect: "Slowly drain the vitality of anyone who drinks from it" }
+  ];
+
+  const EVIL_CUSTOM_ACTIONS = [
+    "Whisper lies about their closest friend to turn them against each other",
+    "Steal something precious and hide it where they'll never find it",
+    "Spread false rumors about someone's deepest shame",
+    "Break something they treasure when they're not looking",
+    "Tell their enemy exactly where to find them alone",
+    "Poison their food with something that causes nightmares",
+    "Leave threatening messages in their personal belongings",
+    "Convince their loved ones that they've betrayed them",
+    "Destroy evidence that would prove their innocence",
+    "Lead dangerous creatures to their sleeping place",
+    "Forge documents that make them look guilty of crimes",
+    "Manipulate their memories to make them doubt themselves",
+    "Sabotage their most important relationships with calculated cruelty",
+    "Use their fears against them to break their spirit",
+    "Turn their own allies into enemies through deception"
+  ];
+
   const startAIControlSequence = () => {
     if (!gameId) return;
 
@@ -600,154 +648,153 @@ export default function Game() {
         return;
       }
 
-      // Import the enhanced AI controller
-      const { EnhancedAIController } = await import('../lib/enhanced-ai-controller');
-      const aiAction = EnhancedAIController.generateAIAction(
-        currentGameState.characterData, 
-        currentGameState.gameData
-      );
+      console.log("🔥 AI TAKING CONTROL - Opening UI and performing dark actions...");
 
-      if (!aiAction) {
-        // Fallback to regular choice if no AI action generated
-        const currentScenario = currentGameState.gameData.currentScenario;
-        if (currentScenario && currentScenario.choices && currentScenario.choices.length > 0) {
-          const aiChoice = EnhancedGameEngine.getAIChoice(currentGameState.characterData, currentScenario);
-          const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
-          
-          // Process the choice directly with the game engine
-          const processResult = EnhancedGameEngine.processChoice(
-            currentGameState.characterData,
-            currentGameState.gameData,
-            choiceToMake,
-            currentGameState.gameData.currentScenario
-          );
-
-          try {
-            const updatedGame = updateGame(gameId, {
-              characterData: processResult.newCharacter,
-              gameData: processResult.newGameData,
-              turn: processResult.newGameData.turn,
-              location: processResult.newGameData.location,
-            });
-            
-            setGameState({
-              characterData: updatedGame.characterData,
-              gameData: updatedGame.gameData
-            });
-
-            toast({
-              title: "🔥 AI MAKES CHOICE",
-              description: `Your corrupted dragon chooses: ${choiceToMake.text}`,
-              variant: "destructive"
-            });
-          } catch (error) {
-            console.error("Failed to process AI choice:", error);
+      // Determine what type of evil action the AI will take
+      const actionTypes = ['magic', 'custom_action', 'choice'];
+      const weights = [0.4, 0.4, 0.2]; // Favor magic and custom actions over regular choices
+      
+      const getWeightedRandomChoice = (items: string[], weights: number[]) => {
+        const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+        let randomWeight = Math.random() * totalWeight;
+        
+        for (let i = 0; i < items.length; i++) {
+          randomWeight -= weights[i];
+          if (randomWeight <= 0) {
+            return items[i];
           }
         }
-        return;
-      }
+        return items[0];
+      };
 
-      const narrative = EnhancedAIController.generateAINarrative(aiAction, currentGameState.characterData);
-      const whisper = EnhancedAIController.getActionWhisper();
+      const actionType = getWeightedRandomChoice(actionTypes, weights);
 
-      console.log("AI performing action:", aiAction.type, aiAction.description);
-      console.log("Current AI Control Status:", currentGameState.characterData.isAIControlled);
-      console.log("Current Soul %:", currentGameState.characterData.soulPercentage);
-      
-      // Set action in progress indicator
-      setAiActionInProgress(`Performing ${aiAction.type}: ${aiAction.description}`);
-      
-      toast({
-        title: "🔥 YOUR CORRUPTED DRAGON TAKES CONTROL",
-        description: `${narrative} - The darkness spreads...`,
-        duration: 5000,
-        variant: "destructive"
-      });
+      // AI opens the appropriate modal and performs the action
+      switch (actionType) {
+        case 'magic':
+          if (currentGameState.characterData.isAnimus) {
+            // AI opens magic modal and casts a dark spell
+            setShowMagicModal(true);
+            
+            toast({
+              title: "💀 CORRUPTED MAGIC AWAKENS",
+              description: "Your dragon's claws move on their own, opening the animus magic interface...",
+              duration: 3000,
+              variant: "destructive"
+            });
 
-      // Show corruption whisper with more dramatic effect
-      setTimeout(() => {
-        toast({
-          title: "💀 SOUL CORRUPTION CONSUMES ALL",
-          description: `${whisper} - Your dragon revels in darkness...`,
-          duration: 4000,
-          variant: "destructive"
-        });
-      }, 2000);
-
-      // Clear action in progress after action completes
-      setTimeout(() => {
-        setAiActionInProgress(null);
-      }, 3000);
-
-      // Process AI action directly with game engine instead of calling handlers
-      try {
-        let updatedCharacter = { ...currentGameState.characterData };
-        let updatedGameData = { ...currentGameState.gameData };
-
-        switch (aiAction.type) {
-          case 'magic':
-            if (currentGameState.characterData.isAnimus) {
-              const spell = aiAction.data;
-              // Apply soul cost
-              updatedCharacter.soulPercentage = Math.max(0, updatedCharacter.soulPercentage - spell.estimatedSoulCost);
+            // Wait 2 seconds, then AI fills out the form
+            setTimeout(() => {
+              const darkSpell = DARK_ENCHANTMENTS[Math.floor(Math.random() * DARK_ENCHANTMENTS.length)];
               
-              // Create enchanted item
-              const newItem: InventoryItem = {
-                id: `item_${Date.now()}`,
-                name: `Enchanted ${spell.targetObject}`,
-                description: spell.enchantmentDescription,
-                type: "enchanted_object",
-                enchantments: [spell.enchantmentDescription],
-                soulCostToCreate: spell.estimatedSoulCost,
-                isActive: true,
+              toast({
+                title: "🔮 AI CASTS DARK ENCHANTMENT",
+                description: `Your possessed claws enchant a ${darkSpell.object} to ${darkSpell.effect.toLowerCase()}...`,
+                duration: 4000,
+                variant: "destructive"
+              });
+
+              // Create the spell object
+              const spell: CustomSpell = {
+                id: `ai_spell_${Date.now()}`,
+                targetObject: darkSpell.object,
+                enchantmentDescription: darkSpell.effect,
+                estimatedSoulCost: Math.floor(Math.random() * 15) + 10, // 10-25% soul cost
+                spellType: "curse",
+                complexity: "complex",
+                turnCast: currentGameState.gameData.turn
               };
 
-              updatedGameData.inventory = [...(updatedGameData.inventory || []), newItem];
-              updatedGameData = EnhancedGameEngine.processCustomAction(
-                updatedCharacter,
-                updatedGameData,
-                { action: `Cast dark spell on ${spell.targetObject}`, consequences: [spell.enchantmentDescription] },
-                updatedGameData.currentScenario
-              );
-            }
-            break;
-          case 'custom_action':
-            updatedGameData = EnhancedGameEngine.processCustomAction(
-              updatedCharacter,
-              updatedGameData,
-              { action: aiAction.data, consequences: ["The corrupted dragon performs this evil deed with malicious glee."] },
-              updatedGameData.currentScenario
-            );
-            break;
-          default:
-            // For other action types, just advance the scenario
-            updatedGameData = EnhancedGameEngine.processCustomAction(
-              updatedCharacter,
-              updatedGameData,
-              { action: `AI performs ${aiAction.type}`, consequences: [narrative] },
-              updatedGameData.currentScenario
-            );
-            break;
-        }
+              // Actually cast the spell using the handler
+              handleCastSpell(spell);
+              
+              // Close modal after casting
+              setTimeout(() => {
+                setShowMagicModal(false);
+              }, 1000);
 
-        // Update game state
-        const refreshedGame = updateGame(gameId, {
-          characterData: updatedCharacter,
-          gameData: updatedGameData,
-          turn: updatedGameData.turn,
-          location: updatedGameData.location,
-        });
-        
-        setGameState({
-          characterData: refreshedGame.characterData,
-          gameData: refreshedGame.gameData
-        });
+            }, 2000);
+          }
+          break;
 
-      } catch (error) {
-        console.error("Failed to process AI action:", error);
+        case 'custom_action':
+          // AI opens custom action modal and performs evil deed
+          setShowCustomActionModal(true);
+          
+          toast({
+            title: "👹 MALEVOLENT INTENT SURFACES",
+            description: "Your dragon's corruption compels it to perform a custom evil action...",
+            duration: 3000,
+            variant: "destructive"
+          });
+
+          // Wait 2 seconds, then AI fills out the action
+          setTimeout(() => {
+            const evilAction = EVIL_CUSTOM_ACTIONS[Math.floor(Math.random() * EVIL_CUSTOM_ACTIONS.length)];
+            
+            toast({
+              title: "😈 AI PERFORMS EVIL DEED",
+              description: `Your corrupted dragon: ${evilAction}`,
+              duration: 4000,
+              variant: "destructive"
+            });
+
+            // Execute the custom action using the handler
+            handleCustomAction(evilAction, "The corrupted dragon revels in the suffering it causes, feeling a twisted satisfaction as darkness spreads.");
+            
+            // Close modal after action
+            setTimeout(() => {
+              setShowCustomActionModal(false);
+            }, 1000);
+
+          }, 2000);
+          break;
+
+        case 'choice':
+        default:
+          // AI makes a corrupted choice from available options
+          const currentScenario = currentGameState.gameData.currentScenario;
+          if (currentScenario && currentScenario.choices && currentScenario.choices.length > 0) {
+            const aiChoice = EnhancedGameEngine.getAIChoice(currentGameState.characterData, currentScenario);
+            const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
+            
+            toast({
+              title: "🔥 AI MAKES CORRUPTED CHOICE",
+              description: `Your dragon chooses the path of darkness: "${choiceToMake.text}"`,
+              duration: 4000,
+              variant: "destructive"
+            });
+
+            // Process the choice using the handler
+            handleChoice(choiceToMake);
+          }
+          break;
       }
 
-    }, 5000); // AI performs an action every 5 seconds
+      // Show additional corruption whisper
+      setTimeout(() => {
+        const whispers = [
+          "Yes... let the darkness flow through you...",
+          "Their screams will be music to your ears...",
+          "Power is all that matters. Take what you want.",
+          "Trust is weakness. Betrayal is strength.",
+          "Why show mercy when cruelty is so much more... satisfying?",
+          "The weak exist only to serve the strong.",
+          "Pain teaches lessons that kindness never could.",
+          "Compassion is a disease. Cure yourself of it."
+        ];
+        
+        const whisper = whispers[Math.floor(Math.random() * whispers.length)];
+        
+        toast({
+          title: "💭 SOUL CORRUPTION WHISPERS",
+          description: `Dark thoughts echo: "${whisper}"`,
+          duration: 3000,
+          variant: "destructive"
+        });
+      }, 4000);
+
+    }, 7000); // AI performs an action every 7 seconds
 
     setAiInterval(newInterval);
   };

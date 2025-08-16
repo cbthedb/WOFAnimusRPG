@@ -1,0 +1,391 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animus: Wings of Fire RPG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    'fantasy': ['Cinzel', 'serif'],
+                    'sans': ['Inter', 'sans-serif'],
+                    'narrative': ['Crimson Text', 'serif']
+                },
+                colors: {
+                    'dragon': {
+                        'deep': '#1a1625',
+                        'scale': '#2d1b3d',
+                        'purple': '#6b46c1',
+                        'gold': '#f59e0b',
+                        'soul-pure': '#ffffff',
+                        'soul-corrupt': '#dc2626'
+                    }
+                },
+                animation: {
+                    'pulse-corrupt': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    'glow': 'glow 2s ease-in-out infinite alternate'
+                }
+            }
+        }
+    };
+    </script>
+    <style>
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #f59e0b, 0 0 10px #f59e0b, 0 0 15px #f59e0b; }
+            to { box-shadow: 0 0 10px #f59e0b, 0 0 20px #f59e0b, 0 0 30px #f59e0b; }
+        }
+        
+        .corrupted-soul {
+            background: linear-gradient(90deg, #dc2626 0%, #7f1d1d 100%);
+            animation: pulse-corrupt 1.5s infinite;
+        }
+        
+        .pure-soul {
+            background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 100%);
+        }
+        
+        .narrative-text {
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .choice-button:hover {
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        
+        .tribal-border {
+            border-image: linear-gradient(45deg, #f59e0b, #6b46c1) 1;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-dragon-deep via-dragon-scale to-dragon-deep min-h-screen text-slate-100 font-sans">
+    
+    <!-- @COMPONENT: GameHeader -->
+    <header class="border-b border-dragon-purple/30 bg-dragon-scale/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="font-fantasy text-3xl font-bold text-dragon-gold">
+                    <i class="fas fa-dragon mr-3"></i>
+                    Animus: Wings of Fire RPG
+                </h1>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 hover:bg-dragon-purple/20 rounded-lg transition-colors" data-mock="true">
+                        <i class="fas fa-save text-dragon-gold"></i>
+                    </button>
+                    <button class="p-2 hover:bg-dragon-purple/20 rounded-lg transition-colors" data-mock="true">
+                        <i class="fas fa-cog text-dragon-gold"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: GameHeader -->
+
+    <div class="container mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-120px)]">
+            
+            <!-- @COMPONENT: CharacterPanel -->
+            <div class="lg:col-span-1">
+                <div class="bg-dragon-scale/60 backdrop-blur-sm rounded-xl border border-dragon-purple/30 p-6 h-full overflow-y-auto">
+                    
+                    <!-- Character Avatar & Basic Info -->
+                    <div class="text-center mb-6">
+                        <!-- A majestic purple dragon with golden eyes in fantasy art style -->
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" 
+                             alt="Dragon character portrait" 
+                             class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-dragon-gold object-cover"
+                             data-mock="true">
+                        <h2 class="font-fantasy text-2xl font-bold text-dragon-gold" data-bind="character.name">Pyrrhine</h2>
+                        <p class="text-dragon-purple font-medium" data-bind="character.tribe">NightWing Dragonet</p>
+                        <p class="text-sm text-slate-300" data-bind="character.age">3 years old</p>
+                    </div>
+
+                    <!-- Soul Status -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-slate-200">Soul Integrity</span>
+                            <span class="text-sm font-bold" data-bind="character.soulPercentage">87%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                            <div class="pure-soul h-full rounded-full transition-all duration-500" 
+                                 style="width: 87%" 
+                                 data-bind="soulBar"></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Your animus magic comes with a price...</p>
+                    </div>
+
+                    <!-- Character Stats -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <h3 class="font-fantasy text-lg font-semibold text-dragon-gold mb-3">Attributes</h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-dragon-deep/50 rounded-lg p-3">
+                                    <div class="text-xs text-slate-400">Strength</div>
+                                    <div class="font-semibold" data-bind="character.strength">12</div>
+                                </div>
+                                <div class="bg-dragon-deep/50 rounded-lg p-3">
+                                    <div class="text-xs text-slate-400">Intelligence</div>
+                                    <div class="font-semibold" data-bind="character.intelligence">18</div>
+                                </div>
+                                <div class="bg-dragon-deep/50 rounded-lg p-3">
+                                    <div class="text-xs text-slate-400">Charisma</div>
+                                    <div class="font-semibold" data-bind="character.charisma">14</div>
+                                </div>
+                                <div class="bg-dragon-deep/50 rounded-lg p-3">
+                                    <div class="text-xs text-slate-400">Wisdom</div>
+                                    <div class="font-semibold" data-bind="character.wisdom">16</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Family & Background -->
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-fantasy text-lg font-semibold text-dragon-gold mb-3">Family</h3>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Mother:</span>
+                                    <span data-bind="character.mother">Nightshade</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Father:</span>
+                                    <span data-bind="character.father">Starflight</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Siblings:</span>
+                                    <span data-bind="character.siblings">Moonwatcher, Eclipse</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-fantasy text-lg font-semibold text-dragon-gold mb-3">Traits</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-dragon-purple/30 text-dragon-purple text-xs px-2 py-1 rounded-full" data-mock="true">Curious</span>
+                                <span class="bg-dragon-purple/30 text-dragon-purple text-xs px-2 py-1 rounded-full" data-mock="true">Ambitious</span>
+                                <span class="bg-dragon-purple/30 text-dragon-purple text-xs px-2 py-1 rounded-full" data-mock="true">Secretive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: CharacterPanel -->
+
+            <!-- @COMPONENT: GameplayArea -->
+            <div class="lg:col-span-2">
+                <div class="bg-dragon-scale/60 backdrop-blur-sm rounded-xl border border-dragon-purple/30 h-full flex flex-col">
+                    
+                    <!-- Game Turn & Location Header -->
+                    <div class="border-b border-dragon-purple/30 p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-fantasy text-xl font-semibold text-dragon-gold" data-bind="location.name">Jade Mountain Academy</h3>
+                                <p class="text-sm text-slate-400" data-bind="timeInfo">Day 23 • Morning • Clear Skies</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-slate-400">Turn</div>
+                                <div class="font-bold text-lg" data-bind="gameState.turn">156</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Narrative Display -->
+                    <div class="flex-1 p-6 overflow-y-auto">
+                        <div class="narrative-text font-narrative text-base leading-relaxed">
+                            <p class="mb-4" data-mock="true">
+                                The morning sun filters through the crystal windows of your cave, casting dancing rainbows across the stone walls. You stretch your dark purple wings, feeling the familiar weight of knowledge—and something else, something <em>powerful</em>—thrumming through your scales.
+                            </p>
+                            
+                            <p class="mb-4" data-mock="true">
+                                Today is different. You can <strong>feel</strong> it in the way the other dragonets avoid your gaze, in the whispered conversations that stop when you pass. Last night's incident in the history cave... when you accidentally <em>wished</em> that ancient scroll would repair itself, and it did...
+                            </p>
+
+                            <p class="mb-6 text-dragon-gold font-semibold" data-mock="true">
+                                You are an animus dragon. The most dangerous and powerful dragon in Pyrrhia.
+                            </p>
+
+                            <div class="bg-dragon-deep/50 border-l-4 border-dragon-gold p-4 rounded-r-lg mb-6">
+                                <p class="font-semibold text-dragon-gold mb-2">Current Scenario:</p>
+                                <p data-mock="true">
+                                    Your clawmate Qibli approaches nervously, carrying a broken piece of jewelry—a small golden bracelet that belonged to his sister. His eyes are hopeful but fearful as he looks at you.
+                                </p>
+                                <p class="mt-2 italic text-slate-300" data-mock="true">
+                                    "Pyrrhine... I know what you can do. Could you... could you fix this? Please? It's all I have left of her."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Choice Selection Area -->
+                    <div class="border-t border-dragon-purple/30 p-6">
+                        <h4 class="font-fantasy text-lg font-semibold text-dragon-gold mb-4">Choose your action:</h4>
+                        
+                        <!-- @MAP: choices.map(choice => ( -->
+                        <div class="space-y-3">
+                            <button class="choice-button w-full text-left p-4 bg-dragon-deep/50 hover:bg-dragon-purple/20 border border-dragon-purple/30 rounded-lg transition-all duration-300" data-mock="true" data-event="click:makeChoice">
+                                <div class="flex items-start">
+                                    <div class="bg-dragon-gold text-dragon-deep rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-1">1</div>
+                                    <div>
+                                        <div class="font-medium text-slate-200">Use your animus magic to repair the bracelet</div>
+                                        <div class="text-sm text-slate-400 mt-1">Risk: Small soul loss (1-3%) • High friendship gain</div>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <button class="choice-button w-full text-left p-4 bg-dragon-deep/50 hover:bg-dragon-purple/20 border border-dragon-purple/30 rounded-lg transition-all duration-300" data-mock="true" data-event="click:makeChoice">
+                                <div class="flex items-start">
+                                    <div class="bg-dragon-gold text-dragon-deep rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-1">2</div>
+                                    <div>
+                                        <div class="font-medium text-slate-200">Refuse and suggest finding a jeweler instead</div>
+                                        <div class="text-sm text-slate-400 mt-1">Risk: None • Possible disappointment</div>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <button class="choice-button w-full text-left p-4 bg-dragon-deep/50 hover:bg-dragon-purple/20 border border-dragon-purple/30 rounded-lg transition-all duration-300" data-mock="true" data-event="click:makeChoice">
+                                <div class="flex items-start">
+                                    <div class="bg-dragon-gold text-dragon-deep rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-1">3</div>
+                                    <div>
+                                        <div class="font-medium text-slate-200">Offer to teach Qibli about animus magic instead</div>
+                                        <div class="text-sm text-slate-400 mt-1">Risk: Revealing dangerous knowledge</div>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <button class="choice-button w-full text-left p-4 bg-dragon-deep/50 hover:bg-red-900/20 border border-red-600/30 rounded-lg transition-all duration-300" data-mock="true" data-event="click:makeChoice">
+                                <div class="flex items-start">
+                                    <div class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-1">4</div>
+                                    <div>
+                                        <div class="font-medium text-red-300">Enchant the bracelet to spy on other dragons</div>
+                                        <div class="text-sm text-red-400 mt-1">Risk: Major soul loss (8-15%) • Corruption influence</div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <!-- @END_MAP )) -->
+
+                        <!-- Quick Actions Bar -->
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-dragon-purple/20">
+                            <div class="flex space-x-3">
+                                <button class="px-4 py-2 bg-dragon-purple/30 hover:bg-dragon-purple/50 rounded-lg text-sm transition-colors" data-mock="true">
+                                    <i class="fas fa-magic mr-2"></i>Magic Spells
+                                </button>
+                                <button class="px-4 py-2 bg-dragon-purple/30 hover:bg-dragon-purple/50 rounded-lg text-sm transition-colors" data-mock="true">
+                                    <i class="fas fa-book mr-2"></i>Inventory
+                                </button>
+                            </div>
+                            <button class="px-4 py-2 bg-dragon-gold/20 hover:bg-dragon-gold/30 text-dragon-gold rounded-lg text-sm transition-colors" data-mock="true">
+                                Skip Turn
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: GameplayArea -->
+        </div>
+    </div>
+
+    <!-- @COMPONENT: MagicSpellModal -->
+    <div id="spellModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50" data-mock="true">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-dragon-scale border border-dragon-gold rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="font-fantasy text-2xl font-bold text-dragon-gold">
+                        <i class="fas fa-magic mr-3"></i>Animus Magic Spells
+                    </h3>
+                    <button class="text-slate-400 hover:text-white text-xl" data-event="click:closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border border-green-500/30 rounded-lg p-4 bg-green-500/10">
+                        <h4 class="font-semibold text-green-400 mb-2">Minor Enchantments</h4>
+                        <ul class="text-sm space-y-1 text-slate-300">
+                            <li>• Repair small objects (1-3% soul)</li>
+                            <li>• Light/warmth spells (1-2% soul)</li>
+                            <li>• Communication aids (2-4% soul)</li>
+                        </ul>
+                    </div>
+
+                    <div class="border border-yellow-500/30 rounded-lg p-4 bg-yellow-500/10">
+                        <h4 class="font-semibold text-yellow-400 mb-2">Moderate Magic</h4>
+                        <ul class="text-sm space-y-1 text-slate-300">
+                            <li>• Enhance abilities (5-8% soul)</li>
+                            <li>• Create magical items (6-10% soul)</li>
+                            <li>• Weather manipulation (7-12% soul)</li>
+                        </ul>
+                    </div>
+
+                    <div class="border border-red-500/30 rounded-lg p-4 bg-red-500/10">
+                        <h4 class="font-semibold text-red-400 mb-2">Dangerous Spells</h4>
+                        <ul class="text-sm space-y-1 text-slate-300">
+                            <li>• Mind control (15-25% soul)</li>
+                            <li>• Life/death magic (20-30% soul)</li>
+                            <li>• Reality alteration (25-40% soul)</li>
+                        </ul>
+                    </div>
+
+                    <div class="border border-purple-500/30 rounded-lg p-4 bg-purple-500/10">
+                        <h4 class="font-semibold text-purple-400 mb-2">Soul Status</h4>
+                        <p class="text-sm text-slate-300 mb-2">Current: 87% Pure</p>
+                        <div class="text-xs text-slate-400">
+                            <div>• 70-100%: Full control</div>
+                            <div>• 40-69%: Occasional dark thoughts</div>
+                            <div>• 20-39%: Partial AI control</div>
+                            <div>• 0-19%: Mostly corrupted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: MagicSpellModal -->
+
+    <!-- @COMPONENT: CorruptionWarning -->
+    <div id="corruptionWarning" class="fixed top-4 right-4 bg-red-900/90 border border-red-500 rounded-lg p-4 max-w-sm hidden animate-pulse" data-mock="true">
+        <div class="flex items-start">
+            <i class="fas fa-exclamation-triangle text-red-400 mr-3 mt-1"></i>
+            <div>
+                <h4 class="font-semibold text-red-300 mb-1">Soul Corruption Warning</h4>
+                <p class="text-sm text-red-200">Dark thoughts cloud your mind...</p>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: CorruptionWarning -->
+
+    <script>
+        // @FUNCTIONALITY: Game state management and UI interactions
+        (function() {
+            // TODO: Implement React state management for game data
+            // TODO: Add save/load functionality
+            // TODO: Implement scenario generation system
+            // TODO: Add soul corruption mechanics
+            // TODO: Create AI decision making for corrupted states
+
+            // Mock interaction handlers for demo
+            const choices = document.querySelectorAll('.choice-button');
+            choices.forEach((choice, index) => {
+                choice.addEventListener('click', function() {
+                    // TODO: Process choice selection and update game state
+                    console.log(`Choice ${index + 1} selected`);
+                });
+            });
+
+            // Modal functionality
+            const spellButton = document.querySelector('[data-mock="true"]');
+            const modal = document.getElementById('spellModal');
+            
+            // TODO: Implement proper modal state management
+            // TODO: Add spell selection and casting mechanics
+            // TODO: Integrate with soul-loss calculation system
+        })();
+    </script>
+</body>
+</html>
