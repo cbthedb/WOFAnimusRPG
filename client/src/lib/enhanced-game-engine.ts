@@ -62,6 +62,34 @@ export class EnhancedGameEngine {
     return { newCharacter, newGameData, event };
   }
 
+  static processCustomAction(
+    character: Character,
+    gameData: GameData,
+    action: { action: string; consequences: string[] },
+    scenario: Scenario
+  ): GameData {
+    const newGameData = { ...gameData };
+    
+    // Create a game event for the custom action
+    const event: GameEvent = {
+      turn: gameData.turn,
+      scenario: scenario.id,
+      choice: `custom_action_${Date.now()}`,
+      consequences: action.consequences,
+      soulLoss: 0,
+      sanityLoss: 0
+    };
+
+    // Update game data
+    newGameData.turn += 1;
+    newGameData.history.push(event);
+    
+    // Generate next scenario
+    newGameData.currentScenario = this.generateNextScenario(character, newGameData);
+    
+    return newGameData;
+  }
+
   static generateNextScenario(character: Character, gameData: GameData): Scenario {
     // Use original scenario generator
     return generateScenario(character, gameData);

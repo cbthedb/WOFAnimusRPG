@@ -99,10 +99,10 @@ export default function Game() {
 
       // Check for game over conditions - but allow continuation for corrupted souls
       const gameOverCheck = EnhancedGameEngine.checkGameOver(character);
-      if (gameOverCheck.isGameOver) {
+      if (gameOverCheck.isGameOver && !character.isAIControlled) {
         const allowContinue = character.soulPercentage <= 0; // Allow AI takeover for corrupted souls
         setGameOverState({ ...gameOverCheck, allowContinue });
-      } else {
+      } else if (!gameOverCheck.isGameOver || character.isAIControlled) {
         setGameOverState(null);
       }
     }
@@ -457,6 +457,88 @@ export default function Game() {
     return null;
   };
 
+  const handleTribalPower = (power: string, corruptedUse: string) => {
+    if (!gameState || !gameId) return;
+
+    const character = gameState.characterData;
+    const gameData = gameState.gameData;
+
+    // Apply consequences of using tribal power corruptly
+    const newCharacter = { ...character };
+    newCharacter.soulPercentage = Math.max(0, character.soulPercentage - 5); // Using powers corruptly costs soul
+    newCharacter.sanityPercentage = Math.max(0, character.sanityPercentage - 3);
+
+    // Create a corrupted scenario result
+    const result = `Using ${power}, ${corruptedUse}. The dark deed leaves a stain on your soul.`;
+
+    const newGameData = EnhancedGameEngine.processCustomAction(
+      character,
+      gameData,
+      {
+        action: `Corrupt use of ${power}`,
+        consequences: [result]
+      },
+      gameData.currentScenario
+    );
+
+    try {
+      const updatedGame = updateGame(gameId, {
+        characterData: newCharacter,
+        gameData: newGameData,
+        turn: newGameData.turn,
+        location: newGameData.location,
+      });
+      
+      setGameState({
+        characterData: updatedGame.characterData,
+        gameData: updatedGame.gameData
+      });
+    } catch (error) {
+      console.error("Failed to handle tribal power:", error);
+    }
+  };
+
+  const handleAISpecialPower = (power: string, corruptedUse: string) => {
+    if (!gameState || !gameId) return;
+
+    const character = gameState.characterData;
+    const gameData = gameState.gameData;
+
+    // Apply consequences of using special power corruptly
+    const newCharacter = { ...character };
+    newCharacter.soulPercentage = Math.max(0, character.soulPercentage - 8); // Special powers cost more
+    newCharacter.sanityPercentage = Math.max(0, character.sanityPercentage - 5);
+
+    // Create a corrupted scenario result
+    const result = `Corrupting special power "${power}": ${corruptedUse}. The perversion of your gift darkens your essence.`;
+
+    const newGameData = EnhancedGameEngine.processCustomAction(
+      character,
+      gameData,
+      {
+        action: `Corrupt use of special power: ${power}`,
+        consequences: [result]
+      },
+      gameData.currentScenario
+    );
+
+    try {
+      const updatedGame = updateGame(gameId, {
+        characterData: newCharacter,
+        gameData: newGameData,
+        turn: newGameData.turn,
+        location: newGameData.location,
+      });
+      
+      setGameState({
+        characterData: updatedGame.characterData,
+        gameData: updatedGame.gameData
+      });
+    } catch (error) {
+      console.error("Failed to handle special power:", error);
+    }
+  };
+
   const continueAsCorrupted = () => {
     if (!gameState || !gameId) return;
     
@@ -498,14 +580,14 @@ export default function Game() {
     if (!gameId) return;
 
     // Show AI taking control message
-    setAiControlMessage("The AI has taken control of your corrupted dragon. Evil choices are being made automatically...");
+    setAiControlMessage("The AI has taken control of your corrupted dragon. Dark deeds are being performed automatically...");
 
     // Clear any existing interval
     if (aiInterval) {
       clearInterval(aiInterval);
     }
 
-    // Set up interval for AI to make choices automatically
+    // Set up interval for AI to perform actions automatically
     const newInterval = setInterval(() => {
       // Get fresh game state each time
       const currentGameState = LocalGameStorage.getGameState(gameId);
@@ -515,25 +597,70 @@ export default function Game() {
         return;
       }
 
-      const currentScenario = currentGameState.gameData.currentScenario;
-      if (!currentScenario || !currentScenario.choices || currentScenario.choices.length === 0) return;
+      // Import the enhanced AI controller
+      import('../lib/enhanced-ai-controller').then(({ EnhancedAIController }) => {
+        const aiAction = EnhancedAIController.generateAIAction(
+          currentGameState.characterData, 
+          currentGameState.gameData
+        );
 
-      // Use the enhanced game engine's AI choice logic
-      const aiChoice = EnhancedGameEngine.getAIChoice(currentGameState.characterData, currentScenario);
-      const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
+        if (!aiAction) {
+          // Fallback to regular choice if no AI action generated
+          const currentScenario = currentGameState.gameData.currentScenario;
+          if (currentScenario && currentScenario.choices && currentScenario.choices.length > 0) {
+            const aiChoice = EnhancedGameEngine.getAIChoice(currentGameState.characterData, currentScenario);
+            const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
+            handleChoice(choiceToMake);
+          }
+          return;
+        }
 
-      console.log("AI making choice:", choiceToMake.text);
-      
-      toast({
-        title: "AI Choice Made",
-        description: `Your corrupted dragon chose: ${choiceToMake.text}`,
-        variant: "destructive"
+        const narrative = EnhancedAIController.generateAINarrative(aiAction, currentGameState.characterData);
+        const whisper = EnhancedAIController.getActionWhisper();
+
+        console.log("AI performing action:", aiAction.type, aiAction.description);
+        
+        toast({
+          title: "Corrupted Action",
+          description: narrative,
+          variant: "destructive"
+        });
+
+        // Show corruption whisper
+        setTimeout(() => {
+          toast({
+            title: "Dark Whisper",
+            description: whisper,
+            variant: "destructive"
+          });
+        }, 1500);
+
+        // Execute the AI action based on type
+        switch (aiAction.type) {
+          case 'magic':
+            if (currentGameState.characterData.isAnimus) {
+              handleCastSpell(aiAction.data);
+            }
+            break;
+          case 'custom_action':
+            handleCustomAction(aiAction.data, "The corrupted dragon performs this evil deed with malicious glee.");
+            break;
+          case 'tribal_power':
+            // Handle tribal power usage
+            handleTribalPower(aiAction.data.power, aiAction.data.use);
+            break;
+          case 'special_power':
+            // Handle special power usage  
+            handleAISpecialPower(aiAction.data.power, aiAction.data.use);
+            break;
+          case 'choice':
+          default:
+            handleChoice(aiAction.data);
+            break;
+        }
       });
-      
-      // Make the choice immediately
-      handleChoice(choiceToMake);
 
-    }, 4000); // AI makes a choice every 4 seconds
+    }, 5000); // AI performs an action every 5 seconds
 
     setAiInterval(newInterval);
   };
