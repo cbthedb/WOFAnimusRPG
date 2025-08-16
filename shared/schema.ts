@@ -109,11 +109,22 @@ export interface GameData {
   currentScenario: Scenario;
   history: GameEvent[];
   relationships: Record<string, number>;
-  inventory: string[];
+  inventory: InventoryItem[];
   reputation: number;
   politicalEvents: PoliticalEvent[];
   warStatus: WarStatus;
   explorationLog: ExplorationEvent[];
+}
+
+export interface InventoryItem {
+  id: string;
+  name: string;
+  description: string;
+  type: "enchanted_object" | "treasure" | "scroll" | "weapon" | "tool" | "magical_artifact";
+  enchantments: string[];
+  soulCostToCreate?: number;
+  turnCreated?: number;
+  isActive: boolean;
 }
 
 export interface Scenario {
@@ -155,6 +166,16 @@ export interface MagicSpell {
   description: string;
   examples: string[];
   type: "enchantment" | "combat" | "healing" | "weather" | "curse" | "summoning";
+}
+
+export interface CustomSpell {
+  id: string;
+  targetObject: string;
+  enchantmentDescription: string;
+  estimatedSoulCost: number;
+  spellType: "enchantment" | "combat" | "healing" | "weather" | "curse" | "summoning";
+  complexity: "simple" | "moderate" | "complex" | "catastrophic";
+  turnCast: number;
 }
 
 export interface PoliticalEvent {

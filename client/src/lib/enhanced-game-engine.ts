@@ -62,20 +62,12 @@ export class EnhancedGameEngine {
   }
 
   static generateNextScenario(character: Character, gameData: GameData): Scenario {
-    // 30% chance for AI-driven events
-    if (Math.random() < 0.3) {
-      const eventType = Math.random();
-      if (eventType < 0.4) {
-        return AIDungeonMaster.generateMoralDilemma(character, gameData);
-      } else if (eventType < 0.7) {
-        return AIDungeonMaster.generateRandomDisaster(character, gameData);
-      } else {
-        // Generate political/war events
-        return this.generatePoliticalScenario(character, gameData);
-      }
+    // 80% chance for AI-driven dynamic events (much higher for more variety)
+    if (Math.random() < 0.8) {
+      return AIDungeonMaster.generateRandomScenario(character, gameData);
     }
 
-    // Otherwise use regular scenario generation
+    // 20% chance for traditional scenarios for some consistency
     return generateScenario(character, gameData);
   }
 
@@ -140,29 +132,123 @@ export class EnhancedGameEngine {
   }
 
   static updateRelationships(character: Character, choice: Choice, scenario: Scenario): void {
-    // Build relationships based on choices
-    if (choice.consequences.some(c => c.includes("friend"))) {
-      const friendName = `Dragon_${Math.random().toString(36).substr(2, 9)}`;
+    // Romance relationship building
+    if (scenario.id.includes('romance') && choice.id === 'romance_accept') {
+      const partnerName = this.generateRandomDragonName();
+      character.relationships[partnerName] = {
+        name: partnerName,
+        type: "romantic",
+        strength: Math.floor(Math.random() * 40) + 30,
+        history: ["Romance blossomed during an encounter"],
+        isAlive: true
+      };
+      
+      // Chance for pregnancy/dragonets if mated
+      if (Math.random() < 0.3 && !character.mate) {
+        character.mate = partnerName;
+        character.relationships[partnerName].type = "mate";
+        
+        // Chance for immediate dragonets
+        if (Math.random() < 0.4) {
+          this.addDragonet(character, partnerName);
+        }
+      }
+    }
+
+    // Build friendships from social interactions
+    if (choice.consequences.some(c => c.includes("friend")) || scenario.id.includes('social')) {
+      const friendName = this.generateRandomDragonName();
       character.relationships[friendName] = {
         name: friendName,
         type: "friend",
         strength: Math.floor(Math.random() * 30) + 20,
-        history: ["Met during a challenging time"],
+        history: ["Met during a memorable encounter"],
+        isAlive: true
+      };
+    }
+
+    // Create rivals from conflicts
+    if (scenario.id.includes('war') || scenario.id.includes('political')) {
+      const rivalName = this.generateRandomDragonName();
+      character.relationships[rivalName] = {
+        name: rivalName,
+        type: "rival",
+        strength: Math.floor(Math.random() * 20) + 10,
+        history: ["Conflict created lasting animosity"],
         isAlive: true
       };
     }
 
     if (choice.corruption) {
-      // Corrupt choices strain relationships
+      // Corrupt choices strain all relationships
       Object.keys(character.relationships).forEach(key => {
-        if (character.relationships[key].type === "friend") {
-          character.relationships[key].strength -= Math.floor(Math.random() * 10) + 5;
-          if (character.relationships[key].strength < 0) {
-            character.relationships[key].type = "neutral";
+        const relationship = character.relationships[key];
+        if (relationship.type === "friend" || relationship.type === "romantic") {
+          relationship.strength -= Math.floor(Math.random() * 15) + 5;
+          if (relationship.strength < 0) {
+            relationship.type = relationship.type === "romantic" ? "ex_mate" : "neutral";
+            relationship.history.push("Relationship damaged by corruption");
           }
         }
       });
     }
+  }
+
+  static generateRandomDragonName(): string {
+    const prefixes = ['Shadow', 'Fire', 'Ice', 'Storm', 'Star', 'Moon', 'Sun', 'Wind', 'Ocean', 'Earth'];
+    const suffixes = ['wing', 'claw', 'scale', 'breath', 'heart', 'eye', 'song', 'dance', 'flight', 'roar'];
+    return `${prefixes[Math.floor(Math.random() * prefixes.length)]}${suffixes[Math.floor(Math.random() * suffixes.length)]}`;
+  }
+
+  static addDragonet(character: Character, partnerName: string): void {
+    const dragonetName = this.generateRandomDragonName();
+    const inheritedTribes = character.hybridTribes ? [...character.hybridTribes] : [character.tribe];
+    
+    // Add some random tribe mixing
+    if (Math.random() < 0.3) {
+      const allTribes = ['NightWing', 'SkyWing', 'SeaWing', 'RainWing', 'SandWing', 'IceWing', 'MudWing'];
+      const randomTribe = allTribes[Math.floor(Math.random() * allTribes.length)];
+      if (!inheritedTribes.includes(randomTribe)) {
+        inheritedTribes.push(randomTribe);
+      }
+    }
+    
+    const dragonet = {
+      name: dragonetName,
+      age: 0,
+      tribe: inheritedTribes[0],
+      hybridTribes: inheritedTribes.length > 1 ? inheritedTribes : undefined,
+      inheritedTraits: this.inheritTraits(character),
+      isAnimus: Math.random() < (character.isAnimus ? 0.15 : 0.05), // Higher chance if parent is animus
+      parentage: 'biological' as const,
+      personality: this.generateDragonetPersonality()
+    };
+    
+    character.dragonets.push(dragonet);
+  }
+
+  static inheritTraits(character: Character): string[] {
+    const inherited = [];
+    // 50% chance to inherit each trait
+    for (const trait of character.traits) {
+      if (Math.random() < 0.5) {
+        inherited.push(trait);
+      }
+    }
+    // Add some new random traits
+    const newTraits = ['Brave', 'Curious', 'Gentle', 'Fierce', 'Wise', 'Playful'];
+    if (Math.random() < 0.7) {
+      inherited.push(newTraits[Math.floor(Math.random() * newTraits.length)]);
+    }
+    return inherited;
+  }
+
+  static generateDragonetPersonality(): string {
+    const personalities = [
+      'Playful and energetic', 'Quiet and thoughtful', 'Bold and adventurous',
+      'Gentle and kind', 'Mischievous and clever', 'Protective and loyal'
+    ];
+    return personalities[Math.floor(Math.random() * personalities.length)];
   }
 
   static checkAchievements(character: Character, choice: Choice, scenario: Scenario): void {

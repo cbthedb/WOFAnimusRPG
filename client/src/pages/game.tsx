@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "wouter";
-import { Character, GameData, Choice } from "@shared/schema";
+import { Character, GameData, Choice, CustomSpell, InventoryItem } from "@shared/schema";
 import { EnhancedGameEngine } from "@/lib/enhanced-game-engine";
 import CharacterPanel from "@/components/character-panel";
 import GameplayArea from "@/components/gameplay-area";
@@ -53,6 +53,75 @@ export default function Game() {
       setGameOverState(gameOverCheck);
     }
   }, [gameState]);
+
+  const handleCastSpell = (spell: CustomSpell) => {
+    if (!gameState || !gameId || gameOverState?.isGameOver) return;
+
+    const character = gameState.characterData;
+    const gameData = gameState.gameData;
+
+    // Check if character has enough soul
+    if (character.soulPercentage < spell.estimatedSoulCost) {
+      toast({
+        title: "Insufficient Soul",
+        description: "You don't have enough soul remaining to cast this spell.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Apply soul cost
+    const newCharacter = { ...character };
+    newCharacter.soulPercentage = Math.max(0, character.soulPercentage - spell.estimatedSoulCost);
+    newCharacter.soulCorruptionStage = {
+      "Normal": character.soulPercentage >= 75 ? "Normal" : character.soulPercentage >= 50 ? "Frayed" : character.soulPercentage >= 25 ? "Twisted" : "Broken",
+      "Frayed": character.soulPercentage >= 50 ? "Frayed" : character.soulPercentage >= 25 ? "Twisted" : "Broken",
+      "Twisted": character.soulPercentage >= 25 ? "Twisted" : "Broken",
+      "Broken": "Broken"
+    }[character.soulCorruptionStage] as any;
+
+    // Create enchanted item and add to inventory
+    const newItem: InventoryItem = {
+      id: `item_${Date.now()}`,
+      name: `Enchanted ${spell.targetObject}`,
+      description: spell.enchantmentDescription,
+      type: "enchanted_object",
+      enchantments: [spell.enchantmentDescription],
+      soulCostToCreate: spell.estimatedSoulCost,
+      turnCreated: gameData.turn,
+      isActive: true
+    };
+
+    const newGameData = { ...gameData };
+    newGameData.inventory.push(newItem);
+
+    try {
+      const updatedGame = updateGame(gameId, {
+        characterData: newCharacter,
+        gameData: newGameData,
+        turn: newGameData.turn,
+        location: newGameData.location,
+      });
+      
+      setGameState({
+        characterData: updatedGame.characterData,
+        gameData: updatedGame.gameData
+      });
+
+      toast({
+        title: "Spell Cast Successfully!",
+        description: `You enchanted ${spell.targetObject}. Soul cost: ${spell.estimatedSoulCost}%`,
+      });
+
+      setShowMagicModal(false);
+    } catch (error) {
+      toast({
+        title: "Spell Failed",
+        description: "Something went wrong casting your spell.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleChoice = (choice: Choice) => {
     if (!gameState || !gameId || gameOverState?.isGameOver) return;
@@ -206,6 +275,7 @@ export default function Game() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-120px)]">
           <CharacterPanel 
             character={character} 
+            inventory={gameData?.inventory || []}
             onShowTribalPowers={() => setShowTribalPowersModal(true)} 
           />
           <GameplayArea
@@ -222,6 +292,8 @@ export default function Game() {
         isOpen={showMagicModal}
         onClose={() => setShowMagicModal(false)}
         character={character}
+        inventory={gameData?.inventory || []}
+        onCastSpell={handleCastSpell}
       />
 
       <TribalPowersModal
