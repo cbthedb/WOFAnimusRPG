@@ -58,6 +58,9 @@ class MemStorage implements IStorage {
       id,
       createdAt: now,
       updatedAt: now,
+      userId: insertGameState.userId || null,
+      turn: insertGameState.turn || 1,
+      location: insertGameState.location || "Jade Mountain Academy",
     };
     this.gameStates.set(id, gameState);
     return gameState;
@@ -83,56 +86,58 @@ class MemStorage implements IStorage {
   }
 }
 
-import { db } from "./db";
-import { gameStates } from "@shared/schema";
-import { eq } from "drizzle-orm";
+// Database imports commented out since we're using MemStorage
+// import { db } from "./db";
+// import { gameStates } from "@shared/schema";
+// import { eq } from "drizzle-orm";
 
-export class DatabaseStorage implements IStorage {
-  async getUser(id: string): Promise<User | undefined> {
-    // User functionality not implemented yet
-    return undefined;
-  }
+// DatabaseStorage commented out since we're using MemStorage
+// export class DatabaseStorage implements IStorage {
+//   async getUser(id: string): Promise<User | undefined> {
+//     // User functionality not implemented yet
+//     return undefined;
+//   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    // User functionality not implemented yet
-    return undefined;
-  }
+//   async getUserByUsername(username: string): Promise<User | undefined> {
+//     // User functionality not implemented yet
+//     return undefined;
+//   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    // User functionality not implemented yet
-    throw new Error("User functionality not implemented");
-  }
+//   async createUser(insertUser: InsertUser): Promise<User> {
+//     // User functionality not implemented yet
+//     throw new Error("User functionality not implemented");
+//   }
 
-  async getGameState(id: string): Promise<GameState | undefined> {
-    const [gameState] = await db.select().from(gameStates).where(eq(gameStates.id, id));
-    return gameState || undefined;
-  }
+//   async getGameState(id: string): Promise<GameState | undefined> {
+//     const [gameState] = await db.select().from(gameStates).where(eq(gameStates.id, id));
+//     return gameState || undefined;
+//   }
 
-  async getGameStateByUserId(userId: string): Promise<GameState | undefined> {
-    const [gameState] = await db.select().from(gameStates).where(eq(gameStates.userId, userId));
-    return gameState || undefined;
-  }
+//   async getGameStateByUserId(userId: string): Promise<GameState | undefined> {
+//     const [gameState] = await db.select().from(gameStates).where(eq(gameStates.userId, userId));
+//     return gameState || undefined;
+//   }
 
-  async createGameState(insertGameState: InsertGameState): Promise<GameState> {
-    const [gameState] = await db
-      .insert(gameStates)
-      .values(insertGameState)
-      .returning();
-    return gameState;
-  }
+//   async createGameState(insertGameState: InsertGameState): Promise<GameState> {
+//     const [gameState] = await db
+//       .insert(gameStates)
+//       .values(insertGameState)
+//       .returning();
+//     return gameState;
+//   }
 
-  async updateGameState(id: string, updateData: Partial<InsertGameState>): Promise<GameState> {
-    const [gameState] = await db
-      .update(gameStates)
-      .set(updateData)
-      .where(eq(gameStates.id, id))
-      .returning();
-    return gameState;
-  }
+//   async updateGameState(id: string, updateData: Partial<InsertGameState>): Promise<GameState> {
+//     const [gameState] = await db
+//       .update(gameStates)
+//       .set(updateData)
+//       .where(eq(gameStates.id, id))
+//       .returning();
+//     return gameState;
+//   }
 
-  async deleteGameState(id: string): Promise<void> {
-    await db.delete(gameStates).where(eq(gameStates.id, id));
-  }
-}
+//   async deleteGameState(id: string): Promise<void> {
+//     await db.delete(gameStates).where(eq(gameStates.id, id));
+//   }
+// }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemStorage();
