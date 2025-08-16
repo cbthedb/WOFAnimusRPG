@@ -6,7 +6,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Object Enchantment",
     category: "minor",
     type: "enchantment",
-    soulCost: [1, 5],
+    soulCost: [0.5, 2],
     description: "Imbue objects with magical properties",
     examples: [
       "Make a pouch that never empties of coins",
@@ -19,7 +19,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Greater Enchantments", 
     category: "moderate",
     type: "enchantment",
-    soulCost: [8, 15],
+    soulCost: [3, 8],
     description: "Create powerful magical artifacts",
     examples: [
       "Forge a sword that cuts through any material",
@@ -34,7 +34,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Combat Enhancement",
     category: "minor", 
     type: "combat",
-    soulCost: [2, 6],
+    soulCost: [1, 3],
     description: "Enhance fighting abilities temporarily",
     examples: [
       "Make your claws razor-sharp for one battle",
@@ -47,7 +47,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Battlefield Control",
     category: "major",
     type: "combat", 
-    soulCost: [15, 25],
+    soulCost: [8, 15],
     description: "Control entire battlefields",
     examples: [
       "Create an army of animated stone warriors",
@@ -62,7 +62,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Healing Touch",
     category: "minor",
     type: "healing",
-    soulCost: [1, 4],
+    soulCost: [0.5, 2],
     description: "Cure injuries and ailments",
     examples: [
       "Instantly heal broken bones",
@@ -75,7 +75,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Resurrection Magic",
     category: "catastrophic",
     type: "healing",
-    soulCost: [40, 60],
+    soulCost: [25, 40],
     description: "Bring back the dead - ultimate taboo",
     examples: [
       "Restore life to a recently deceased dragon",
@@ -172,9 +172,9 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
 
 export class SoulCorruptionManager {
   static getSoulCorruptionStage(soulPercentage: number): "Normal" | "Frayed" | "Twisted" | "Broken" {
-    if (soulPercentage >= 75) return "Normal";
-    if (soulPercentage >= 50) return "Frayed";
-    if (soulPercentage >= 25) return "Twisted";
+    if (soulPercentage >= 85) return "Normal";
+    if (soulPercentage >= 60) return "Frayed";
+    if (soulPercentage >= 30) return "Twisted";
     return "Broken";
   }
 
@@ -215,15 +215,18 @@ export class SoulCorruptionManager {
       case "Normal":
         return { aiControlChance: 0, corruptionChoiceBonus: 0, relationshipPenalty: 0 };
       case "Frayed":
-        return { aiControlChance: 0.1, corruptionChoiceBonus: 0.2, relationshipPenalty: -5 };
+        return { aiControlChance: 0.05, corruptionChoiceBonus: 0.1, relationshipPenalty: -2 };
       case "Twisted":
-        return { aiControlChance: 0.3, corruptionChoiceBonus: 0.4, relationshipPenalty: -15 };
+        return { aiControlChance: 0.1, corruptionChoiceBonus: 0.2, relationshipPenalty: -8 };
       case "Broken":
-        return { aiControlChance: 0.7, corruptionChoiceBonus: 0.8, relationshipPenalty: -30 };
+        return { aiControlChance: 0.2, corruptionChoiceBonus: 0.3, relationshipPenalty: -15 };
     }
   }
 
   static shouldAITakeControl(character: Character): boolean {
+    // AI only takes control when soul is under 5%
+    if (character.soulPercentage > 5) return false;
+    
     const stage = character.soulCorruptionStage;
     const behavior = this.getCorruptionBehavior(stage);
     return Math.random() < behavior.aiControlChance;
