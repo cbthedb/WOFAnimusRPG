@@ -591,7 +591,7 @@ export default function Game() {
     }
 
     // Set up interval for AI to perform actions automatically
-    const newInterval = setInterval(() => {
+    const newInterval = setInterval(async () => {
       // Get fresh game state each time
       const currentGameState = LocalGameStorage.getGameState(gameId);
       if (!currentGameState?.characterData?.isAIControlled) {
@@ -601,112 +601,149 @@ export default function Game() {
       }
 
       // Import the enhanced AI controller
-      import('../lib/enhanced-ai-controller').then(({ EnhancedAIController }) => {
-        const aiAction = EnhancedAIController.generateAIAction(
-          currentGameState.characterData, 
-          currentGameState.gameData
-        );
+      const { EnhancedAIController } = await import('../lib/enhanced-ai-controller');
+      const aiAction = EnhancedAIController.generateAIAction(
+        currentGameState.characterData, 
+        currentGameState.gameData
+      );
 
-        if (!aiAction) {
-          // Fallback to regular choice if no AI action generated
-          const currentScenario = currentGameState.gameData.currentScenario;
-          if (currentScenario && currentScenario.choices && currentScenario.choices.length > 0) {
-            const aiChoice = EnhancedGameEngine.getAIChoice(currentGameState.characterData, currentScenario);
-            const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
-            handleChoice(choiceToMake);
+      if (!aiAction) {
+        // Fallback to regular choice if no AI action generated
+        const currentScenario = currentGameState.gameData.currentScenario;
+        if (currentScenario && currentScenario.choices && currentScenario.choices.length > 0) {
+          const aiChoice = EnhancedGameEngine.getAIChoice(currentGameState.characterData, currentScenario);
+          const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
+          
+          // Process the choice directly with the game engine
+          const newGameData = EnhancedGameEngine.processChoice(
+            currentGameState.characterData,
+            currentGameState.gameData,
+            choiceToMake
+          );
+
+          try {
+            const updatedGame = updateGame(gameId, {
+              characterData: newGameData.character,
+              gameData: newGameData.gameData,
+              turn: newGameData.gameData.turn,
+              location: newGameData.gameData.location,
+            });
+            
+            setGameState({
+              characterData: updatedGame.characterData,
+              gameData: updatedGame.gameData
+            });
+
+            toast({
+              title: "🔥 AI MAKES CHOICE",
+              description: `Your corrupted dragon chooses: ${choiceToMake.text}`,
+              variant: "destructive"
+            });
+          } catch (error) {
+            console.error("Failed to process AI choice:", error);
           }
-          return;
         }
+        return;
+      }
 
-        const narrative = EnhancedAIController.generateAINarrative(aiAction, currentGameState.characterData);
-        const whisper = EnhancedAIController.getActionWhisper();
+      const narrative = EnhancedAIController.generateAINarrative(aiAction, currentGameState.characterData);
+      const whisper = EnhancedAIController.getActionWhisper();
 
-        console.log("AI performing action:", aiAction.type, aiAction.description);
-        console.log("Current AI Control Status:", currentGameState.characterData.isAIControlled);
-        console.log("Current Soul %:", currentGameState.characterData.soulPercentage);
-        
-        // Set action in progress indicator
-        setAiActionInProgress(`Performing ${aiAction.type}: ${aiAction.description}`);
-        
+      console.log("AI performing action:", aiAction.type, aiAction.description);
+      console.log("Current AI Control Status:", currentGameState.characterData.isAIControlled);
+      console.log("Current Soul %:", currentGameState.characterData.soulPercentage);
+      
+      // Set action in progress indicator
+      setAiActionInProgress(`Performing ${aiAction.type}: ${aiAction.description}`);
+      
+      toast({
+        title: "🔥 YOUR CORRUPTED DRAGON TAKES CONTROL",
+        description: `${narrative} - The darkness spreads...`,
+        duration: 5000,
+        variant: "destructive"
+      });
+
+      // Show corruption whisper with more dramatic effect
+      setTimeout(() => {
         toast({
-          title: "🔥 YOUR CORRUPTED DRAGON TAKES CONTROL",
-          description: `${narrative} - The darkness spreads...`,
-          duration: 5000,
+          title: "💀 SOUL CORRUPTION CONSUMES ALL",
+          description: `${whisper} - Your dragon revels in darkness...`,
+          duration: 4000,
           variant: "destructive"
         });
+      }, 2000);
 
-        // Show corruption whisper with more dramatic effect
-        setTimeout(() => {
-          toast({
-            title: "💀 SOUL CORRUPTION CONSUMES ALL",
-            description: `${whisper} - Your dragon revels in darkness...`,
-            duration: 4000,
-            variant: "destructive"
-          });
-        }, 2000);
+      // Clear action in progress after action completes
+      setTimeout(() => {
+        setAiActionInProgress(null);
+      }, 3000);
 
-        // Clear action in progress after action completes
-        setTimeout(() => {
-          setAiActionInProgress(null);
-        }, 3000);
+      // Process AI action directly with game engine instead of calling handlers
+      try {
+        let updatedCharacter = { ...currentGameState.characterData };
+        let updatedGameData = { ...currentGameState.gameData };
 
-        // Execute AI action directly
         switch (aiAction.type) {
           case 'magic':
             if (currentGameState.characterData.isAnimus) {
-              handleCastSpell(aiAction.data);
+              const spell = aiAction.data;
+              // Apply soul cost
+              updatedCharacter.soulPercentage = Math.max(0, updatedCharacter.soulPercentage - spell.estimatedSoulCost);
+              
+              // Create enchanted item
+              const newItem: InventoryItem = {
+                id: `item_${Date.now()}`,
+                name: `Enchanted ${spell.targetObject}`,
+                description: spell.enchantmentDescription,
+                type: "enchanted_object",
+                enchantments: [spell.enchantmentDescription],
+                soulCostToCreate: spell.estimatedSoulCost,
+              };
+
+              updatedGameData.inventory = [...(updatedGameData.inventory || []), newItem];
+              updatedGameData = EnhancedGameEngine.processCustomAction(
+                updatedCharacter,
+                updatedGameData,
+                { action: `Cast dark spell on ${spell.targetObject}`, consequences: [spell.enchantmentDescription] },
+                updatedGameData.currentScenario
+              );
             }
             break;
           case 'custom_action':
-            handleCustomAction(aiAction.data, "The corrupted dragon performs this evil deed with malicious glee.");
+            updatedGameData = EnhancedGameEngine.processCustomAction(
+              updatedCharacter,
+              updatedGameData,
+              { action: aiAction.data, consequences: ["The corrupted dragon performs this evil deed with malicious glee."] },
+              updatedGameData.currentScenario
+            );
             break;
-          case 'tribal_power':
-            handleTribalPower(aiAction.data.power, aiAction.data.use);
-            break;
-          case 'special_power':
-            handleAISpecialPower(aiAction.data.power, aiAction.data.use);
-            break;
-          case 'choice':
           default:
-            handleChoice(aiAction.data);
+            // For other action types, just advance the scenario
+            updatedGameData = EnhancedGameEngine.processCustomAction(
+              updatedCharacter,
+              updatedGameData,
+              { action: `AI performs ${aiAction.type}`, consequences: [narrative] },
+              updatedGameData.currentScenario
+            );
             break;
         }
 
-        // Update the scenario to reflect what the AI just did
-        setTimeout(() => {
-          const updatedGameState = LocalGameStorage.getGameState(gameId);
-          if (updatedGameState) {
-            const newScenario = {
-              ...updatedGameState.gameData.currentScenario,
-              narrativeText: [
-                narrative,
-                `The corrupted dragon's essence grows darker with each malevolent act.`,
-                `Dark whispers echo: "${whisper}"`
-              ],
-              description: `${updatedGameState.characterData.name} prowls through the shadows, consumed by corruption.`
-            };
+        // Update game state
+        const refreshedGame = updateGame(gameId, {
+          characterData: updatedCharacter,
+          gameData: updatedGameData,
+          turn: updatedGameData.turn,
+          location: updatedGameData.location,
+        });
+        
+        setGameState({
+          characterData: refreshedGame.characterData,
+          gameData: refreshedGame.gameData
+        });
 
-            const newGameData = { ...updatedGameState.gameData };
-            newGameData.currentScenario = newScenario;
-
-            try {
-              const refreshedGame = updateGame(gameId, {
-                characterData: updatedGameState.characterData,
-                gameData: newGameData,
-                turn: newGameData.turn,
-                location: newGameData.location,
-              });
-              
-              setGameState({
-                characterData: refreshedGame.characterData,
-                gameData: refreshedGame.gameData
-              });
-            } catch (error) {
-              console.error("Failed to update scenario:", error);
-            }
-          }
-        }, 2000); // Update scenario after action completes
-      });
+      } catch (error) {
+        console.error("Failed to process AI action:", error);
+      }
 
     }, 5000); // AI performs an action every 5 seconds
 
