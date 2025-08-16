@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { MockAIService } from "@/lib/mock-ai-service";
+import { OpenAIService } from "@/lib/openai-service";
 import { Sparkles, Send, Package, Zap } from "lucide-react";
 import { useState } from "react";
 
@@ -52,13 +52,10 @@ export default function CustomActionModal({
     
     if (selectedItem) {
       // Action with item usage
-      const itemDescription = MockAIService.generateObjectDescription(selectedItem.name, context);
-      const actionEvent = MockAIService.generateRandomEvent(character, context);
-      result = `Using your ${selectedItem.name}: ${itemDescription.content}\n\nOutcome: ${actionEvent.content}`;
+      result = await OpenAIService.generateCustomAction(character, `${customAction} using ${selectedItem.name}`, gameData.currentScenario.description);
     } else {
       // Pure custom action
-      const actionEvent = MockAIService.generateRandomEvent(character, context);
-      result = actionEvent.content;
+      result = await OpenAIService.generateCustomAction(character, customAction, gameData.currentScenario.description);
     }
     
     setActionResult(result);

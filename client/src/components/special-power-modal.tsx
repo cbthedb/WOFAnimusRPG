@@ -2,7 +2,7 @@ import { Character } from "@shared/schema";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MockAIService } from "@/lib/mock-ai-service";
+import { OpenAIService } from "@/lib/openai-service";
 import { Eye, Brain, Sparkles, Zap, RefreshCw } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -93,28 +93,15 @@ export default function SpecialPowerModal({
     
     switch (powerType) {
       case 'prophecy':
-        const prophecy = MockAIService.generateProphecy(character, { 
-          turn: Math.floor(Math.random() * 100),
-          action: actionType 
-        });
-        vision = prophecy.content;
+        vision = await OpenAIService.generateProphecy(character, actionType);
         break;
         
       case 'mindreading':
-        const mindRead = MockAIService.generateVision(character, { 
-          turn: Math.floor(Math.random() * 100),
-          target: "random dragon",
-          action: actionType
-        });
-        vision = mindRead.content;
+        vision = await OpenAIService.generateMindReading(character, actionType);
         break;
         
       case 'future':
-        const futureVision = MockAIService.generateRandomEvent(character, { 
-          turn: Math.floor(Math.random() * 100),
-          futureAction: actionType
-        });
-        vision = `Future Vision: ${futureVision.content}`;
+        vision = await OpenAIService.generateFutureVision(character, actionType);
         break;
     }
     

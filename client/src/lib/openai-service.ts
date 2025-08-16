@@ -1,7 +1,13 @@
 import OpenAI from "openai";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-const openai = new OpenAI({ apiKey: import.meta.env.VITE_OPENAI_API_KEY || process.env.OPENAI_API_KEY });
+// For client-side use, we'll make requests to our backend which has the API key
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || process.env.OPENAI_API_KEY;
+
+const openai = new OpenAI({ 
+  apiKey: OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true 
+});
 
 const WINGS_OF_FIRE_CONTEXT = `
 You are an AI assistant for a Wings of Fire themed role-playing game. Wings of Fire is a fantasy book series about dragons living in tribes with unique abilities.

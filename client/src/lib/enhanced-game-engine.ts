@@ -2,14 +2,15 @@ import { Character, GameData, Choice, GameEvent, Scenario } from "@shared/schema
 import { AIDungeonMaster } from "./ai-dungeon-master";
 import { SoulCorruptionManager } from "./enhanced-magic-system";
 import { generateScenario, generateTimeInfo } from "./scenario-generator-final";
+import { OpenAIService } from "./openai-service";
 
 export class EnhancedGameEngine {
-  static processChoice(
+  static async processChoice(
     character: Character,
     gameData: GameData,
     choice: Choice,
     scenario: Scenario
-  ): { newCharacter: Character; newGameData: GameData; event: GameEvent } {
+  ): Promise<{ newCharacter: Character; newGameData: GameData; event: GameEvent }> {
     const newCharacter = { ...character };
     const newGameData = { ...gameData };
 
@@ -35,8 +36,8 @@ export class EnhancedGameEngine {
     // Check for achievements
     this.checkAchievements(newCharacter, choice, scenario);
 
-    // Generate next scenario using AI dungeon master
-    const nextScenario = this.generateNextScenario(newCharacter, newGameData);
+    // Generate next scenario using OpenAI
+    const nextScenario = await this.generateNextScenario(newCharacter, newGameData);
 
     // Create game event
     const event: GameEvent = {
@@ -61,20 +62,128 @@ export class EnhancedGameEngine {
     return { newCharacter, newGameData, event };
   }
 
-  static generateNextScenario(character: Character, gameData: GameData): Scenario {
-    // Apply comprehensive animus filtering before generating scenarios
-    if (!character.isAnimus) {
-      // Force traditional scenario generator which has proper filtering
-      return generateScenario(character, gameData);
-    }
+  static async generateNextScenario(character: Character, gameData: GameData): Promise<Scenario> {
+    // Use OpenAI for ALL scenario generation for maximum variety and quality
+    return await this.generateOpenAIScenario(character, gameData);
+  }
 
-    // 80% chance for AI-driven dynamic events (much higher for more variety)
-    if (Math.random() < 0.8) {
-      return AIDungeonMaster.generateRandomScenario(character, gameData);
-    }
+  static async generateOpenAIScenario(character: Character, gameData: GameData): Promise<Scenario> {
+    try {
+      const context = {
+        character: {
+          name: character.name,
+          tribe: character.tribe,
+          hybridTribes: character.hybridTribes,
+          isAnimus: character.isAnimus,
+          age: character.age,
+          soulPercentage: character.soulPercentage,
+          soulCorruptionStage: character.soulCorruptionStage,
+          sanityPercentage: character.sanityPercentage,
+          location: gameData.location,
+          currentSeason: character.currentSeason
+        },
+        gameData: {
+          turn: gameData.turn,
+          location: gameData.location,
+          recentEvents: gameData.history.slice(-3)
+        }
+      };
 
-    // 20% chance for traditional scenarios for some consistency
+      const prompt = `Generate a new scenario for this Wings of Fire RPG character. Create an interesting, dramatic situation that fits their current state and location. The character is ${character.isAnimus ? 'an animus dragon' : 'a regular dragon'} of the ${character.tribe}${character.hybridTribes ? ` and ${character.hybridTribes.join('/')} tribes` : ' tribe'}.
+
+Return a JSON object with:
+- title: Brief scenario title
+- description: One sentence setup
+- narrativeText: Array of 2-3 dramatic sentences describing the situation
+- choices: Array of 3-4 choice objects, each with id, text, description, soulCost (0-3 for normal choices, higher for animus magic), sanityCost (0-2), and consequences array
+
+Make choices varied - include social, combat, magical, and strategic options. For animus characters, include magical choices but not every scenario needs magic.`;
+
+      const response = await OpenAIService.generateScenarioResponse(prompt, context);
+      
+      // Try to parse the JSON response
+      let parsedScenario;
+      try {
+        parsedScenario = JSON.parse(response);
+      } catch {
+        // Fallback to a basic scenario if JSON parsing fails
+        return this.createFallbackScenario(character, gameData);
+      }
+
+      // Validate and format the scenario
+      const scenario: Scenario = {
+        id: `openai_${Date.now()}`,
+        title: parsedScenario.title || "A New Challenge",
+        description: parsedScenario.description || "Something interesting happens.",
+        narrativeText: Array.isArray(parsedScenario.narrativeText) ? parsedScenario.narrativeText : ["The situation unfolds before you."],
+        choices: this.validateChoices(parsedScenario.choices || []),
+        type: 'extraordinary' as const,
+        location: gameData.location,
+        timeOfDay: this.getRandomTimeOfDay(),
+        weather: this.getRandomWeather()
+      };
+
+      return scenario;
+    } catch (error) {
+      console.error("OpenAI scenario generation failed:", error);
+      return this.createFallbackScenario(character, gameData);
+    }
+  }
+
+  static createFallbackScenario(character: Character, gameData: GameData): Scenario {
     return generateScenario(character, gameData);
+  }
+
+  static validateChoices(choices: any[]): Choice[] {
+    const validChoices: Choice[] = [];
+    
+    for (let i = 0; i < Math.min(choices.length, 4); i++) {
+      const choice = choices[i];
+      if (choice && choice.text) {
+        validChoices.push({
+          id: choice.id || `choice_${i}`,
+          text: choice.text,
+          description: choice.description || choice.text,
+          soulCost: Math.min(Math.max(choice.soulCost || 0, 0), 10),
+          sanityCost: Math.min(Math.max(choice.sanityCost || 0, 0), 5),
+          consequences: Array.isArray(choice.consequences) ? choice.consequences : ["The outcome unfolds..."]
+        });
+      }
+    }
+
+    // Ensure at least 2 choices
+    if (validChoices.length < 2) {
+      validChoices.push(
+        {
+          id: "default_1",
+          text: "Take action",
+          description: "Do something about the situation",
+          soulCost: 0,
+          sanityCost: 1,
+          consequences: ["You take decisive action..."]
+        },
+        {
+          id: "default_2", 
+          text: "Wait and observe",
+          description: "Carefully assess the situation",
+          soulCost: 0,
+          sanityCost: 0,
+          consequences: ["You observe the situation carefully..."]
+        }
+      );
+    }
+
+    return validChoices;
+  }
+
+  static getRandomTimeOfDay(): string {
+    const times = ["dawn", "morning", "midday", "afternoon", "dusk", "night", "midnight"];
+    return times[Math.floor(Math.random() * times.length)];
+  }
+
+  static getRandomWeather(): string {
+    const weather = ["clear", "cloudy", "rainy", "stormy", "foggy", "windy", "calm"];
+    return weather[Math.floor(Math.random() * weather.length)];
   }
 
   static generatePoliticalScenario(character: Character, gameData: GameData): Scenario {
@@ -362,9 +471,28 @@ export class EnhancedGameEngine {
   }
 
   static getCorruptionLevel(soulPercentage: number): "Normal" | "Frayed" | "Twisted" | "Broken" {
-    if (soulPercentage >= 75) return "Normal";
-    if (soulPercentage >= 50) return "Frayed";
-    if (soulPercentage >= 25) return "Twisted";
+    if (soulPercentage >= 85) return "Normal";
+    if (soulPercentage >= 60) return "Frayed";
+    if (soulPercentage >= 30) return "Twisted";
     return "Broken";
+  }
+
+  static shouldShowCorruptionPopup(character: Character): boolean {
+    return character.soulPercentage < 15 && character.soulPercentage > 5;
+  }
+
+  static async generateCorruptionWhisper(character: Character): Promise<string> {
+    try {
+      return await OpenAIService.generateCorruptionWhisper(character);
+    } catch (error) {
+      const darkWhispers = [
+        "Power awaits those who embrace the darkness...",
+        "Why resist when you could rule them all?",
+        "Your enemies deserve to suffer for their weakness...",
+        "Magic is meant to be used. Use it without restraint...",
+        "Show them the true meaning of fear..."
+      ];
+      return darkWhispers[Math.floor(Math.random() * darkWhispers.length)];
+    }
   }
 }

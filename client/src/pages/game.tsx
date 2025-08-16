@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "wouter";
 import { Character, GameData, Choice, CustomSpell, InventoryItem } from "@shared/schema";
 import { EnhancedGameEngine } from "@/lib/enhanced-game-engine";
+import { OpenAIService } from "@/lib/openai-service";
 import CharacterPanel from "@/components/character-panel";
 import GameplayArea from "@/components/gameplay-area";
 import MagicModal from "@/components/magic-modal";
@@ -31,8 +32,26 @@ export default function Game() {
   const [gameOverState, setGameOverState] = useState<{ isGameOver: boolean; reason?: string; allowContinue?: boolean } | null>(null);
   const [gameState, setGameState] = useState<{ characterData: Character; gameData: GameData } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [corruptionWhisper, setCorruptionWhisper] = useState<string | null>(null);
+  const [showCorruptionPopup, setShowCorruptionPopup] = useState(false);
 
   const { updateGame } = useLocalGameState();
+
+  const generateCorruptionWhisper = async (character: Character) => {
+    try {
+      const whisper = await EnhancedGameEngine.generateCorruptionWhisper(character);
+      setCorruptionWhisper(whisper);
+      setShowCorruptionPopup(true);
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        setShowCorruptionPopup(false);
+        setCorruptionWhisper(null);
+      }, 5000);
+    } catch (error) {
+      console.error("Failed to generate corruption whisper:", error);
+    }
+  };
 
   useEffect(() => {
     if (gameId) {
@@ -69,6 +88,13 @@ export default function Game() {
         if (aiInterval) {
           clearInterval(aiInterval);
           setAiInterval(null);
+        }
+      }
+
+      // Show corruption whispers for souls below 15%
+      if (EnhancedGameEngine.shouldShowCorruptionPopup(character)) {
+        if (Math.random() < 0.3) { // 30% chance per turn
+          generateCorruptionWhisper(character);
         }
       }
 
@@ -152,7 +178,7 @@ export default function Game() {
     }
   };
 
-  const handleChoice = (choice: Choice) => {
+  const handleChoice = async (choice: Choice) => {
     if (!gameState || !gameId || gameOverState?.isGameOver) return;
 
     const character = gameState.characterData;
@@ -170,7 +196,7 @@ export default function Game() {
       });
     }
 
-    const { newCharacter, newGameData } = EnhancedGameEngine.processChoice(
+    const { newCharacter, newGameData } = await EnhancedGameEngine.processChoice(
       character,
       gameData,
       actualChoice,
@@ -203,7 +229,7 @@ export default function Game() {
     }
   };
 
-  const handleUsePower = (power: string, scenario?: string) => {
+  const handleUsePower = async (power: string, scenario?: string) => {
     if (!gameState || !gameId) return;
 
     const { characterData: character, gameData } = gameState;
@@ -225,7 +251,7 @@ export default function Game() {
     const result = scenario ? `${scenario} - ${aiResponse.content}` : aiResponse.content;
 
     // Process the power use as a choice to advance the storyline
-    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
+    const { newCharacter: updatedCharacter, newGameData } = await EnhancedGameEngine.processChoice(
       newCharacter,
       gameData,
       {
@@ -272,7 +298,7 @@ export default function Game() {
     setShowSpecialPowerModal(true);
   };
 
-  const handleSpecialPowerUse = (power: string, result: string) => {
+  const handleSpecialPowerUse = async (power: string, result: string) => {
     if (!gameState || !gameId) return;
 
     // Special powers cost sanity for non-animus, soul energy for animus
@@ -289,7 +315,7 @@ export default function Game() {
     }
 
     // Generate a new scenario based on the power use result
-    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
+    const { newCharacter: updatedCharacter, newGameData } = await EnhancedGameEngine.processChoice(
       newCharacter,
       gameData,
       {
@@ -331,7 +357,7 @@ export default function Game() {
     setShowSpecialPowerModal(false);
   };
 
-  const handleCustomAction = (action: string, result: string, itemUsed?: InventoryItem) => {
+  const handleCustomAction = async (action: string, result: string, itemUsed?: InventoryItem) => {
     if (!gameState || !gameId) return;
 
     const { characterData: character, gameData } = gameState;
@@ -358,7 +384,7 @@ export default function Game() {
     }
 
     // Process the action as a choice to advance the storyline
-    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
+    const { newCharacter: updatedCharacter, newGameData } = await EnhancedGameEngine.processChoice(
       newCharacter,
       gameData,
       {
@@ -612,6 +638,27 @@ export default function Game() {
                 <h4 className="font-semibold text-red-300 mb-1">Soul Corruption Warning</h4>
                 <p className="text-sm text-red-200">{aiControlMessage}</p>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Corruption Whisper Popup */}
+      {showCorruptionPopup && corruptionWhisper && (
+        <div className="fixed top-4 right-4 z-50 max-w-sm animate-pulse">
+          <div className="bg-black/90 border border-red-500 rounded-lg p-4 shadow-lg">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">👁️</span>
+              <div>
+                <h4 className="font-semibold text-red-300 mb-2">Dark Whisper</h4>
+                <p className="text-sm text-red-200 italic">{corruptionWhisper}</p>
+              </div>
+              <button 
+                onClick={() => setShowCorruptionPopup(false)}
+                className="text-red-300 hover:text-red-100 text-lg"
+              >
+                ×
+              </button>
             </div>
           </div>
         </div>

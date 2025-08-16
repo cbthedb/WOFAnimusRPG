@@ -2,7 +2,7 @@ import { Character } from "@shared/schema";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MockAIService } from "@/lib/mock-ai-service";
+import { OpenAIService } from "@/lib/openai-service";
 import { Zap, Eye, Flame, Droplets, Snowflake, Leaf, Moon, Sparkles } from "lucide-react";
 import { useState } from "react";
 
@@ -58,7 +58,7 @@ export default function TribalPowersModal({ character, currentScenario, isOpen, 
     return IconComponent ? <IconComponent className="w-4 h-4" /> : <Zap className="w-4 h-4" />;
   };
 
-  const handlePowerSelect = (power: string) => {
+  const handlePowerSelect = async (power: string) => {
     setSelectedPower(power);
     const powerType = determinePowerType(power);
     const context = { 
@@ -66,24 +66,24 @@ export default function TribalPowersModal({ character, currentScenario, isOpen, 
       currentSituation: currentScenario || "general situation",
       powerName: power
     };
-    const scenarios = MockAIService.generatePowerUsageOptions(powerType, context);
-    setPowerScenarios(scenarios);
+    const response = await OpenAIService.generateTribalPowerUse(character, power, currentScenario || "current situation");
+    setPowerScenarios([response]);
     setAiResponse(null);
   };
 
-  const handleUsePowerWithScenario = (scenario: string) => {
-    const response = MockAIService.generateRandomEvent(character, { turn: Math.floor(Math.random() * 100) });
-    setAiResponse(response.content);
+  const handleUsePowerWithScenario = async (scenario: string) => {
+    const response = await OpenAIService.generateTribalPowerUse(character, selectedPower!, scenario);
+    setAiResponse(response);
     onUsePower(selectedPower!, scenario);
   };
 
-  const handleUseVisionPower = (power: string) => {
+  const handleUseVisionPower = async (power: string) => {
     if (power.toLowerCase().includes('future') || power.toLowerCase().includes('prophecy')) {
-      const prophecy = MockAIService.generateProphecy(character, { turn: Math.floor(Math.random() * 100) });
-      setAiResponse(prophecy.content);
+      const prophecy = await OpenAIService.generateProphecy(character, "current situation");
+      setAiResponse(prophecy);
     } else if (power.toLowerCase().includes('mind')) {
-      const vision = MockAIService.generateVision(character, { turn: Math.floor(Math.random() * 100) });
-      setAiResponse(vision.content);
+      const vision = await OpenAIService.generateMindReading(character, "nearby dragons");
+      setAiResponse(vision);
     }
     onUsePower(power);
   };

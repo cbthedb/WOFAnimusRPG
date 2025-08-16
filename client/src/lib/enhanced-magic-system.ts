@@ -90,7 +90,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Weather Manipulation",
     category: "moderate",
     type: "weather",
-    soulCost: [5, 12],
+    soulCost: [2, 6],
     description: "Control local weather patterns",
     examples: [
       "Summon lightning storms",
@@ -103,7 +103,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Climate Control",
     category: "major",
     type: "weather", 
-    soulCost: [20, 35],
+    soulCost: [10, 20],
     description: "Alter climate across vast regions",
     examples: [
       "End a kingdom-wide drought permanently",
@@ -118,7 +118,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Minor Curses",
     category: "minor",
     type: "curse",
-    soulCost: [3, 8],
+    soulCost: [1, 4],
     description: "Inflict misfortune on enemies",
     examples: [
       "Make someone's words come out backwards",
@@ -131,7 +131,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Devastating Curses",
     category: "major",
     type: "curse",
-    soulCost: [18, 30],
+    soulCost: [8, 18],
     description: "Destroy lives with dark magic",
     examples: [
       "Curse an entire bloodline with madness",
@@ -146,7 +146,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Creature Summoning",
     category: "moderate",
     type: "summoning",
-    soulCost: [6, 14],
+    soulCost: [3, 8],
     description: "Call forth magical beings",
     examples: [
       "Summon a storm of deadly insects",
@@ -159,7 +159,7 @@ export const ENHANCED_MAGIC_SPELLS: MagicSpell[] = [
     name: "Planar Summoning",
     category: "catastrophic",
     type: "summoning",
-    soulCost: [35, 50],
+    soulCost: [15, 25],
     description: "Tear holes between dimensions",
     examples: [
       "Summon demons from other realms",
