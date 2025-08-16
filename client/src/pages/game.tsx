@@ -191,16 +191,64 @@ export default function Game() {
   const handleUsePower = (power: string, scenario?: string) => {
     if (!gameState || !gameId) return;
 
-    // Generate AI description for the power usage
-    const aiResponse = MockAIService.generateRandomEvent(
-      gameState.characterData, 
-      { turn: gameState.gameData.turn, power, scenario }
+    const { characterData: character, gameData } = gameState;
+    let newCharacter = { ...character };
+
+    // Apply power usage costs and effects
+    const sanityCost = Math.floor(Math.random() * 5) + 2;
+    newCharacter.sanityPercentage = Math.max(0, newCharacter.sanityPercentage - sanityCost);
+
+    // Generate AI description for the power usage with current scenario context
+    const powerContext = {
+      turn: gameData.turn,
+      power,
+      scenario: scenario || gameData.currentScenario.description,
+      currentSituation: gameData.currentScenario.narrativeText.join(' ')
+    };
+    
+    const aiResponse = MockAIService.generateRandomEvent(character, powerContext);
+    const result = scenario ? `${scenario} - ${aiResponse.content}` : aiResponse.content;
+
+    // Process the power use as a choice to advance the storyline
+    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
+      newCharacter,
+      gameData,
+      {
+        id: `tribal_power_${Date.now()}`,
+        text: `Use ${power}`,
+        description: result,
+        soulCost: 0,
+        sanityCost: sanityCost,
+        consequences: [result]
+      },
+      gameData.currentScenario
     );
 
-    toast({
-      title: "Power Used", 
-      description: scenario ? `${scenario} - ${aiResponse.content.slice(0, 100)}...` : `You use your ${power} ability!`,
-    });
+    try {
+      const updatedGame = updateGame(gameId, {
+        characterData: updatedCharacter,
+        gameData: newGameData,
+        turn: newGameData.turn,
+        location: newGameData.location,
+      });
+      
+      setGameState({
+        characterData: updatedGame.characterData,
+        gameData: updatedGame.gameData
+      });
+
+      toast({
+        title: "Power Used",
+        description: result.slice(0, 150) + "...",
+      });
+    } catch (error) {
+      toast({
+        title: "Power Failed",
+        description: "Your power usage had unexpected results.",
+        variant: "destructive",
+      });
+    }
+    
     setShowTribalPowersModal(false);
   };
 
@@ -212,18 +260,40 @@ export default function Game() {
   const handleSpecialPowerUse = (power: string, result: string) => {
     if (!gameState || !gameId) return;
 
-    // Special powers cost soul energy like animus magic
-    const soulCost = specialPowerType === 'future' ? 5 : specialPowerType === 'mindreading' ? 3 : 2;
-    const newCharacter = { ...gameState.characterData };
-    newCharacter.soulPercentage = Math.max(0, newCharacter.soulPercentage - soulCost);
-    newCharacter.soulCorruptionStage = EnhancedGameEngine.getCorruptionLevel(newCharacter.soulPercentage);
+    // Special powers cost sanity for non-animus, soul energy for animus
+    const { characterData: character, gameData } = gameState;
+    const newCharacter = { ...character };
+    
+    if (character.isAnimus) {
+      const soulCost = specialPowerType === 'future' ? 5 : specialPowerType === 'mindreading' ? 3 : 2;
+      newCharacter.soulPercentage = Math.max(0, newCharacter.soulPercentage - soulCost);
+      newCharacter.soulCorruptionStage = EnhancedGameEngine.getCorruptionLevel(newCharacter.soulPercentage);
+    } else {
+      const sanityCost = specialPowerType === 'future' ? 8 : specialPowerType === 'mindreading' ? 5 : 3;
+      newCharacter.sanityPercentage = Math.max(0, newCharacter.sanityPercentage - sanityCost);
+    }
+
+    // Generate a new scenario based on the power use result
+    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
+      newCharacter,
+      gameData,
+      {
+        id: `power_${specialPowerType}`,
+        text: `Use ${power}`,
+        description: result,
+        soulCost: 0,
+        sanityCost: 0,
+        consequences: [result]
+      },
+      gameData.currentScenario
+    );
 
     try {
       const updatedGame = updateGame(gameId, {
-        characterData: newCharacter,
-        gameData: gameState.gameData,
-        turn: gameState.gameData.turn,
-        location: gameState.gameData.location,
+        characterData: updatedCharacter,
+        gameData: newGameData,
+        turn: newGameData.turn,
+        location: newGameData.location,
       });
       
       setGameState({
@@ -249,15 +319,73 @@ export default function Game() {
   const handleCustomAction = (action: string, result: string, itemUsed?: InventoryItem) => {
     if (!gameState || !gameId) return;
 
-    // Custom actions can trigger conversations or scenarios
+    const { characterData: character, gameData } = gameState;
+    let newCharacter = { ...character };
+
+    // Handle enchanted item usage with storyline progression
+    if (itemUsed && itemUsed.enchantments.length > 0) {
+      // Apply enchantment effects based on the description
+      const enchantment = itemUsed.enchantments[0];
+      
+      // Check for major enchantments that should trigger story events
+      if (enchantment.toLowerCase().includes('darkstalker') || 
+          enchantment.toLowerCase().includes('resurrection') ||
+          enchantment.toLowerCase().includes('immortal') ||
+          enchantment.toLowerCase().includes('time') ||
+          enchantment.toLowerCase().includes('reality')) {
+        
+        // Major enchantments cost soul for animus dragons
+        if (character.isAnimus) {
+          newCharacter.soulPercentage = Math.max(0, newCharacter.soulPercentage - 15);
+          newCharacter.soulCorruptionStage = EnhancedGameEngine.getCorruptionLevel(newCharacter.soulPercentage);
+        }
+      }
+    }
+
+    // Process the action as a choice to advance the storyline
+    const { newCharacter: updatedCharacter, newGameData } = EnhancedGameEngine.processChoice(
+      newCharacter,
+      gameData,
+      {
+        id: `custom_${Date.now()}`,
+        text: action,
+        description: result,
+        soulCost: 0,
+        sanityCost: Math.floor(Math.random() * 3),
+        consequences: [result]
+      },
+      gameData.currentScenario
+    );
+
+    // Check if action triggers conversation
     if (result.toLowerCase().includes('conversation') || result.toLowerCase().includes('talk') || result.toLowerCase().includes('speak')) {
       const dragonName = extractDragonName(result) || "Unknown Dragon";
       setConversationData({ topic: action, otherDragon: dragonName });
       setShowConversationModal(true);
-    } else {
+    }
+
+    try {
+      const updatedGame = updateGame(gameId, {
+        characterData: updatedCharacter,
+        gameData: newGameData,
+        turn: newGameData.turn,
+        location: newGameData.location,
+      });
+      
+      setGameState({
+        characterData: updatedGame.characterData,
+        gameData: updatedGame.gameData
+      });
+
       toast({
-        title: "Custom Action",
+        title: "Action Completed",
         description: `${action} - ${result.slice(0, 100)}...`,
+      });
+    } catch (error) {
+      toast({
+        title: "Action Failed",
+        description: "Something went wrong. Try again.",
+        variant: "destructive",
       });
     }
     
@@ -456,6 +584,7 @@ export default function Game() {
 
       <TribalPowersModal
         character={character}
+        currentScenario={gameData.currentScenario.description}
         isOpen={showTribalPowersModal}
         onClose={() => setShowTribalPowersModal(false)}
         onUsePower={handleUsePower}

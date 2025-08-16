@@ -8,6 +8,7 @@ import { useState } from "react";
 
 interface TribalPowersModalProps {
   character: Character;
+  currentScenario?: string;
   isOpen: boolean;
   onClose: () => void;
   onUsePower: (power: string, scenario?: string) => void;
@@ -45,7 +46,7 @@ const POWER_ICONS = {
   "Photosynthesis healing": Leaf,
 };
 
-export default function TribalPowersModal({ character, isOpen, onClose, onUsePower }: TribalPowersModalProps) {
+export default function TribalPowersModal({ character, currentScenario, isOpen, onClose, onUsePower }: TribalPowersModalProps) {
   const [selectedPower, setSelectedPower] = useState<string | null>(null);
   const [powerScenarios, setPowerScenarios] = useState<string[]>([]);
   const [aiResponse, setAiResponse] = useState<string | null>(null);
@@ -60,7 +61,12 @@ export default function TribalPowersModal({ character, isOpen, onClose, onUsePow
   const handlePowerSelect = (power: string) => {
     setSelectedPower(power);
     const powerType = determinePowerType(power);
-    const scenarios = MockAIService.generatePowerUsageOptions(powerType, { turn: Math.floor(Math.random() * 100) });
+    const context = { 
+      turn: Math.floor(Math.random() * 100),
+      currentSituation: currentScenario || "general situation",
+      powerName: power
+    };
+    const scenarios = MockAIService.generatePowerUsageOptions(powerType, context);
     setPowerScenarios(scenarios);
     setAiResponse(null);
   };

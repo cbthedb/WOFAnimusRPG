@@ -62,6 +62,12 @@ export class EnhancedGameEngine {
   }
 
   static generateNextScenario(character: Character, gameData: GameData): Scenario {
+    // Apply comprehensive animus filtering before generating scenarios
+    if (!character.isAnimus) {
+      // Force traditional scenario generator which has proper filtering
+      return generateScenario(character, gameData);
+    }
+
     // 80% chance for AI-driven dynamic events (much higher for more variety)
     if (Math.random() < 0.8) {
       return AIDungeonMaster.generateRandomScenario(character, gameData);
@@ -80,7 +86,7 @@ export class EnhancedGameEngine {
       description: "Political turmoil threatens the stability of your tribe",
       narrativeText: [
         politicalEvent.description,
-        "Your position as an animus dragon makes you valuable to all sides.",
+        character.isAnimus ? "Your position as an animus dragon makes you valuable to all sides." : "Your unique abilities make you valuable to all sides.",
         "How will you navigate these treacherous political waters?"
       ],
       choices: [

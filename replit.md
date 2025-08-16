@@ -16,6 +16,9 @@ Preferred communication style: Simple, everyday language.
 - **Multiple Game Endings** (January 2025): Implemented 12+ different endings based on player choices, including victory, tragic, neutral, and legendary outcomes.
 - **Enhanced Magic Variety** (January 2025): Expanded animus spell system with 6+ spell types including enchantment, combat, healing, weather control, curses, and summoning.
 - **Hybrid Dragon Support** (January 2025): Enhanced hybrid dragon generation with mixed tribal abilities and inheritance mechanics.
+- **Comprehensive Animus Filtering System** (January 2025): Fixed persistent issue where animus magic prompts appeared for non-animus dragons. Implemented thorough filtering across all AI generation systems.
+- **Enhanced Storyline Progression** (January 2025): Fixed custom actions, tribal powers, and special abilities to actually advance the story rather than just showing static results. Powers now generate new scenarios based on their effects.
+- **Contextual Tribal Powers** (January 2025): Made tribal powers more relevant to current situations and properly integrated with the storyline progression system.
 
 # System Architecture
 

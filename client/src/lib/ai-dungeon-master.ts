@@ -1,6 +1,21 @@
 import { Character, GameData, Scenario, Choice, PoliticalEvent, WarStatus, ExplorationEvent, InventoryItem } from "@shared/schema";
 
 export class AIDungeonMaster {
+  // Comprehensive animus filtering utility
+  static filterAnimusContent(text: string, character: Character): string {
+    if (character.isAnimus) return text;
+    
+    // Replace animus-specific references with alternatives
+    return text
+      .replace(/animus magic/gi, "natural abilities")
+      .replace(/animus power/gi, "special abilities")
+      .replace(/soul cost/gi, "energy cost")
+      .replace(/soul corruption/gi, "mental strain")
+      .replace(/enchant/gi, "enhance")
+      .replace(/magical manipulation/gi, "natural influence")
+      .replace(/force.*with.*magic/gi, "use persuasion");
+  }
+
   // Dynamic scenario generation categories
   private static scenarioTypes = [
     "moral_dilemma", "random_disaster", "tribal_politics", "romance_encounter", 
