@@ -102,13 +102,13 @@ export default function MagicModal({ isOpen, onClose, character }: MagicModalPro
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[80vh] bg-black/90 border-[#6b46c1]/50 text-slate-100 overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[80vh] bg-black/90 border-purple-500/50 text-slate-100 overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="font-fantasy text-2xl font-bold text-[#f59e0b] flex items-center">
+          <DialogTitle className="font-fantasy text-2xl font-bold text-purple-300 flex items-center">
             <Wand2 className="mr-3" />
             Animus Magic Spells
           </DialogTitle>
-          <DialogDescription className="text-slate-300">
+          <DialogDescription className="text-purple-200">
             Understanding the cost of power. Each spell category represents increasing corruption to your soul.
           </DialogDescription>
         </DialogHeader>
@@ -145,9 +145,9 @@ export default function MagicModal({ isOpen, onClose, character }: MagicModalPro
             </Card>
           ))}
 
-          <Card className="border-[#6b46c1]/30 bg-[#6b46c1]/10">
+          <Card className="border-purple-500/30 bg-purple-500/10">
             <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-lg text-[#6b46c1]">
+              <CardTitle className="flex items-center gap-2 text-lg text-purple-400">
                 <Wand2 />
                 Your Soul Status
               </CardTitle>
@@ -175,12 +175,12 @@ export default function MagicModal({ isOpen, onClose, character }: MagicModalPro
           </Card>
         </div>
 
-        <div className="bg-black/50 border border-[#f59e0b]/30 rounded-lg p-4">
-          <h4 className="font-semibold text-[#f59e0b] mb-2 flex items-center">
+        <div className="bg-black/50 border border-purple-400/30 rounded-lg p-4">
+          <h4 className="font-semibold text-purple-300 mb-2 flex items-center">
             <Skull className="w-4 h-4 mr-2" />
             Warning: The Price of Power
           </h4>
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-purple-200">
             Every use of animus magic corrupts your soul. As your purity decreases, you will lose control
             over your choices. The game will begin making increasingly dark decisions for you. At 0% purity,
             you become a villain that others must stop.

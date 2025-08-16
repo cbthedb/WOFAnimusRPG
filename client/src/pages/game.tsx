@@ -111,10 +111,10 @@ export default function Game() {
   return (
     <div className="min-h-screen bg-dragon-gradient text-slate-100">
       {/* Header */}
-      <header className="border-b border-[#6b46c1]/30 bg-black/20 backdrop-blur-sm">
+      <header className="border-b border-purple-500/30 bg-black/20 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="font-fantasy text-3xl font-bold text-[#f59e0b]">
+            <h1 className="font-fantasy text-3xl font-bold text-purple-300">
               <span className="mr-3">🐉</span>
               Animus: Wings of Fire RPG
             </h1>
@@ -123,14 +123,14 @@ export default function Game() {
                 variant="ghost"
                 size="sm"
                 onClick={handleSave}
-                className="text-[#f59e0b] hover:bg-[#6b46c1]/20"
+                className="text-purple-300 hover:bg-purple-500/20"
               >
                 <Save className="w-4 h-4" />
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-[#f59e0b] hover:bg-[#6b46c1]/20"
+                className="text-purple-300 hover:bg-purple-500/20"
               >
                 <Settings className="w-4 h-4" />
               </Button>

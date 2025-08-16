@@ -30,20 +30,20 @@ export default function GameplayArea({
     if (choice.soulCost > 0) {
       return "bg-yellow-900/50 hover:bg-yellow-900/70 border-yellow-600/30";
     }
-    return "bg-black/50 hover:bg-[#6b46c1]/20 border-[#6b46c1]/30";
+    return "bg-black/50 hover:bg-purple-500/20 border-purple-500/30";
   };
 
   return (
     <div className="lg:col-span-2">
-      <Card className="bg-black/40 backdrop-blur-sm border-[#6b46c1]/30 h-full flex flex-col">
+      <Card className="bg-black/40 backdrop-blur-sm border-purple-500/30 h-full flex flex-col">
         {/* Header */}
-        <div className="border-b border-[#6b46c1]/30 p-4">
+        <div className="border-b border-purple-500/30 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-fantasy text-xl font-semibold text-[#f59e0b]">
+              <h3 className="font-fantasy text-xl font-semibold text-purple-300">
                 {gameData.location}
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-purple-200">
                 Day {Math.floor(gameData.turn / 3)} • {gameData.timeInfo}
               </p>
             </div>
@@ -70,8 +70,8 @@ export default function GameplayArea({
             ))}
 
             {scenario.type === 'magical' && (
-              <div className="bg-black/50 border-l-4 border-[#f59e0b] p-4 rounded-r-lg mb-6">
-                <p className="font-semibold text-[#f59e0b] mb-2">Current Scenario:</p>
+              <div className="bg-black/50 border-l-4 border-purple-400 p-4 rounded-r-lg mb-6">
+                <p className="font-semibold text-purple-300 mb-2">Current Scenario:</p>
                 <p>{scenario.description}</p>
               </div>
             )}
@@ -79,8 +79,8 @@ export default function GameplayArea({
         </div>
 
         {/* Choice Selection Area */}
-        <div className="border-t border-[#6b46c1]/30 p-6">
-          <h4 className="font-fantasy text-lg font-semibold text-[#f59e0b] mb-4">
+        <div className="border-t border-purple-500/30 p-6">
+          <h4 className="font-fantasy text-lg font-semibold text-purple-300 mb-4">
             Choose your action:
           </h4>
 
@@ -94,7 +94,7 @@ export default function GameplayArea({
                 disabled={isProcessing}
               >
                 <div className="flex items-start">
-                  <div className="bg-[#f59e0b] text-black rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-1">
+                  <div className="bg-purple-400 text-black rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-1">
                     {index + 1}
                   </div>
                   <div className="flex-1">
@@ -107,13 +107,13 @@ export default function GameplayArea({
           </div>
 
           {/* Quick Actions Bar */}
-          <div className="flex items-center justify-between mt-6 pt-4 border-t border-[#6b46c1]/20">
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-purple-500/20">
             <div className="flex space-x-3">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={onShowMagic}
-                className="border-[#6b46c1]/50 text-[#6b46c1] hover:bg-[#6b46c1]/10"
+                className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10"
               >
                 <Wand2 className="w-4 h-4 mr-2" />
                 Magic Spells
@@ -121,7 +121,7 @@ export default function GameplayArea({
               <Button
                 variant="outline"
                 size="sm"
-                className="border-[#6b46c1]/50 text-[#6b46c1] hover:bg-[#6b46c1]/10"
+                className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10"
                 disabled
               >
                 <Package className="w-4 h-4 mr-2" />
@@ -131,7 +131,7 @@ export default function GameplayArea({
             <Button
               variant="outline"
               size="sm"
-              className="border-[#f59e0b]/50 text-[#f59e0b] hover:bg-[#f59e0b]/10"
+              className="border-purple-400/50 text-purple-300 hover:bg-purple-500/10"
               disabled
             >
               <SkipForward className="w-4 h-4 mr-2" />

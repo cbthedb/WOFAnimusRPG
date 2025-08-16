@@ -20,22 +20,22 @@ export default function CharacterPanel({ character }: CharacterPanelProps) {
 
   return (
     <div className="lg:col-span-1">
-      <Card className="bg-black/40 backdrop-blur-sm border-[#6b46c1]/30 h-full overflow-y-auto">
+      <Card className="bg-black/40 backdrop-blur-sm border-purple-500/30 h-full overflow-y-auto">
         <CardContent className="p-6">
           {/* Character Avatar & Basic Info */}
           <div className="text-center mb-6">
             <img
               src={character.avatar}
               alt="Dragon character portrait"
-              className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-[#f59e0b] object-cover"
+              className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-purple-400 object-cover"
             />
-            <h2 className="font-fantasy text-2xl font-bold text-[#f59e0b]">
+            <h2 className="font-fantasy text-2xl font-bold text-purple-300">
               {character.name}
             </h2>
-            <p className="text-[#6b46c1] font-medium">
+            <p className="text-purple-400 font-medium">
               {character.tribe} Dragonet
             </p>
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-purple-200">
               {character.age} years old
             </p>
           </div>
@@ -58,7 +58,7 @@ export default function CharacterPanel({ character }: CharacterPanelProps) {
           {/* Character Stats */}
           <div className="space-y-4 mb-6">
             <div>
-              <h3 className="font-fantasy text-lg font-semibold text-[#f59e0b] mb-3">
+              <h3 className="font-fantasy text-lg font-semibold text-purple-300 mb-3">
                 Attributes
               </h3>
               <div className="grid grid-cols-2 gap-3">
@@ -85,7 +85,7 @@ export default function CharacterPanel({ character }: CharacterPanelProps) {
           {/* Family & Background */}
           <div className="space-y-4">
             <div>
-              <h3 className="font-fantasy text-lg font-semibold text-[#f59e0b] mb-3">
+              <h3 className="font-fantasy text-lg font-semibold text-purple-300 mb-3">
                 Family
               </h3>
               <div className="space-y-2 text-sm">
@@ -107,7 +107,7 @@ export default function CharacterPanel({ character }: CharacterPanelProps) {
             </div>
 
             <div>
-              <h3 className="font-fantasy text-lg font-semibold text-[#f59e0b] mb-3">
+              <h3 className="font-fantasy text-lg font-semibold text-purple-300 mb-3">
                 Traits
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -115,7 +115,7 @@ export default function CharacterPanel({ character }: CharacterPanelProps) {
                   <Badge
                     key={index}
                     variant={trait === 'Corrupted' ? 'destructive' : 'secondary'}
-                    className={trait === 'Corrupted' ? 'bg-red-600/30 text-red-300' : 'bg-[#6b46c1]/30 text-[#6b46c1]'}
+                    className={trait === 'Corrupted' ? 'bg-red-600/30 text-red-300' : 'bg-purple-600/30 text-purple-300'}
                   >
                     {trait}
                   </Badge>
