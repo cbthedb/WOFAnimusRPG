@@ -7,10 +7,13 @@ import { apiRequest } from "@/lib/queryClient";
 import { generateCharacter } from "@/lib/character-generator";
 import { generateScenario, generateTimeInfo } from "@/lib/scenario-generator-final";
 import { Character, GameData, InsertGameState } from "@shared/schema";
+import CharacterCreator from "@/components/character-creator";
+import { User, Wand2, Sparkles } from "lucide-react";
 
 export default function Home() {
   const [, setLocation] = useLocation();
   const [isCreating, setIsCreating] = useState(false);
+  const [showCharacterCreator, setShowCharacterCreator] = useState(false);
 
   const createGameMutation = useMutation({
     mutationFn: async (gameState: InsertGameState) => {
@@ -26,6 +29,10 @@ export default function Home() {
     setIsCreating(true);
     
     const character = generateCharacter();
+    createGameWithCharacter(character);
+  };
+
+  const createGameWithCharacter = (character: Character) => {
     const gameData: GameData = {
       turn: 1,
       location: "Jade Mountain Academy",
@@ -46,6 +53,12 @@ export default function Home() {
     };
 
     createGameMutation.mutate(gameState);
+  };
+
+  const handleCustomCharacter = (character: Character) => {
+    setShowCharacterCreator(false);
+    setIsCreating(true);
+    createGameWithCharacter(character);
   };
 
   return (
@@ -97,7 +110,8 @@ export default function Home() {
                 </>
               ) : (
                 <>
-                  🐲 Begin Your Journey
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  Quick Start (Random Dragon)
                 </>
               )}
             </Button>
@@ -106,9 +120,11 @@ export default function Home() {
               variant="outline" 
               size="lg" 
               className="w-full border-purple-400/50 text-purple-300 hover:bg-purple-500/10"
-              disabled
+              onClick={() => setShowCharacterCreator(true)}
+              disabled={isCreating || createGameMutation.isPending}
             >
-              📚 Load Saved Game (Coming Soon)
+              <User className="w-5 h-5 mr-2" />
+              Create Custom Dragon
             </Button>
           </div>
 
