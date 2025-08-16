@@ -114,9 +114,20 @@
   * {
     @apply border-border;
   }
+  
+  html {
+    background: hsl(260 20% 8%);
+  }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased text-foreground;
+    background: hsl(260 20% 8%);
+    min-height: 100vh;
+  }
+  
+  #root {
+    background: hsl(260 20% 8%);
+    min-height: 100vh;
   }
 }
 
