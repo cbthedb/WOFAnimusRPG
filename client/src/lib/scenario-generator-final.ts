@@ -259,9 +259,9 @@ function getScenarioDescription(scenario: ScenarioData): string {
 
 function generateContextualNarrative(scenario: ScenarioData, character: Character, gameData: GameData): string {
   const contextualElements = [
-    `As a ${character.tribe} dragon, your perspective shapes your approach.`,
+    `As a ${character?.tribe || 'dragon'} dragon, your perspective shapes your approach.`,
     `The atmosphere around you adds tension to the moment.`,
-    `Your experiences at ${gameData.location} influence your decision.`,
+    `Your experiences at ${gameData?.location || 'this place'} influence your decision.`,
     `The weight of your choices so far guides your thinking.`,
     `Your tribal heritage whispers guidance in your mind.`,
     `The memory of past lessons echoes in your thoughts.`,
@@ -288,10 +288,11 @@ export function generateTimeInfo(character: Character): string {
   const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
   const times = ['Early morning', 'Mid-morning', 'Late morning', 'Early afternoon', 'Mid-afternoon', 'Late afternoon', 'Early evening', 'Late evening'];
   
-  const season = character.currentSeason;
+  const season = character?.currentSeason || seasons[Math.floor(Math.random() * seasons.length)];
   const time = times[Math.floor(Math.random() * times.length)];
+  const year = (character?.yearsSurvived || 0) + 1;
   
-  return `${time}, ${season} of Year ${character.yearsSurvived + 1}`;
+  return `${time}, ${season} of Year ${year}`;
 }
 
 export function generateLocation(): string {
