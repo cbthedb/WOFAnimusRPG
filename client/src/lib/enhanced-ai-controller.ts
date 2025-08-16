@@ -12,8 +12,17 @@ export class EnhancedAIController {
    * Generate an AI action based on the current game state
    */
   static generateAIAction(character: Character, gameData: GameData): AIAction | null {
+    console.log("AI Controller - checking conditions:", {
+      isAIControlled: character.isAIControlled,
+      soulPercentage: character.soulPercentage,
+      shouldGenerate: character.isAIControlled && character.soulPercentage <= 0
+    });
+    
     // Only generate AI actions when soul is completely gone AND character is AI controlled
-    if (!character.isAIControlled || character.soulPercentage > 0) return null;
+    if (!character.isAIControlled || character.soulPercentage > 0) {
+      console.log("AI Controller - conditions not met, returning null");
+      return null;
+    }
 
     // AI becomes increasingly aggressive and creative as corruption deepens
     const actionTypes = ['choice', 'magic', 'custom_action', 'tribal_power', 'special_power'];
