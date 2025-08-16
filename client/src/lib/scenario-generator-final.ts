@@ -16,7 +16,7 @@ const SCENARIO_DATABASE: ScenarioData[] = [
   { id: "skywing_tribute", type: "WARS", text: "The SkyWings demand tribute from your village. Do you resist or submit?" },
   { id: "forest_herbs", type: "NORMAL", text: "You wander into a forest and find rare herbs. Do you collect or leave them?" },
   { id: "immortality_request", type: "ANIMUS", text: "A dragon asks you to enchant them immortal. Do you grant their wish or refuse?", requirements: (c) => c.isAnimus },
-  { id: "ancient_spells_study", type: "LEARNING", text: "You are offered a chance to study ancient animus spells. Do you risk it?" },
+  { id: "ancient_spells_study", type: "ANIMUS", text: "You are offered a chance to study ancient animus spells. Do you risk it?", requirements: (c) => c.isAnimus },
   { id: "darkstalker_dream", type: "ANIMUS", text: "Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?", requirements: (c) => c.isAnimus },
   { id: "ancient_object", type: "ANIMUS", text: "You find an ancient object. Do you enchant it for power, wealth, or protection?", requirements: (c) => c.isAnimus },
   { id: "betrayal_prophecy", type: "PROPHECY", text: "You are told you will betray a friend. Do you cut ties now or wait?", requirements: (c) => c.tribalPowers.includes('Prophecy (rare)') || c.specialPowers.includes('Foresight') || c.specialPowers.includes('Enhanced Prophecy') },

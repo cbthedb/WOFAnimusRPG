@@ -388,7 +388,7 @@ export class AIDungeonMaster {
       narrativeText: [
         `At ${location} during ${weather} conditions...`,
         politicalEvent.description,
-        "Your position as an animus dragon makes you valuable to all sides.",
+        character.isAnimus ? "Your position as an animus dragon makes you valuable to all sides." : "Your unique abilities make you valuable to all sides.",
         "How will you navigate these treacherous political waters?"
       ],
       choices: [
@@ -506,11 +506,11 @@ export class AIDungeonMaster {
         },
         {
           id: "explore_magic",
-          text: "Use animus magic to understand the discovery",
-          description: "Magic can reveal hidden secrets",
-          soulCost: Math.floor(Math.random() * 8) + 3,
-          sanityCost: 0,
-          consequences: ["Magic reveals truths that some would keep hidden..."]
+          text: character.isAnimus ? "Use animus magic to understand the discovery" : "Use your natural abilities to understand the discovery",
+          description: character.isAnimus ? "Magic can reveal hidden secrets" : "Your abilities can reveal hidden secrets",
+          soulCost: character.isAnimus ? Math.floor(Math.random() * 8) + 3 : 0,
+          sanityCost: character.isAnimus ? 0 : Math.floor(Math.random() * 5) + 1,
+          consequences: ["Deeper understanding reveals truths that some would keep hidden..."]
         },
         {
           id: "explore_leave",
@@ -586,7 +586,7 @@ export class AIDungeonMaster {
       narrativeText: [
         `War has broken out between ${warEvent.warringTribes.join(' and ')} over ${warEvent.warCause}.`,
         `The battle has reached ${location}, and you find yourself caught in the middle.`,
-        "As an animus dragon, both sides want you as an ally. What do you do?"
+        character.isAnimus ? "As an animus dragon, both sides want you as an ally. What do you do?" : "Both sides want you as an ally. What do you do?"
       ],
       choices: [
         {
@@ -599,10 +599,10 @@ export class AIDungeonMaster {
         },
         {
           id: "war_magic",
-          text: "Use animus magic to end the conflict",
-          description: "Force peace through magical means",
-          soulCost: Math.floor(Math.random() * 15) + 10,
-          sanityCost: 0,
+          text: character.isAnimus ? "Use animus magic to end the conflict" : "Use your abilities to mediate the conflict",
+          description: character.isAnimus ? "Force peace through magical means" : "Try to find a peaceful solution",
+          soulCost: character.isAnimus ? Math.floor(Math.random() * 15) + 10 : 0,
+          sanityCost: character.isAnimus ? 0 : Math.floor(Math.random() * 8) + 3,
           consequences: ["Peace through force may not be true peace..."]
         },
         {
@@ -649,12 +649,12 @@ export class AIDungeonMaster {
         },
         {
           id: "social_magic",
-          text: "Subtly use animus magic to influence them",
-          description: "Magical manipulation",
-          soulCost: Math.floor(Math.random() * 5) + 2,
-          sanityCost: 0,
-          consequences: ["False friendship built on magic is hollow..."],
-          corruption: true
+          text: character.isAnimus ? "Subtly use animus magic to influence them" : "Use your natural abilities to connect with them",
+          description: character.isAnimus ? "Magical manipulation" : "Natural empathy and understanding",
+          soulCost: character.isAnimus ? Math.floor(Math.random() * 5) + 2 : 0,
+          sanityCost: character.isAnimus ? 0 : Math.floor(Math.random() * 2),
+          consequences: character.isAnimus ? ["False friendship built on magic is hollow..."] : ["Genuine connection builds lasting relationships..."],
+          corruption: character.isAnimus ? true : false
         },
         {
           id: "social_honest",
@@ -734,23 +734,23 @@ export class AIDungeonMaster {
       narrativeText: [
         `A ${phenomenon} has manifested at ${location}.`,
         "The magical energies are chaotic and dangerous.",
-        "As an animus dragon, you can sense the power involved. What do you do?"
+        character.isAnimus ? "As an animus dragon, you can sense the power involved. What do you do?" : "You can sense something powerful and dangerous here. What do you do?"
       ],
       choices: [
         {
           id: "phenomenon_absorb",
-          text: "Try to absorb the magical energy",
-          description: "Risky but potentially powerful",
-          soulCost: Math.floor(Math.random() * 20) + 5,
+          text: character.isAnimus ? "Try to absorb the magical energy" : "Try to resist the magical influence",
+          description: character.isAnimus ? "Risky but potentially powerful" : "Protect yourself from the dangerous energy",
+          soulCost: character.isAnimus ? Math.floor(Math.random() * 20) + 5 : 0,
           sanityCost: Math.floor(Math.random() * 10) + 5,
           consequences: ["Power always comes with a price..."]
         },
         {
           id: "phenomenon_dispel",
-          text: "Use animus magic to dispel the phenomenon",
+          text: character.isAnimus ? "Use animus magic to dispel the phenomenon" : "Use your tribal powers to counter the phenomenon",
           description: "Attempt to restore normalcy",
-          soulCost: Math.floor(Math.random() * 15) + 8,
-          sanityCost: 0,
+          soulCost: character.isAnimus ? Math.floor(Math.random() * 15) + 8 : 0,
+          sanityCost: character.isAnimus ? 0 : Math.floor(Math.random() * 8) + 2,
           consequences: ["Sometimes the cure is worse than the disease..."]
         },
         {
@@ -851,10 +851,10 @@ export class AIDungeonMaster {
         },
         {
           id: "prophecy_magic",
-          text: "Use animus magic to explore the vision further",
-          description: "Seek more details about the prophecy",
-          soulCost: Math.floor(Math.random() * 8) + 4,
-          sanityCost: 0,
+          text: character.isAnimus ? "Use animus magic to explore the vision further" : "Use your intuition to understand the vision",
+          description: character.isAnimus ? "Seek more details about the prophecy" : "Trust your natural instincts about the vision",
+          soulCost: character.isAnimus ? Math.floor(Math.random() * 8) + 4 : 0,
+          sanityCost: character.isAnimus ? 0 : Math.floor(Math.random() * 5) + 2,
           consequences: ["Some knowledge comes at too high a price..."]
         },
         {
