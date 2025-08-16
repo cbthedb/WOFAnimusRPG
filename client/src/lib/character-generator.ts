@@ -153,6 +153,8 @@ export function generateCharacter(): Character {
     tribalPowers: finalTribalPowers,
     specialPowers,
     relationships: {},
+    lifeEvents: [],
+    romanticHistory: [],
     achievements: [],
     isAIControlled: false
   };

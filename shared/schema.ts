@@ -55,15 +55,51 @@ export interface Character {
   father: string;
   siblings: string[];
   mate?: string;
-  dragonets: string[];
+  dragonets: Dragonet[];
   traits: string[];
   avatar: string;
   isAnimus: boolean;
   tribalPowers: string[];
   specialPowers: string[];
-  relationships: Record<string, { name: string; type: "friend" | "rival" | "enemy" | "neutral" | "romantic"; strength: number }>;
+  relationships: Record<string, Relationship>;
   achievements: string[];
   isAIControlled: boolean;
+  lifeEvents: LifeEvent[];
+  romanticHistory: RomanticEvent[];
+}
+
+export interface Dragonet {
+  name: string;
+  age: number;
+  tribe: string;
+  hybridTribes?: string[];
+  inheritedTraits: string[];
+  isAnimus: boolean;
+  parentage: "biological" | "adopted";
+  personality: string;
+}
+
+export interface Relationship {
+  name: string;
+  type: "friend" | "rival" | "enemy" | "neutral" | "romantic" | "mate" | "ex_mate" | "family";
+  strength: number;
+  history: string[];
+  isAlive: boolean;
+}
+
+export interface RomanticEvent {
+  partnerName: string;
+  eventType: "courtship" | "mating" | "breakup" | "loss";
+  turnOccurred: number;
+  outcome: string;
+  hasOffspring: boolean;
+}
+
+export interface LifeEvent {
+  turn: number;
+  category: "birth" | "death" | "political" | "war" | "discovery" | "romance" | "achievement" | "corruption";
+  description: string;
+  impact: "positive" | "negative" | "neutral";
 }
 
 export interface GameData {

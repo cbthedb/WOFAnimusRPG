@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams } from "wouter";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest, queryClient } from "@/lib/queryClient";
-import { Character, GameData, GameState, Choice } from "@shared/schema";
-import { GameEngine } from "@/lib/game-engine";
+import { Character, GameData, Choice } from "@shared/schema";
+import { EnhancedGameEngine } from "@/lib/enhanced-game-engine";
 import CharacterPanel from "@/components/character-panel";
 import GameplayArea from "@/components/gameplay-area";
 import MagicModal from "@/components/magic-modal";
 import TribalPowersModal from "@/components/tribal-powers-modal";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { Save, Settings, Shield } from "lucide-react";
+import { Save, Home } from "lucide-react";
+import { useLocalGameState } from "@/hooks/use-local-game-state";
+import { LocalGameStorage } from "@/lib/local-storage";
 
 export default function Game() {
   const { gameId } = useParams();
@@ -19,45 +19,49 @@ export default function Game() {
   const [showTribalPowersModal, setShowTribalPowersModal] = useState(false);
   const [aiControlMessage, setAiControlMessage] = useState<string | null>(null);
   const [gameOverState, setGameOverState] = useState<{ isGameOver: boolean; reason?: string } | null>(null);
+  const [gameState, setGameState] = useState<{ characterData: Character; gameData: GameData } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: gameState, isLoading } = useQuery({
-    queryKey: ["/api/game", gameId],
-    enabled: !!gameId,
-  });
+  const { updateGame } = useLocalGameState();
 
-  const updateGameMutation = useMutation({
-    mutationFn: async (updates: { characterData: Character; gameData: GameData; turn: number; location: string }) => {
-      const response = await apiRequest("PATCH", `/api/game/${gameId}`, updates);
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/game", gameId] });
-    },
-  });
+  useEffect(() => {
+    if (gameId) {
+      const loadedGame = LocalGameStorage.getGameState(gameId);
+      if (loadedGame) {
+        setGameState({
+          characterData: loadedGame.characterData,
+          gameData: loadedGame.gameData
+        });
+      }
+      setIsLoading(false);
+    }
+  }, [gameId]);
 
   useEffect(() => {
     if (gameState?.characterData) {
-      const corruptionLevel = GameEngine.getCorruptionLevel(gameState.characterData.soulPercentage);
-      if (corruptionLevel === 'corrupted' || corruptionLevel === 'lost') {
-        setAiControlMessage(GameEngine.getCorruptionMessage(corruptionLevel));
+      const character = gameState.characterData;
+      const stage = character.soulCorruptionStage;
+      
+      if (stage !== 'Normal') {
+        setAiControlMessage(EnhancedGameEngine.getCorruptionMessage(stage));
       } else {
         setAiControlMessage(null);
       }
 
       // Check for game over conditions
-      const gameOverCheck = GameEngine.checkGameOver(gameState.characterData);
+      const gameOverCheck = EnhancedGameEngine.checkGameOver(character);
       setGameOverState(gameOverCheck);
     }
   }, [gameState]);
 
   const handleChoice = (choice: Choice) => {
-    if (!gameState || gameOverState?.isGameOver) return;
+    if (!gameState || !gameId || gameOverState?.isGameOver) return;
 
-    const character = gameState.characterData as Character;
-    const gameData = gameState.gameData as GameData;
+    const character = gameState.characterData;
+    const gameData = gameState.gameData;
 
     // Check if AI should intervene
-    const aiChoice = GameEngine.getAIChoice(character, gameData.currentScenario);
+    const aiChoice = EnhancedGameEngine.getAIChoice(character, gameData.currentScenario);
     const actualChoice = aiChoice || choice;
 
     if (aiChoice) {
@@ -68,19 +72,37 @@ export default function Game() {
       });
     }
 
-    const { newCharacter, newGameData } = GameEngine.processChoice(
+    const { newCharacter, newGameData } = EnhancedGameEngine.processChoice(
       character,
       gameData,
       actualChoice,
       gameData.currentScenario
     );
 
-    updateGameMutation.mutate({
-      characterData: newCharacter,
-      gameData: newGameData,
-      turn: newGameData.turn,
-      location: newGameData.location,
-    });
+    try {
+      const updatedGame = updateGame(gameId, {
+        characterData: newCharacter,
+        gameData: newGameData,
+        turn: newGameData.turn,
+        location: newGameData.location,
+      });
+      
+      setGameState({
+        characterData: updatedGame.characterData,
+        gameData: updatedGame.gameData
+      });
+
+      toast({
+        title: "Choice Made",
+        description: "Your decision shapes your destiny...",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to save your choice. Try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleUsePower = (power: string) => {
@@ -94,15 +116,12 @@ export default function Game() {
   const handleSaveGame = () => {
     toast({
       title: "Game Saved",
-      description: "Your progress has been automatically saved.",
+      description: "Your progress is automatically saved to your browser.",
     });
   };
 
-  const handleSave = () => {
-    toast({
-      title: "Game Saved",
-      description: "Your progress has been automatically saved.",
-    });
+  const handleBackHome = () => {
+    window.location.href = '/';
   };
 
   if (isLoading) {
@@ -121,14 +140,18 @@ export default function Game() {
       <div className="min-h-screen bg-dragon-gradient flex items-center justify-center">
         <div className="text-center text-slate-300">
           <h2 className="text-2xl font-fantasy mb-4">Game Not Found</h2>
-          <p>The requested game could not be loaded.</p>
+          <p className="mb-4">The requested game could not be loaded.</p>
+          <Button onClick={handleBackHome} className="bg-purple-600 hover:bg-purple-700">
+            <Home className="w-4 h-4 mr-2" />
+            Return Home
+          </Button>
         </div>
       </div>
     );
   }
 
-  const character = gameState.characterData as Character;
-  const gameData = gameState.gameData as GameData;
+  const character = gameState.characterData;
+  const gameData = gameState.gameData;
 
   return (
     <div className="min-h-screen bg-dragon-gradient text-slate-100">
@@ -146,15 +169,18 @@ export default function Game() {
                 size="sm"
                 onClick={handleSaveGame}
                 className="text-purple-300 hover:bg-purple-500/20"
+                data-testid="button-save-game"
               >
                 <Save className="w-4 h-4" />
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={handleBackHome}
                 className="text-purple-300 hover:bg-purple-500/20"
+                data-testid="button-back-home"
               >
-                <Settings className="w-4 h-4" />
+                <Home className="w-4 h-4" />
               </Button>
             </div>
           </div>
@@ -187,7 +213,7 @@ export default function Game() {
             gameData={gameData}
             onChoice={handleChoice}
             onShowMagic={() => setShowMagicModal(true)}
-            isProcessing={updateGameMutation.isPending}
+            isProcessing={false}
           />
         </div>
       </div>

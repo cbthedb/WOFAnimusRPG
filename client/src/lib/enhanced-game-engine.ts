@@ -146,7 +146,9 @@ export class EnhancedGameEngine {
       character.relationships[friendName] = {
         name: friendName,
         type: "friend",
-        strength: Math.floor(Math.random() * 30) + 20
+        strength: Math.floor(Math.random() * 30) + 20,
+        history: ["Met during a challenging time"],
+        isAlive: true
       };
     }
 

@@ -2,28 +2,19 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { generateCharacter } from "@/lib/character-generator";
 import { generateScenario, generateTimeInfo } from "@/lib/scenario-generator-final";
 import { Character, GameData, InsertGameState } from "@shared/schema";
 import CharacterCreator from "@/components/character-creator";
-import { User, Wand2, Sparkles } from "lucide-react";
+import { User, Sparkles, GamepadIcon, Save } from "lucide-react";
+import { useLocalGameState } from "@/hooks/use-local-game-state";
 
 export default function Home() {
   const [, setLocation] = useLocation();
   const [isCreating, setIsCreating] = useState(false);
   const [showCharacterCreator, setShowCharacterCreator] = useState(false);
-
-  const createGameMutation = useMutation({
-    mutationFn: async (gameState: InsertGameState) => {
-      const response = await apiRequest("POST", "/api/game", gameState);
-      return response.json();
-    },
-    onSuccess: (gameState) => {
-      setLocation(`/game/${gameState.id}`);
-    },
-  });
+  const [showLoadMenu, setShowLoadMenu] = useState(false);
+  const { createGame, getAllGames, loadGame } = useLocalGameState();
 
   const handleNewGame = () => {
     setIsCreating(true);
@@ -41,18 +32,27 @@ export default function Home() {
       history: [],
       relationships: {},
       inventory: [],
-      reputation: 0
+      reputation: 0,
+      politicalEvents: [],
+      warStatus: { isAtWar: false, warringTribes: [], warCause: "", playerInvolvement: "neutral" },
+      explorationLog: []
     };
 
     const gameState: InsertGameState = {
-      userId: null, // No user system for now
+      userId: null,
       characterData: character,
       gameData: gameData,
       turn: 1,
       location: gameData.location
     };
 
-    createGameMutation.mutate(gameState);
+    try {
+      const newGame = createGame(gameState);
+      setLocation(`/game/${newGame.id}`);
+    } catch (error) {
+      console.error("Failed to create game:", error);
+      setIsCreating(false);
+    }
   };
 
   const handleCustomCharacter = (character: Character) => {
@@ -60,6 +60,13 @@ export default function Home() {
     setIsCreating(true);
     createGameWithCharacter(character);
   };
+
+  const handleLoadGame = (gameId: string) => {
+    loadGame(gameId);
+    setLocation(`/game/${gameId}`);
+  };
+
+  const savedGames = getAllGames();
 
   if (showCharacterCreator) {
     return (
@@ -121,9 +128,9 @@ export default function Home() {
               size="lg" 
               className="w-full bg-purple-600 hover:bg-purple-700 text-white font-fantasy text-lg py-6"
               onClick={handleNewGame}
-              disabled={isCreating || createGameMutation.isPending}
+              disabled={isCreating}
             >
-              {isCreating || createGameMutation.isPending ? (
+              {isCreating ? (
                 <>
                   <div className="animate-spin mr-2">⚡</div>
                   Generating Your Dragon...
@@ -141,11 +148,24 @@ export default function Home() {
               size="lg" 
               className="w-full border-purple-400/50 text-purple-300 hover:bg-purple-500/10"
               onClick={() => setShowCharacterCreator(true)}
-              disabled={isCreating || createGameMutation.isPending}
+              disabled={isCreating}
             >
               <User className="w-5 h-5 mr-2" />
               Create Custom Dragon
             </Button>
+
+            {savedGames.length > 0 && (
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full border-green-400/50 text-green-300 hover:bg-green-500/10"
+                onClick={() => setShowLoadMenu(true)}
+                disabled={isCreating}
+              >
+                <Save className="w-5 h-5 mr-2" />
+                Load Saved Game ({savedGames.length})
+              </Button>
+            )}
           </div>
 
           <div className="text-center text-xs text-purple-400 pt-4 border-t border-purple-700">
@@ -154,6 +174,51 @@ export default function Home() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Load Game Modal */}
+      {showLoadMenu && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-md bg-black/90 border-purple-500/50">
+            <CardHeader>
+              <CardTitle className="text-purple-300">Load Saved Game</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3 max-h-60 overflow-y-auto">
+                {savedGames.map((game) => (
+                  <div
+                    key={game.id}
+                    className="p-3 bg-purple-900/30 rounded-lg border border-purple-500/30 cursor-pointer hover:bg-purple-800/40 transition-colors"
+                    onClick={() => {
+                      handleLoadGame(game.id);
+                      setShowLoadMenu(false);
+                    }}
+                  >
+                    <div className="font-semibold text-purple-200">
+                      {game.characterData.name} the {game.characterData.tribe}
+                    </div>
+                    <div className="text-xs text-purple-400">
+                      Turn {game.turn} • {game.location}
+                    </div>
+                    <div className="text-xs text-purple-500">
+                      Soul: {game.characterData.soulPercentage}% • 
+                      Stage: {game.characterData.soulCorruptionStage}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-2 mt-4">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowLoadMenu(false)}
+                  className="flex-1"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

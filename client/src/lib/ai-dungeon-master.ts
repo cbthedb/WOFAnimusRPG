@@ -256,8 +256,7 @@ export class AIDungeonMaster {
       soulCost: temptation.soulCost,
       sanityCost: 0,
       consequences: ["The easy path often leads to darkness..."],
-      corruption: true,
-      aiTemptation: true
+      corruption: true
     };
   }
 }
