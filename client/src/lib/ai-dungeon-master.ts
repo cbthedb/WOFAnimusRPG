@@ -32,7 +32,16 @@ export class AIDungeonMaster {
   };
 
   static generateRandomScenario(character: Character, gameData: GameData): Scenario {
-    const scenarioType = this.scenarioTypes[Math.floor(Math.random() * this.scenarioTypes.length)];
+    // Filter scenario types based on character abilities
+    let availableScenarios = this.scenarioTypes.filter(type => {
+      // Don't show animus scenarios to non-animus dragons
+      if (type === "animus_temptation" && !character.isAnimus) {
+        return false;
+      }
+      return true;
+    });
+
+    const scenarioType = availableScenarios[Math.floor(Math.random() * availableScenarios.length)];
     
     switch (scenarioType) {
       case "moral_dilemma":
@@ -74,12 +83,19 @@ export class AIDungeonMaster {
     const location = this.getRandomElement(this.randomElements.locations);
     const weather = this.getRandomElement(this.randomElements.weather);
     
-    const magicSolution = this.getRandomElement([
+    // Generate different solutions based on whether character is animus or not
+    const magicSolution = character.isAnimus ? this.getRandomElement([
       "heal them instantly with animus magic",
       "enchant an object to save them",
       "use magic to turn back time",
       "transfer their suffering to yourself",
       "create a magical barrier"
+    ]) : this.getRandomElement([
+      "use your tribal powers to help",
+      "attempt magical healing with tribal abilities",
+      "try to channel natural magic",
+      "use elemental powers to assist",
+      "rely on instinctual magical abilities"
     ]);
     
     const nonMagicSolution = this.getRandomElement([
@@ -102,7 +118,7 @@ export class AIDungeonMaster {
       {
         title: `Crisis at ${location}`,
         setup: `During a ${weather} day at ${location}, you encounter a ${victim} suffering from ${threat}. They desperately plead for your help, but the situation is complex and morally challenging.`,
-        choice1: magicSolution + " (10-25% soul cost)",
+        choice1: character.isAnimus ? magicSolution + " (10-25% soul cost)" : magicSolution,
         choice2: nonMagicSolution,
         choice3: moralChoice
       }
@@ -119,9 +135,9 @@ export class AIDungeonMaster {
         {
           id: "dilemma_1",
           text: dilemma.choice1,
-          description: "The path of power, but at what cost?",
-          soulCost: dilemma.choice1.includes("soul cost") ? Math.floor(Math.random() * 15) + 10 : 0,
-          sanityCost: 0,
+          description: character.isAnimus ? "The path of power, but at what cost?" : "Use your natural abilities to help",
+          soulCost: character.isAnimus && dilemma.choice1.includes("soul cost") ? Math.floor(Math.random() * 15) + 10 : 0,
+          sanityCost: character.isAnimus ? 0 : Math.floor(Math.random() * 5),
           consequences: ["Your choice will have lasting consequences..."],
           corruption: dilemma.choice1.includes("corruption")
         },
