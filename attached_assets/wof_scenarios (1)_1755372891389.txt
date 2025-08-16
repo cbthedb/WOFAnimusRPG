@@ -1,0 +1,1000 @@
+Scenario 1: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 2: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 3: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 4: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 5: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 6: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 7: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 8: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 9: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 10: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 11: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 12: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 13: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 14: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 15: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 16: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 17: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 18: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 19: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 20: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 21: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 22: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 23: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 24: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 25: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 26: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 27: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 28: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 29: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 30: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 31: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 32: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 33: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 34: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 35: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 36: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 37: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 38: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 39: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 40: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 41: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 42: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 43: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 44: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 45: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 46: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 47: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 48: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 49: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 50: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 51: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 52: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 53: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 54: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 55: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 56: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 57: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 58: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 59: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 60: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 61: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 62: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 63: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 64: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 65: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 66: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 67: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 68: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 69: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 70: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 71: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 72: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 73: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 74: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 75: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 76: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 77: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 78: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 79: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 80: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 81: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 82: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 83: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 84: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 85: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 86: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 87: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 88: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 89: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 90: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 91: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 92: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 93: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 94: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 95: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 96: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 97: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 98: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 99: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 100: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 101: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 102: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 103: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 104: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 105: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 106: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 107: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 108: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 109: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 110: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 111: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 112: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 113: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 114: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 115: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 116: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 117: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 118: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 119: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 120: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 121: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 122: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 123: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 124: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 125: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 126: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 127: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 128: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 129: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 130: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 131: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 132: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 133: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 134: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 135: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 136: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 137: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 138: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 139: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 140: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 141: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 142: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 143: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 144: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 145: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 146: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 147: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 148: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 149: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 150: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 151: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 152: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 153: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 154: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 155: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 156: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 157: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 158: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 159: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 160: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 161: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 162: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 163: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 164: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 165: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 166: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 167: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 168: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 169: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 170: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 171: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 172: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 173: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 174: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 175: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 176: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 177: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 178: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 179: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 180: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 181: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 182: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 183: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 184: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 185: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 186: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 187: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 188: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 189: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 190: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 191: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 192: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 193: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 194: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 195: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 196: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 197: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 198: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 199: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 200: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 201: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 202: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 203: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 204: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 205: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 206: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 207: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 208: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 209: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 210: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 211: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 212: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 213: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 214: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 215: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 216: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 217: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 218: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 219: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 220: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 221: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 222: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 223: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 224: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 225: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 226: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 227: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 228: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 229: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 230: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 231: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 232: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 233: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 234: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 235: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 236: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 237: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 238: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 239: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 240: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 241: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 242: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 243: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 244: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 245: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 246: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 247: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 248: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 249: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 250: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 251: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 252: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 253: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 254: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 255: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 256: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 257: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 258: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 259: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 260: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 261: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 262: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 263: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 264: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 265: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 266: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 267: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 268: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 269: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 270: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 271: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 272: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 273: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 274: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 275: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 276: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 277: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 278: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 279: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 280: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 281: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 282: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 283: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 284: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 285: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 286: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 287: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 288: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 289: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 290: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 291: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 292: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 293: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 294: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 295: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 296: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 297: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 298: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 299: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 300: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 301: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 302: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 303: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 304: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 305: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 306: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 307: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 308: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 309: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 310: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 311: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 312: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 313: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 314: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 315: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 316: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 317: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 318: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 319: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 320: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 321: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 322: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 323: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 324: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 325: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 326: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 327: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 328: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 329: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 330: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 331: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 332: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 333: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 334: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 335: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 336: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 337: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 338: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 339: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 340: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 341: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 342: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 343: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 344: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 345: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 346: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 347: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 348: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 349: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 350: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 351: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 352: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 353: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 354: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 355: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 356: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 357: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 358: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 359: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 360: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 361: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 362: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 363: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 364: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 365: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 366: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 367: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 368: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 369: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 370: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 371: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 372: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 373: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 374: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 375: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 376: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 377: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 378: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 379: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 380: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 381: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 382: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 383: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 384: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 385: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 386: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 387: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 388: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 389: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 390: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 391: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 392: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 393: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 394: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 395: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 396: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 397: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 398: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 399: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 400: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 401: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 402: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 403: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 404: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 405: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 406: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 407: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 408: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 409: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 410: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 411: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 412: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 413: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 414: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 415: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 416: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 417: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 418: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 419: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 420: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 421: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 422: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 423: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 424: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 425: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 426: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 427: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 428: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 429: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 430: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 431: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 432: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 433: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 434: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 435: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 436: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 437: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 438: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 439: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 440: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 441: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 442: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 443: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 444: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 445: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 446: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 447: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 448: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 449: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 450: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 451: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 452: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 453: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 454: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 455: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 456: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 457: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 458: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 459: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 460: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 461: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 462: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 463: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 464: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 465: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 466: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 467: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 468: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 469: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 470: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 471: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 472: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 473: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 474: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 475: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 476: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 477: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 478: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 479: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 480: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 481: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 482: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 483: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 484: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 485: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 486: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 487: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 488: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 489: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 490: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 491: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 492: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 493: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 494: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 495: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 496: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 497: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 498: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 499: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 500: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 501: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 502: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 503: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 504: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 505: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 506: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 507: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 508: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 509: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 510: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 511: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 512: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 513: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 514: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 515: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 516: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 517: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 518: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 519: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 520: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 521: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 522: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 523: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 524: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 525: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 526: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 527: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 528: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 529: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 530: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 531: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 532: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 533: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 534: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 535: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 536: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 537: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 538: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 539: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 540: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 541: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 542: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 543: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 544: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 545: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 546: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 547: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 548: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 549: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 550: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 551: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 552: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 553: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 554: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 555: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 556: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 557: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 558: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 559: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 560: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 561: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 562: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 563: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 564: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 565: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 566: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 567: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 568: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 569: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 570: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 571: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 572: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 573: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 574: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 575: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 576: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 577: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 578: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 579: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 580: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 581: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 582: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 583: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 584: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 585: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 586: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 587: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 588: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 589: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 590: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 591: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 592: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 593: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 594: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 595: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 596: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 597: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 598: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 599: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 600: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 601: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 602: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 603: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 604: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 605: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 606: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 607: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 608: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 609: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 610: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 611: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 612: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 613: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 614: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 615: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 616: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 617: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 618: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 619: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 620: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 621: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 622: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 623: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 624: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 625: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 626: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 627: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 628: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 629: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 630: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 631: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 632: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 633: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 634: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 635: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 636: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 637: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 638: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 639: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 640: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 641: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 642: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 643: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 644: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 645: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 646: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 647: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 648: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 649: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 650: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 651: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 652: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 653: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 654: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 655: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 656: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 657: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 658: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 659: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 660: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 661: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 662: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 663: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 664: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 665: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 666: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 667: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 668: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 669: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 670: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 671: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 672: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 673: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 674: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 675: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 676: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 677: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 678: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 679: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 680: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 681: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 682: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 683: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 684: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 685: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 686: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 687: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 688: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 689: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 690: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 691: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 692: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 693: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 694: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 695: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 696: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 697: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 698: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 699: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 700: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 701: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 702: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 703: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 704: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 705: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 706: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 707: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 708: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 709: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 710: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 711: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 712: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 713: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 714: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 715: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 716: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 717: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 718: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 719: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 720: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 721: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 722: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 723: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 724: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 725: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 726: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 727: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 728: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 729: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 730: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 731: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 732: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 733: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 734: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 735: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 736: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 737: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 738: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 739: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 740: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 741: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 742: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 743: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 744: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 745: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 746: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 747: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 748: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 749: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 750: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 751: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 752: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 753: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 754: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 755: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 756: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 757: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 758: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 759: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 760: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 761: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 762: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 763: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 764: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 765: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 766: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 767: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 768: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 769: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 770: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 771: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 772: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 773: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 774: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 775: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 776: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 777: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 778: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 779: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 780: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 781: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 782: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 783: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 784: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 785: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 786: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 787: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 788: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 789: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 790: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 791: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 792: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 793: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 794: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 795: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 796: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 797: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 798: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 799: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 800: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 801: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 802: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 803: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 804: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 805: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 806: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 807: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 808: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 809: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 810: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 811: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 812: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 813: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 814: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 815: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 816: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 817: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 818: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 819: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 820: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 821: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 822: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 823: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 824: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 825: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 826: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 827: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 828: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 829: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 830: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 831: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 832: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 833: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 834: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 835: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 836: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 837: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 838: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 839: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 840: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 841: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 842: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 843: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 844: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 845: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 846: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 847: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 848: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 849: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 850: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 851: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 852: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 853: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 854: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 855: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 856: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 857: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 858: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 859: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 860: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 861: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 862: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 863: [NORMAL] You visit another tribe’s territory. Do you explore or leave quickly?
+Scenario 864: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 865: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 866: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 867: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 868: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 869: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 870: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 871: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 872: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 873: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 874: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 875: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 876: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 877: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 878: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 879: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 880: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 881: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 882: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 883: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 884: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 885: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 886: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 887: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 888: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 889: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 890: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 891: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 892: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 893: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 894: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 895: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 896: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 897: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 898: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 899: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 900: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 901: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 902: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 903: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 904: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 905: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 906: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 907: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 908: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 909: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 910: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 911: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 912: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 913: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 914: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 915: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 916: [MINDREADING] You discover someone loves you secretly. Do you return the feeling or not?
+Scenario 917: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 918: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 919: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 920: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 921: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 922: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 923: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 924: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 925: [WARS] The war turns against your side. Do you retreat, rally, or betray your allies?
+Scenario 926: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 927: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 928: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 929: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 930: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 931: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 932: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 933: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 934: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 935: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 936: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 937: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 938: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 939: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 940: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 941: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 942: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 943: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 944: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 945: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 946: [LEARNING] A teacher asks you a difficult question. Do you guess or admit ignorance?
+Scenario 947: [ANIMUS] A tribe discovers you're animus. Do you hide your powers or reveal them?
+Scenario 948: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 949: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 950: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 951: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 952: [LEARNING] You are offered a chance to study ancient animus spells. Do you risk it?
+Scenario 953: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 954: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 955: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 956: [ANIMUS] You feel your soul weaken after casting a spell. Do you continue or stop using animus magic?
+Scenario 957: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 958: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 959: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 960: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 961: [NORMAL] A hatchling asks for your story. Do you tell the truth or lie?
+Scenario 962: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 963: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 964: [NORMAL] A dragon offers friendship. Do you accept or push them away?
+Scenario 965: [ANIMUS] A dragon asks you to enchant them immortal. Do you grant their wish or refuse?
+Scenario 966: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 967: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 968: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 969: [LEARNING] You overhear advanced battle tactics. Do you learn them or forget?
+Scenario 970: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 971: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 972: [LEARNING] You find a hidden scroll in a library. Do you read or ignore it?
+Scenario 973: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 974: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 975: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 976: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 977: [NORMAL] You are invited to a feast. Do you join, decline, or sneak away?
+Scenario 978: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 979: [MINDREADING] A dragon thinks about betraying you. Do you act first or wait?
+Scenario 980: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 981: [PROPHECY] A prophecy declares you will save Pyrrhia. Do you believe it or not?
+Scenario 982: [WARS] Your commander orders you to attack innocents. Do you obey or disobey?
+Scenario 983: [PROPHECY] Your actions today will fulfill a prophecy. Do you act boldly or carefully?
+Scenario 984: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 985: [WARS] Your tribe prepares for battle. Do you fight, negotiate, or flee?
+Scenario 986: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 987: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 988: [WARS] The SkyWings demand tribute from your village. Do you resist or submit?
+Scenario 989: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
+Scenario 990: [ANIMUS] You find an ancient object. Do you enchant it for power, wealth, or protection?
+Scenario 991: [NORMAL] You wander into a forest and find rare herbs. Do you collect or leave them?
+Scenario 992: [LEARNING] You stumble into a secret class about prophecy. Do you stay or leave?
+Scenario 993: [PROPHECY] You discover a scroll with half-burnt prophecy. Do you try to finish it?
+Scenario 994: [MINDREADING] You overhear dark thoughts from your closest friend. Do you confront them or stay silent?
+Scenario 995: [WARS] You are captured by enemy dragons. Do you plan escape, spy, or accept fate?
+Scenario 996: [MINDREADING] You sense someone lying during negotiations. Do you expose them or keep quiet?
+Scenario 997: [ANIMUS] Darkstalker himself appears in a dream, offering you forbidden knowledge. Do you accept or reject it?
+Scenario 998: [PROPHECY] You are told you will betray a friend. Do you cut ties now or wait?
+Scenario 999: [MINDREADING] You hear multiple thoughts at once. Do you focus or retreat from the noise?
+Scenario 1000: [PROPHECY] A seer whispers a prophecy involving your death. Do you seek to avoid it or embrace destiny?
