@@ -28,6 +28,7 @@ export default function Game() {
   const [conversationData, setConversationData] = useState<{topic: string, otherDragon: string} | null>(null);
   const [aiControlMessage, setAiControlMessage] = useState<string | null>(null);
   const [aiInterval, setAiInterval] = useState<NodeJS.Timeout | null>(null);
+  const [aiActionInProgress, setAiActionInProgress] = useState<string | null>(null);
   const [gameOverState, setGameOverState] = useState<{ isGameOver: boolean; reason?: string; allowContinue?: boolean } | null>(null);
   const [hasChosenCorruption, setHasChosenCorruption] = useState(false);
   const [gameState, setGameState] = useState<{ characterData: Character; gameData: GameData } | null>(null);
@@ -621,6 +622,11 @@ export default function Game() {
         const whisper = EnhancedAIController.getActionWhisper();
 
         console.log("AI performing action:", aiAction.type, aiAction.description);
+        console.log("Current AI Control Status:", currentGameState.characterData.isAIControlled);
+        console.log("Current Soul %:", currentGameState.characterData.soulPercentage);
+        
+        // Set action in progress indicator
+        setAiActionInProgress(`Performing ${aiAction.type}: ${aiAction.description}`);
         
         toast({
           title: "🔥 YOUR CORRUPTED DRAGON TAKES CONTROL",
@@ -639,55 +645,29 @@ export default function Game() {
           });
         }, 2000);
 
-        // Execute the AI action based on type with UI interaction
+        // Clear action in progress after action completes
+        setTimeout(() => {
+          setAiActionInProgress(null);
+        }, 3000);
+
+        // Execute AI action directly
         switch (aiAction.type) {
           case 'magic':
             if (currentGameState.characterData.isAnimus) {
-              // Simulate opening magic modal and casting spell
-              setTimeout(() => {
-                setShowMagicModal(true);
-                setTimeout(() => {
-                  handleCastSpell(aiAction.data);
-                  setShowMagicModal(false);
-                }, 1000);
-              }, 500);
+              handleCastSpell(aiAction.data);
             }
             break;
           case 'custom_action':
-            // Simulate opening custom action modal
-            setTimeout(() => {
-              setShowCustomActionModal(true);
-              setTimeout(() => {
-                handleCustomAction(aiAction.data, "The corrupted dragon performs this evil deed with malicious glee.");
-                setShowCustomActionModal(false);
-              }, 1000);
-            }, 500);
+            handleCustomAction(aiAction.data, "The corrupted dragon performs this evil deed with malicious glee.");
             break;
           case 'tribal_power':
-            // Simulate opening tribal powers modal
-            setTimeout(() => {
-              setShowTribalPowersModal(true);
-              setTimeout(() => {
-                handleTribalPower(aiAction.data.power, aiAction.data.use);
-                setShowTribalPowersModal(false);
-              }, 1000);
-            }, 500);
+            handleTribalPower(aiAction.data.power, aiAction.data.use);
             break;
           case 'special_power':
-            // Simulate opening special power modal
-            setTimeout(() => {
-              setSpecialPowerType(aiAction.data.power.toLowerCase().includes('prophecy') ? 'prophecy' : 
-                                 aiAction.data.power.toLowerCase().includes('mind') ? 'mindreading' : 'future');
-              setShowSpecialPowerModal(true);
-              setTimeout(() => {
-                handleAISpecialPower(aiAction.data.power, aiAction.data.use);
-                setShowSpecialPowerModal(false);
-              }, 1000);
-            }, 500);
+            handleAISpecialPower(aiAction.data.power, aiAction.data.use);
             break;
           case 'choice':
           default:
-            // Direct choice handling for scenario choices
             handleChoice(aiAction.data);
             break;
         }
@@ -831,6 +811,12 @@ export default function Game() {
               <div>
                 <h4 className="font-semibold text-red-300 mb-1">Soul Corruption Warning</h4>
                 <p className="text-sm text-red-200">{aiControlMessage}</p>
+                {aiActionInProgress && (
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-red-300 border-t-transparent"></div>
+                    <p className="text-xs text-red-300 italic">{aiActionInProgress}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
