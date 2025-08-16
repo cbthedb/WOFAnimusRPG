@@ -601,14 +601,10 @@ export default function Game() {
 
       // Import the enhanced AI controller
       import('../lib/enhanced-ai-controller').then(({ EnhancedAIController }) => {
-        console.log("AI Control Check - isAIControlled:", currentGameState.characterData.isAIControlled, "soulPercentage:", currentGameState.characterData.soulPercentage);
-        
         const aiAction = EnhancedAIController.generateAIAction(
           currentGameState.characterData, 
           currentGameState.gameData
         );
-
-        console.log("AI Action generated:", aiAction);
 
         if (!aiAction) {
           // Fallback to regular choice if no AI action generated
@@ -616,7 +612,6 @@ export default function Game() {
           if (currentScenario && currentScenario.choices && currentScenario.choices.length > 0) {
             const aiChoice = EnhancedGameEngine.getAIChoice(currentGameState.characterData, currentScenario);
             const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
-            console.log("AI making fallback choice:", choiceToMake.text);
             handleChoice(choiceToMake);
           }
           return;
