@@ -29,6 +29,7 @@ export default function Game() {
   const [aiControlMessage, setAiControlMessage] = useState<string | null>(null);
   const [aiInterval, setAiInterval] = useState<NodeJS.Timeout | null>(null);
   const [gameOverState, setGameOverState] = useState<{ isGameOver: boolean; reason?: string; allowContinue?: boolean } | null>(null);
+  const [hasChosenCorruption, setHasChosenCorruption] = useState(false);
   const [gameState, setGameState] = useState<{ characterData: Character; gameData: GameData } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [corruptionWhisper, setCorruptionWhisper] = useState<string | null>(null);
@@ -99,7 +100,7 @@ export default function Game() {
 
       // Check for game over conditions - but allow continuation for corrupted souls
       const gameOverCheck = EnhancedGameEngine.checkGameOver(character);
-      if (gameOverCheck.isGameOver && !character.isAIControlled) {
+      if (gameOverCheck.isGameOver && !character.isAIControlled && !gameOverState && !hasChosenCorruption) {
         const allowContinue = character.soulPercentage <= 0; // Allow AI takeover for corrupted souls
         setGameOverState({ ...gameOverCheck, allowContinue });
       } else if (!gameOverCheck.isGameOver || character.isAIControlled) {
@@ -560,6 +561,7 @@ export default function Game() {
       });
       
       setGameOverState(null);
+      setHasChosenCorruption(true);
       
       toast({
         title: "Soul Lost",
@@ -580,7 +582,7 @@ export default function Game() {
     if (!gameId) return;
 
     // Show AI taking control message
-    setAiControlMessage("The AI has taken control of your corrupted dragon. Dark deeds are being performed automatically...");
+    setAiControlMessage("🔴 AI CORRUPTION ACTIVE - Your dragon acts autonomously with dark intent. Watch as evil unfolds...");
 
     // Clear any existing interval
     if (aiInterval) {
@@ -658,6 +660,41 @@ export default function Game() {
             handleChoice(aiAction.data);
             break;
         }
+
+        // Update the scenario to reflect what the AI just did
+        setTimeout(() => {
+          const updatedGameState = LocalGameStorage.getGameState(gameId);
+          if (updatedGameState) {
+            const newScenario = {
+              ...updatedGameState.gameData.currentScenario,
+              narrativeText: [
+                narrative,
+                `The corrupted dragon's essence grows darker with each malevolent act.`,
+                `Dark whispers echo: "${whisper}"`
+              ],
+              description: `${updatedGameState.characterData.name} prowls through the shadows, consumed by corruption.`
+            };
+
+            const newGameData = { ...updatedGameState.gameData };
+            newGameData.currentScenario = newScenario;
+
+            try {
+              const refreshedGame = updateGame(gameId, {
+                characterData: updatedGameState.characterData,
+                gameData: newGameData,
+                turn: newGameData.turn,
+                location: newGameData.location,
+              });
+              
+              setGameState({
+                characterData: refreshedGame.characterData,
+                gameData: refreshedGame.gameData
+              });
+            } catch (error) {
+              console.error("Failed to update scenario:", error);
+            }
+          }
+        }, 2000); // Update scenario after action completes
       });
 
     }, 5000); // AI performs an action every 5 seconds
