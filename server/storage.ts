@@ -13,7 +13,8 @@ export interface IStorage {
   deleteGameState(id: string): Promise<void>;
 }
 
-export class MemStorage implements IStorage {
+// Using DatabaseStorage now, keeping MemStorage for reference
+class MemStorage implements IStorage {
   private users: Map<string, User>;
   private gameStates: Map<string, GameState>;
 
@@ -82,4 +83,56 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+import { db } from "./db";
+import { gameStates } from "@shared/schema";
+import { eq } from "drizzle-orm";
+
+export class DatabaseStorage implements IStorage {
+  async getUser(id: string): Promise<User | undefined> {
+    // User functionality not implemented yet
+    return undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    // User functionality not implemented yet
+    return undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    // User functionality not implemented yet
+    throw new Error("User functionality not implemented");
+  }
+
+  async getGameState(id: string): Promise<GameState | undefined> {
+    const [gameState] = await db.select().from(gameStates).where(eq(gameStates.id, id));
+    return gameState || undefined;
+  }
+
+  async getGameStateByUserId(userId: string): Promise<GameState | undefined> {
+    const [gameState] = await db.select().from(gameStates).where(eq(gameStates.userId, userId));
+    return gameState || undefined;
+  }
+
+  async createGameState(insertGameState: InsertGameState): Promise<GameState> {
+    const [gameState] = await db
+      .insert(gameStates)
+      .values(insertGameState)
+      .returning();
+    return gameState;
+  }
+
+  async updateGameState(id: string, updateData: Partial<InsertGameState>): Promise<GameState> {
+    const [gameState] = await db
+      .update(gameStates)
+      .set(updateData)
+      .where(eq(gameStates.id, id))
+      .returning();
+    return gameState;
+  }
+
+  async deleteGameState(id: string): Promise<void> {
+    await db.delete(gameStates).where(eq(gameStates.id, id));
+  }
+}
+
+export const storage = new DatabaseStorage();

@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { generateCharacter } from "@/lib/character-generator";
-import { generateScenario, generateTimeInfo } from "@/lib/scenario-generator";
+import { generateScenario, generateTimeInfo } from "@/lib/scenario-generator-final";
 import { Character, GameData, InsertGameState } from "@shared/schema";
 
 export default function Home() {

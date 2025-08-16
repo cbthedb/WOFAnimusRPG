@@ -1,5 +1,5 @@
 import { Character, GameData, Choice, GameEvent, Scenario } from "@shared/schema";
-import { generateScenario, generateTimeInfo, generateLocation } from "./scenario-generator";
+import { generateScenario, generateTimeInfo, generateLocation } from "./scenario-generator-final";
 
 export class GameEngine {
   static processChoice(
@@ -17,13 +17,20 @@ export class GameEngine {
       newCharacter.soulPercentage = Math.max(0, character.soulPercentage - actualSoulLoss);
     }
 
+    // Apply sanity changes (can be positive or negative)
+    if (choice.sanityCost !== 0) {
+      const actualSanityChange = this.calculateSanityChange(choice.sanityCost);
+      newCharacter.sanityPercentage = Math.max(0, Math.min(100, character.sanityPercentage - actualSanityChange));
+    }
+
     // Create game event
     const event: GameEvent = {
       turn: gameData.turn,
       scenario: scenario.id,
       choice: choice.id,
       consequences: choice.consequences,
-      soulLoss: choice.soulCost
+      soulLoss: choice.soulCost,
+      sanityLoss: choice.sanityCost
     };
 
     // Add to history
@@ -50,6 +57,25 @@ export class GameEngine {
     const variance = baseCost * 0.2;
     const actualCost = baseCost + (Math.random() - 0.5) * variance;
     return Math.max(1, Math.round(actualCost));
+  }
+
+  private static calculateSanityChange(baseCost: number): number {
+    // Add some randomness to sanity changes (±15%)
+    const variance = baseCost * 0.15;
+    const actualCost = baseCost + (Math.random() - 0.5) * variance;
+    return Math.round(actualCost);
+  }
+
+  static checkGameOver(character: Character): { isGameOver: boolean; reason?: string } {
+    if (character.soulPercentage <= 0) {
+      return { isGameOver: true, reason: 'Your soul has been completely consumed by animus magic. You are no longer yourself.' };
+    }
+    
+    if (character.sanityPercentage <= 0) {
+      return { isGameOver: true, reason: 'Your mind has shattered under the weight of power and knowledge. You can no longer distinguish reality from madness.' };
+    }
+    
+    return { isGameOver: false };
   }
 
   private static applyConsequences(

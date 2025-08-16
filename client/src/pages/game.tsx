@@ -7,15 +7,18 @@ import { GameEngine } from "@/lib/game-engine";
 import CharacterPanel from "@/components/character-panel";
 import GameplayArea from "@/components/gameplay-area";
 import MagicModal from "@/components/magic-modal";
+import TribalPowersModal from "@/components/tribal-powers-modal";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { Save, Settings } from "lucide-react";
+import { Save, Settings, Shield } from "lucide-react";
 
 export default function Game() {
   const { gameId } = useParams();
   const { toast } = useToast();
   const [showMagicModal, setShowMagicModal] = useState(false);
+  const [showTribalPowersModal, setShowTribalPowersModal] = useState(false);
   const [aiControlMessage, setAiControlMessage] = useState<string | null>(null);
+  const [gameOverState, setGameOverState] = useState<{ isGameOver: boolean; reason?: string } | null>(null);
 
   const { data: gameState, isLoading } = useQuery({
     queryKey: ["/api/game", gameId],
@@ -40,11 +43,15 @@ export default function Game() {
       } else {
         setAiControlMessage(null);
       }
+
+      // Check for game over conditions
+      const gameOverCheck = GameEngine.checkGameOver(gameState.characterData);
+      setGameOverState(gameOverCheck);
     }
   }, [gameState]);
 
   const handleChoice = (choice: Choice) => {
-    if (!gameState) return;
+    if (!gameState || gameOverState?.isGameOver) return;
 
     const character = gameState.characterData as Character;
     const gameData = gameState.gameData as GameData;
@@ -73,6 +80,21 @@ export default function Game() {
       gameData: newGameData,
       turn: newGameData.turn,
       location: newGameData.location,
+    });
+  };
+
+  const handleUsePower = (power: string) => {
+    toast({
+      title: "Power Used", 
+      description: `You use your ${power} ability!`,
+    });
+    setShowTribalPowersModal(false);
+  };
+
+  const handleSaveGame = () => {
+    toast({
+      title: "Game Saved",
+      description: "Your progress has been automatically saved.",
     });
   };
 
@@ -122,7 +144,7 @@ export default function Game() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={handleSave}
+                onClick={handleSaveGame}
                 className="text-purple-300 hover:bg-purple-500/20"
               >
                 <Save className="w-4 h-4" />
@@ -156,7 +178,10 @@ export default function Game() {
 
       <div className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-120px)]">
-          <CharacterPanel character={character} />
+          <CharacterPanel 
+            character={character} 
+            onShowTribalPowers={() => setShowTribalPowersModal(true)} 
+          />
           <GameplayArea
             character={character}
             gameData={gameData}
@@ -172,6 +197,38 @@ export default function Game() {
         onClose={() => setShowMagicModal(false)}
         character={character}
       />
+
+      <TribalPowersModal
+        character={character}
+        isOpen={showTribalPowersModal}
+        onClose={() => setShowTribalPowersModal(false)}
+        onUsePower={handleUsePower}
+      />
+
+      {/* Game Over Modal */}
+      {gameOverState?.isGameOver && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-purple-900/90 border border-purple-500 rounded-lg p-8 max-w-md mx-4 text-center">
+            <h2 className="text-2xl font-bold text-red-400 mb-4">Game Over</h2>
+            <p className="text-purple-200 mb-6">{gameOverState.reason}</p>
+            <div className="space-y-3">
+              <Button 
+                onClick={() => window.location.href = '/'} 
+                className="w-full bg-purple-600 hover:bg-purple-700"
+              >
+                Return Home
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={() => window.location.reload()}
+                className="w-full"
+              >
+                Restart Game
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

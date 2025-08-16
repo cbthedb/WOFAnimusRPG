@@ -37,6 +37,59 @@ function generateDragonName(tribe: string): string {
   return randomChoice(tribeNames);
 }
 
+// Tribal power definitions based on the attached file
+const TRIBAL_POWERS = {
+  MudWing: ['Fireproof (with siblings)', 'Physical strength', 'Hold breath (1 hour)'],
+  SandWing: ['Poisonous tail stinger', 'Heat resistance', 'Desert camouflage'],
+  SkyWing: ['Superior flight', 'Aerial combat mastery', 'Enhanced fire breath'],
+  SeaWing: ['Underwater breathing', 'Night vision underwater', 'Bioluminescent communication'],
+  IceWing: ['Frostbreath', 'Cold resistance', 'Armored scales', 'Combat tail spines'],
+  RainWing: ['Color-changing scales', 'Deadly venom spit', 'Prehensile tail'],
+  NightWing: ['Mind reading (rare)', 'Prophecy (rare)', 'Night camouflage'],
+  SilkWing: ['Silk production', 'Flame silk (post-metamorphosis)'],
+  HiveWing: ['Various venoms', 'Mind-control toxins', 'Fire breath', 'Resistant scales'],
+  LeafWing: ['Leafspeak (plant control)', 'Forest camouflage', 'Poison knowledge']
+};
+
+const SPECIAL_POWERS = [
+  'Foresight', 'Enhanced Mind Reading', 'Advanced Leafspeak', 
+  'FlameSilk Mastery', 'Royal Fires', 'Enhanced Prophecy'
+];
+
+function determineTribalPowers(tribe: string): string[] {
+  const powers = TRIBAL_POWERS[tribe as keyof typeof TRIBAL_POWERS] || [];
+  // Most dragons get all their tribal powers, some may be weaker versions
+  return [...powers];
+}
+
+function determineSpecialPowers(tribe: string, intelligence: number): string[] {
+  const powers: string[] = [];
+  
+  // NightWings have higher chance of mind reading/prophecy
+  if (tribe === 'NightWing') {
+    if (Math.random() < 0.3 && intelligence >= 16) powers.push('Enhanced Mind Reading');
+    if (Math.random() < 0.2 && intelligence >= 17) powers.push('Enhanced Prophecy');
+    if (Math.random() < 0.1 && intelligence >= 18) powers.push('Foresight');
+  }
+  
+  // LeafWings can have enhanced leafspeak
+  if (tribe === 'LeafWing' && Math.random() < 0.4) {
+    powers.push('Advanced Leafspeak');
+  }
+  
+  // SilkWings might develop flame silk
+  if (tribe === 'SilkWing' && Math.random() < 0.3) {
+    powers.push('FlameSilk Mastery');
+  }
+  
+  // Rare chance for any dragon to have special abilities
+  if (Math.random() < 0.05 && intelligence >= 17) {
+    powers.push(randomChoice(SPECIAL_POWERS));
+  }
+  
+  return powers;
+}
+
 export function generateCharacter(): Character {
   const tribe = randomChoice(TRIBES);
   const name = generateDragonName(tribe);
@@ -60,21 +113,32 @@ export function generateCharacter(): Character {
     traits.push(availableTraits.splice(traitIndex, 1)[0]);
   }
   
-  // Generate balanced stats (10-18, with higher intelligence for animus dragons)
+  // Generate stats
+  const intelligence = randomRange(15, 18);
+  const isAnimus = Math.random() < 0.05; // 5% chance to be animus
+  
+  // Determine powers
+  const tribalPowers = determineTribalPowers(tribe);
+  const specialPowers = determineSpecialPowers(tribe, intelligence);
+  
   const character: Character = {
     name,
     tribe,
     age: randomRange(3, 8), // Young dragonet
     soulPercentage: 100, // Start with pure soul
+    sanityPercentage: 100, // Start with full sanity
     strength: randomRange(10, 16),
-    intelligence: randomRange(15, 18), // Animus dragons tend to be intelligent
+    intelligence,
     charisma: randomRange(10, 16),
     wisdom: randomRange(12, 18),
     mother,
     father,
     siblings,
     traits,
-    avatar: `https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400` // Placeholder dragon image
+    avatar: `https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400`,
+    isAnimus,
+    tribalPowers,
+    specialPowers
   };
   
   return character;

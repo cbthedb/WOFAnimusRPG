@@ -42,6 +42,7 @@ export interface Character {
   tribe: string;
   age: number;
   soulPercentage: number;
+  sanityPercentage: number;
   strength: number;
   intelligence: number;
   charisma: number;
@@ -51,6 +52,9 @@ export interface Character {
   siblings: string[];
   traits: string[];
   avatar: string;
+  isAnimus: boolean;
+  tribalPowers: string[];
+  specialPowers: string[];
 }
 
 export interface GameData {
@@ -70,7 +74,10 @@ export interface Scenario {
   description: string;
   narrativeText: string[];
   choices: Choice[];
-  type: 'mundane' | 'extraordinary' | 'magical';
+  type: 'mundane' | 'extraordinary' | 'magical' | 'tribal' | 'prophetic';
+  location: string;
+  timeOfDay: string;
+  weather: string;
 }
 
 export interface Choice {
@@ -78,6 +85,7 @@ export interface Choice {
   text: string;
   description: string;
   soulCost: number;
+  sanityCost: number;
   consequences: string[];
   requirements?: string[];
   corruption?: boolean;
@@ -89,6 +97,7 @@ export interface GameEvent {
   choice: string;
   consequences: string[];
   soulLoss: number;
+  sanityLoss: number;
 }
 
 export interface MagicSpell {

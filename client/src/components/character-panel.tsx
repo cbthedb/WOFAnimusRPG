@@ -2,13 +2,17 @@ import { Character } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { GameEngine } from "@/lib/game-engine";
+import SanityBar from "./sanity-bar";
+import { Zap, Eye, Sparkles } from "lucide-react";
 
 interface CharacterPanelProps {
   character: Character;
+  onShowTribalPowers?: () => void;
 }
 
-export default function CharacterPanel({ character }: CharacterPanelProps) {
+export default function CharacterPanel({ character, onShowTribalPowers }: CharacterPanelProps) {
   const corruptionLevel = GameEngine.getCorruptionLevel(character.soulPercentage);
   
   const getSoulBarColor = () => {
@@ -53,6 +57,35 @@ export default function CharacterPanel({ character }: CharacterPanelProps) {
             <p className="text-xs text-slate-400 mt-1">
               {GameEngine.getCorruptionMessage(corruptionLevel)}
             </p>
+          </div>
+
+          {/* Sanity Status */}
+          <div className="mb-6">
+            <SanityBar sanityPercentage={character.sanityPercentage} />
+          </div>
+
+          {/* Animus & Powers Status */}
+          <div className="mb-6">
+            <div className="space-y-3">
+              {character.isAnimus && (
+                <Badge variant="destructive" className="w-full justify-center py-2">
+                  <Zap className="w-4 h-4 mr-2" />
+                  Animus Dragon
+                </Badge>
+              )}
+              
+              {(character.tribalPowers.length > 0 || character.specialPowers.length > 0) && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onShowTribalPowers}
+                  className="w-full"
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  View Powers ({character.tribalPowers.length + character.specialPowers.length})
+                </Button>
+              )}
+            </div>
           </div>
 
           {/* Character Stats */}
