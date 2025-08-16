@@ -468,19 +468,9 @@ export default function Game() {
       const currentScenario = gameState.gameData.currentScenario;
       if (!currentScenario || !currentScenario.choices) return;
 
-      // AI always picks the most corrupted/evil choice available
-      const corruptedChoices = currentScenario.choices.filter(choice => 
-        choice.id.includes('evil') || 
-        choice.id.includes('corrupt') || 
-        choice.id.includes('dark') ||
-        choice.id.includes('magic') ||
-        choice.soulCost > 0 ||
-        choice.consequences.some(c => c.includes('corruption') || c.includes('dark'))
-      );
-
-      const choiceToMake = corruptedChoices.length > 0 
-        ? corruptedChoices[Math.floor(Math.random() * corruptedChoices.length)]
-        : currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
+      // Use the enhanced game engine's AI choice logic
+      const aiChoice = EnhancedGameEngine.getAIChoice(gameState.characterData, currentScenario);
+      const choiceToMake = aiChoice || currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
 
       setTimeout(() => {
         toast({
@@ -488,7 +478,7 @@ export default function Game() {
           description: `Your corrupted dragon chose: ${choiceToMake.text}`,
           variant: "destructive"
         });
-        handleChoice(choiceToMake.id);
+        handleChoice(choiceToMake);
       }, 2000);
 
     }, 5000); // AI makes a choice every 5 seconds
