@@ -354,4 +354,11 @@ export class EnhancedGameEngine {
     const effects = SoulCorruptionManager.getCorruptionEffects(stage);
     return effects[Math.floor(Math.random() * effects.length)];
   }
+
+  static getCorruptionLevel(soulPercentage: number): "Normal" | "Frayed" | "Twisted" | "Broken" {
+    if (soulPercentage >= 75) return "Normal";
+    if (soulPercentage >= 50) return "Frayed";
+    if (soulPercentage >= 25) return "Twisted";
+    return "Broken";
+  }
 }

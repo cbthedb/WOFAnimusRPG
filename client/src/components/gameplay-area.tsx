@@ -1,13 +1,16 @@
 import { Character, GameData, Choice } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Wand2, Package, SkipForward } from "lucide-react";
+import { Wand2, Package, SkipForward, Eye, Brain, Sparkles, Zap } from "lucide-react";
 
 interface GameplayAreaProps {
   character: Character;
   gameData: GameData;
   onChoice: (choice: Choice) => void;
   onShowMagic: () => void;
+  onShowSpecialPower: (powerType: 'prophecy' | 'mindreading' | 'future') => void;
+  onShowTribalPowers: () => void;
+  onCustomAction: () => void;
   isProcessing: boolean;
 }
 
@@ -16,6 +19,9 @@ export default function GameplayArea({
   gameData,
   onChoice,
   onShowMagic,
+  onShowSpecialPower,
+  onShowTribalPowers,
+  onCustomAction,
   isProcessing,
 }: GameplayAreaProps) {
   const scenario = gameData.currentScenario;
@@ -107,36 +113,80 @@ export default function GameplayArea({
           </div>
 
           {/* Quick Actions Bar */}
-          <div className="flex items-center justify-between mt-6 pt-4 border-t border-purple-500/20">
-            <div className="flex space-x-3">
+          <div className="mt-6 pt-4 border-t border-purple-500/20">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {/* Animus Magic - Only for animus dragons */}
+              {character.isAnimus && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onShowMagic}
+                  className="border-red-500/50 text-red-400 hover:bg-red-500/10"
+                >
+                  <Wand2 className="w-4 h-4 mr-1" />
+                  Animus Magic
+                </Button>
+              )}
+              
+              {/* Special Powers - Prophecy, Mind Reading, Future Sight */}
+              {character.tribalPowers.some(power => power.toLowerCase().includes('prophecy') || power.toLowerCase().includes('future')) && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => onShowSpecialPower('prophecy')}
+                  className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10"
+                >
+                  <Eye className="w-4 h-4 mr-1" />
+                  Prophecy
+                </Button>
+              )}
+              
+              {character.tribalPowers.some(power => power.toLowerCase().includes('mind')) && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => onShowSpecialPower('mindreading')}
+                  className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10"
+                >
+                  <Brain className="w-4 h-4 mr-1" />
+                  Mind Reading
+                </Button>
+              )}
+              
+              {character.specialPowers.some(power => power.toLowerCase().includes('foresight') || power.toLowerCase().includes('future')) && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => onShowSpecialPower('future')}
+                  className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10"
+                >
+                  <Sparkles className="w-4 h-4 mr-1" />
+                  Future Sight
+                </Button>
+              )}
+              
+              {/* Tribal Powers */}
               <Button
                 variant="outline"
                 size="sm"
-                onClick={onShowMagic}
-                className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10"
+                onClick={onShowTribalPowers}
+                className="border-green-500/50 text-green-400 hover:bg-green-500/10"
               >
-                <Wand2 className="w-4 h-4 mr-2" />
-                Magic Spells
+                <Zap className="w-4 h-4 mr-1" />
+                Tribal Powers
               </Button>
+              
+              {/* Custom Action */}
               <Button
                 variant="outline"
                 size="sm"
-                className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10"
-                disabled
+                onClick={onCustomAction}
+                className="border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10"
               >
-                <Package className="w-4 h-4 mr-2" />
-                Inventory
+                <Package className="w-4 h-4 mr-1" />
+                Custom Action
               </Button>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-purple-400/50 text-purple-300 hover:bg-purple-500/10"
-              disabled
-            >
-              <SkipForward className="w-4 h-4 mr-2" />
-              Skip Turn
-            </Button>
           </div>
         </div>
       </Card>
