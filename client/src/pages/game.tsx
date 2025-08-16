@@ -444,9 +444,68 @@ export default function Game() {
         description: "The darkness takes control. Watch as your corrupted dragon wreaks havoc...",
         variant: "destructive"
       });
+
+      // Start AI control sequence
+      startAIControlSequence();
     } catch (error) {
       console.error("Failed to continue as corrupted:", error);
     }
+  };
+
+  const startAIControlSequence = () => {
+    if (!gameState) return;
+
+    // Show AI taking control message
+    setAiControlMessage("The AI has taken control of your corrupted dragon. Evil choices are being made automatically...");
+
+    // Set up interval for AI to make choices automatically
+    const aiInterval = setInterval(() => {
+      if (!gameState?.characterData?.isAIControlled) {
+        clearInterval(aiInterval);
+        return;
+      }
+
+      const currentScenario = gameState.gameData.currentScenario;
+      if (!currentScenario || !currentScenario.choices) return;
+
+      // AI always picks the most corrupted/evil choice available
+      const corruptedChoices = currentScenario.choices.filter(choice => 
+        choice.id.includes('evil') || 
+        choice.id.includes('corrupt') || 
+        choice.id.includes('dark') ||
+        choice.id.includes('magic') ||
+        choice.soulCost > 0 ||
+        choice.consequences.some(c => c.includes('corruption') || c.includes('dark'))
+      );
+
+      const choiceToMake = corruptedChoices.length > 0 
+        ? corruptedChoices[Math.floor(Math.random() * corruptedChoices.length)]
+        : currentScenario.choices[Math.floor(Math.random() * currentScenario.choices.length)];
+
+      setTimeout(() => {
+        toast({
+          title: "AI Choice Made",
+          description: `Your corrupted dragon chose: ${choiceToMake.text}`,
+          variant: "destructive"
+        });
+        handleChoice(choiceToMake.id);
+      }, 2000);
+
+    }, 5000); // AI makes a choice every 5 seconds
+
+    // Stop AI control after 10 choices or 1 minute
+    setTimeout(() => {
+      clearInterval(aiInterval);
+      setAiControlMessage("The corruption overwhelms your dragon completely. The story ends in darkness...");
+      
+      setTimeout(() => {
+        setGameOverState({
+          isGameOver: true,
+          reason: "Your dragon has been completely consumed by corruption and lost to the darkness forever.",
+          allowContinue: false
+        });
+      }, 3000);
+    }, 60000); // 1 minute of AI control
   };
 
   const handleUseInventoryItem = (item: InventoryItem) => {
@@ -569,7 +628,7 @@ export default function Game() {
             onShowSpecialPower={handleSpecialPower}
             onShowTribalPowers={() => setShowTribalPowersModal(true)}
             onCustomAction={() => setShowCustomActionModal(true)}
-            isProcessing={false}
+            isProcessing={character.isAIControlled}
           />
         </div>
       </div>
